@@ -9,6 +9,8 @@ import { ContactListComponent } from './contact/contact-list/contact-list.compon
 import { ChatCardComponent } from './chat/chat-card/chat-card.component';
 import { ChatWindowComponent } from './chat/chat-window/chat-window.component';
 import { MessageComponent } from './chat/message/message.component';
+import { HashStringPipe } from './share/pipes/hash-string.pipe';
+import { UrlStringPipe } from './share/pipes/url-string.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { MessageComponent } from './chat/message/message.component';
     ContactListComponent,
     ChatCardComponent,
     ChatWindowComponent,
-    MessageComponent
+    MessageComponent,
+    HashStringPipe,
+    UrlStringPipe
   ],
   imports: [
     BrowserModule,

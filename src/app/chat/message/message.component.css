@@ -11,16 +11,17 @@
   border-radius: 15px 15px 1px 15px;
 }
 
-.msg-sent-container:hover {
-  background-color: #4ba3c7;
-}
-
-.msg-receive-container:hover {
-  background-color: #ff8a80;
-}
+/*.msg-sent-container:hover {*/
+  /*background-color: #4ba3c7;*/
+/*}*/
+/**/
+/*.msg-receive-container:hover {*/
+  /*background-color: #ff8a80;*/
+/*}*/
 
 .msg-sent-text {
 }
+
 
 .msg-sent-timestamp {
 }
@@ -46,6 +47,9 @@
   float: left;
   margin-bottom: 0px;
 }
+.msg-text-link {
+  color: white;
+}
 
 .msg-container {
   max-width: 80%;
@@ -57,7 +61,8 @@
   padding: 4px 8px 4px 8px;
   color: #000a12;
 }
-.msg-container:hover {
-  color: white;
-}
+
+/*.msg-container:hover {*/
+  /*color: white;*/
+/*}*/
 

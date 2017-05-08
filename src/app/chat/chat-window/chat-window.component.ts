@@ -32,7 +32,7 @@ export class ChatWindowComponent implements OnInit, AfterViewChecked {
     this.me = new Contact(1, 'me', 'as', 'asd', 'asd');
     this.inContact = new Contact(2, 'Rainer Winkler', 'as', 'asd', 'asd');
     this.sentMessage = new Message(1, new Date(), this.me, 'Meddl Leudde ' + String.fromCodePoint(0x1F918));
-    this.recvMe = new Message(1, new Date(), this.me, 'Meddl Leudde ');
+    this.recvMe = new Message(1, new Date(), this.me, 'Meddl Leudde #meddl http://altschauerberganzeiger.com/');
     this.recvMessage = new Message(1, new Date(), this.inContact, 'Ich weiß, dass n ' +
       'paar Arschlöcher da draußen meinen, ich sei das letzte Arschloch und der letzte Kaschber un Dreggsagg un' +
       ' was-weiß-ich alles - ich hab heut einen Aufruf an euch kleinen miesen Dreggsschweine: Irgendeiner - ich weiß' +
