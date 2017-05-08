@@ -26,7 +26,7 @@ export class ChatCardComponent implements OnInit {
     this.recvMessage = new Message(1, new Date(), this.inContact, 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, ' +
       'sed diam  et dolore magna aliquyam erat');
     this.recvMessage2 = new Message(1, new Date(), this.inContact, 'Ok :D ');
-    this.sentMessage2 = new Message(1, new Date(), this.inContact, 'Bye :* ');
+    this.sentMessage2 = new Message(1, new Date(), this.inContact, ':D :D ');
 
   }
 
