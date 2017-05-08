@@ -1,0 +1,47 @@
+<div class="card-wide mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__menu">
+    <button id="demo-menu-lower-right"
+            class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons">more_vert</i>
+    </button>
+    <!--TODO: Menu-->
+
+    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" (click)="closeCard()">
+      <i class="material-icons">close</i>
+    </button>
+  </div>
+  <div class="mdl-card__title">
+    <span class="mdl-chip__contact mdl-color-text--white" style="background-color: #4ba3c7">DL</span>
+    <h2 class="mdl-card__title-text">{{inContact.name}}</h2>
+  </div>
+  <div class="mdl-card__media" style="padding: 10px">
+    <!--TODO: Chat Field-->
+    <app-message [message]="sentMessage" [incoming]="false"></app-message>
+    <app-message [message]="recvMessage" [incoming]="true"></app-message>
+    <app-message [message]="sentMessage2" [incoming]="true"></app-message>
+    <app-message [message]="recvMessage2" [incoming]="false"></app-message>
+    <app-message [message]="sentMessage" [incoming]="false"></app-message>
+    <app-message [message]="recvMessage" [incoming]="true"></app-message>
+    <app-message [message]="sentMessage2" [incoming]="true"></app-message>
+    <app-message [message]="recvMessage2" [incoming]="false"></app-message>
+    <app-message [message]="sentMessage" [incoming]="false"></app-message>
+    <app-message [message]="recvMessage" [incoming]="true"></app-message>
+    <app-message [message]="sentMessage2" [incoming]="true"></app-message>
+    <app-message [message]="recvMessage2" [incoming]="false"></app-message>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <form action="#">
+      <div class="flex-form-container">
+        <div class="mdl-textfield  mdl-js-textfield flex-input-field" style="width: 90%">
+          <input class="mdl-textfield__input" type="text" id="sample">
+          <label class="mdl-textfield__label" for="sample">Send a Message...</label>
+        </div>
+        <button
+          class="btn-primary mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored flex-send-button">
+          <i class="material-icons">send</i>
+        </button>
+      </div>
+    </form>
+  </div>
+
+</div>

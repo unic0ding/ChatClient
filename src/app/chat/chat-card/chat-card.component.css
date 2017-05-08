@@ -1,0 +1,30 @@
+
+.card-wide.mdl-card {
+  width: 100%;
+}
+
+.btn-primary{
+  background-color: #ff8a80;
+}
+.btn-primary:hover{
+  background-color: #c85a54;
+}
+
+.card-wide > .mdl-card__media {
+  /*color: #fff;*/
+  background: url('../../../assets/img/wallpaper.jpg') no-repeat top;
+}
+
+.flex-form-container {
+  display: flex;
+}
+
+.flex-input-field {
+  order: 1;
+  flex-grow: 9;
+}
+
+.flex-send-button {
+  order: 2;
+  flex-grow: 1;
+}

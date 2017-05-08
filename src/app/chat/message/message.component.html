@@ -1,0 +1,8 @@
+<!--<div class="msg-container msg-sent-container flex-sent-container">-->
+  <div class="msg-container flex-msg-container" [ngClass]="{'msg-sent-container': !incoming, 'msg-receive-container': incoming}">
+    <p class="msg-text flex-text" [ngClass]="{'msg-sent-text': !incoming, 'msg-receive-text': incoming}">{{message.text}}
+      </p>
+    <p class="msg-timestamp flex-timestamp" [ngClass]="{'msg-sent-timestamp': !incoming, 'msg-receive-timestamp': incoming}">
+        {{message.sendAt | date:"mediumTime"}}</p>
+    <div class="arrow bottom right"></div>
+  </div>
