@@ -1,9 +1,15 @@
 <form action="#">
   <div class="mdl-textfield  mdl-js-textfield">
-    <input class="mdl-textfield__input" type="text" id="sample1">
-    <label class="mdl-textfield__label" for="sample1">Search</label>
+    <input class="mdl-textfield__input" type="text" #contactSearch id="contactSearchInput">
+    <label class="mdl-textfield__label" for="contactSearchInput">Search</label>
   </div>
 </form>
 <ul class="mdl-list">
-  <app-contact-detail *ngFor="let contact of contactList" [contact]="contact"></app-contact-detail>
+  <div style="text-align: center">
+  <span *ngIf="!viewContactList.length" class="mdl-chip" style="display: inline-block">
+      <span class="mdl-chip__text" style="text-align: center">No Results were Found</span>
+  </span>
+  </div>
+  <app-contact-detail *ngFor="let contact of viewContactList" [contact]="contact">Searching for Contacts
+  </app-contact-detail>
 </ul>
