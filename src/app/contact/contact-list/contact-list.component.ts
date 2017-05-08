@@ -32,8 +32,15 @@ export class ContactListComponent implements AfterViewInit {
           return c;
         }
       });
-    contactSource$.subscribe((c) => this.viewContactList.push(c));
-  }
+    contactSource$.subscribe(
+      (contact) => {
+        this.viewContactList.push(contact);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
+  }
 
 }
