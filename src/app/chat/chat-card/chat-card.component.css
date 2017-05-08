@@ -12,7 +12,7 @@
 
 .card-wide > .mdl-card__media {
   /*color: #fff;*/
-  background: url('../../../assets/img/wallpaper.jpg') no-repeat top;
+  background: url('../../../assets/img/wallpaper.jpg') no-repeat bottom;
 }
 
 .flex-form-container {
