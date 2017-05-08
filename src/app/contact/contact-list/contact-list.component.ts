@@ -7,7 +7,6 @@ import {Contact} from '../../share/model/contact.model';
   styleUrls: ['./contact-list.component.css']
 })
 export class ContactListComponent implements OnInit {
-  // contactList: Array<Contact>;
   contactList = [];
 
   constructor() {

@@ -12,16 +12,22 @@
 
 .card-wide > .mdl-card__media {
   /*color: #fff;*/
-  background: url('../../../assets/img/wallpaper.jpg') no-repeat bottom;
+  background: #fff url('../../../assets/img/wallpaper.jpg') no-repeat bottom;
 }
 
 .flex-form-container {
   display: flex;
 }
+.flex-attachment-button {
+  order: 1;
+  flex-grow: 1;
+  margin-right: 5px;
+  background-color: transparent;
+}
 
 .flex-input-field {
-  order: 1;
-  flex-grow: 9;
+  order: 2;
+  flex-grow: 8;
 }
 
 .flex-send-button {
