@@ -1,5 +1,5 @@
 <div class="mdl-layout mdl-js-layout">
-  <header class="mdl-layout__header mdl-layout__header--scroll" style="background-color: #4ba3c7">
+  <header class="mdl-layout__header mdl-layout__header--scroll main-color">
     <div class="mdl-layout__header-row">
       <!-- Title -->
       <span class="mdl-layout-title">ChatClient</span>
@@ -21,7 +21,9 @@
   <main class="mdl-layout__content">
     <div class="page-content">
       <div class="mdl-grid main-content">
-        <app-chat-card class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-cell--stretch"></app-chat-card>
+        <app-chat-card *ngFor="let contact of openChats"
+                       [ngClass]="{'mdl-cell--12-col': (openChats.length == 1), 'mdl-cell--8-col': (openChats > 1)}"
+                       class="mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-phone"></app-chat-card>
       </div>
     </div>
   </main>
