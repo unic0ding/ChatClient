@@ -35,7 +35,7 @@ export class ChatWindowComponent implements OnInit {
       ' es net wer, es is mir auch scheißegal - ich weiß nicht, wer es war, irgendjemand hat meine Schwester mit ner' +
       ' PC-Kombjuderstimme angrufen und gemeint: Pass auf, ich weiß, wo du wohnst. WER auch immer des war:' +
       'traut euch, kommt zu mir, Altschauerberg 8, in 91448 Emskirchen.');
-    this.sentMessage2 = new Message(1, new Date(), this.inContact, 'Mett'
+    this.sentMessage2 = new Message(1, new Date(), this.inContact, 'Meddl'
       + String.fromCodePoint(0x1F918) + String.fromCodePoint(0x1F918) + String.fromCodePoint(0x1F918));
     this.recvMessage2 = new Message(1, new Date(), this.inContact, 'Traut euch, kommt zu mir und legt euch mit mir an,' +
       ' ich brügel die Scheiße aus euch raus. Wenn jemand meint, er kann meine Familie beleidigen, oder irgend...wie... ' +

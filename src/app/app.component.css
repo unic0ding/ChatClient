@@ -1,5 +1,13 @@
-.main-content {
-  width: 90%;
+.main-content{
   background-color: #FAFAFA;
   justify-content: center;
+}
+
+.one-chat {
+  width: 75%;
+
+}
+
+.multiple-chat {
+  width: 90%;
 }

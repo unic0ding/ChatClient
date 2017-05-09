@@ -20,7 +20,8 @@
   </div>
   <main class="mdl-layout__content">
     <div class="page-content">
-      <div class="mdl-grid main-content">
+      <div class="mdl-grid main-content"
+           [ngClass]="{'one-chat': (openChats.length == 1), 'multiple-chat': (openChats.length > 1)}">
         <app-chat-card *ngFor="let contact of openChats"
                        [ngClass]="{'mdl-cell--12-col': (openChats.length == 1), 'mdl-cell--8-col': (openChats > 1)}"
                        class="mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-phone"></app-chat-card>
