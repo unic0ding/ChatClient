@@ -24,7 +24,7 @@ export class ChatWindowComponent implements OnInit {
   ngOnInit(): void {}
 
   constructor() {
-    const timer = Observable.timer(170).subscribe(() => this.scrollToBottom());
+    Observable.timer(70).subscribe(() => this.scrollToBottom());
     this.me = new Contact(1, 'me', 'as', 'asd', 'asd');
     this.inContact = new Contact(2, 'Rainer Winkler', 'as', 'asd', 'asd');
     this.sentMessage = new Message(1, new Date(), this.me, 'Meddl Leudde ' + String.fromCodePoint(0x1F918));

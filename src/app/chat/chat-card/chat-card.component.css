@@ -11,8 +11,8 @@
 }
 
 .card-wide > .mdl-card__media {
-  /*color: #fff;*/
   background: #fff url('../../../assets/img/wallpaper.jpg') no-repeat bottom;
+  background-size: cover;
 }
 
 .flex-form-container {
