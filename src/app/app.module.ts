@@ -11,6 +11,7 @@ import { ChatWindowComponent } from './chat/chat-window/chat-window.component';
 import { MessageComponent } from './chat/message/message.component';
 import { HashStringPipe } from './share/pipes/hash-string.pipe';
 import { UrlStringPipe } from './share/pipes/url-string.pipe';
+import {ChatService} from './share/services/chat.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { UrlStringPipe } from './share/pipes/url-string.pipe';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

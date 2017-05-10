@@ -1,16 +1,19 @@
 <div #scrollChat id="messages" class="chat-window">
-    <app-message [message]="sentMessage" [incoming]="false"></app-message>
-    <app-message [message]="recvMe" [incoming]="true"></app-message>
-    <app-message [message]="recvMessage" [incoming]="true"></app-message>
-    <app-message [message]="sentMessage2" [incoming]="false"></app-message>
-    <app-message [message]="recvMessage3" [incoming]="true"></app-message>
-    <app-message [message]="recvMessage4" [incoming]="false"></app-message>
-    <app-message [message]="sentMessage" [incoming]="false"></app-message>
-    <app-message [message]="recvMe" [incoming]="true"></app-message>
-    <app-message [message]="recvMessage" [incoming]="true"></app-message>
-    <app-message [message]="sentMessage2" [incoming]="false"></app-message>
-    <app-message [message]="recvMessage3" [incoming]="true"></app-message>
-    <app-message [message]="recvMessage4" [incoming]="false"></app-message>
+  <!--  constructor(public id: number, public sendAt: Date, public author: Contact, public text: string) {
+-->
+  <app-message *ngFor="let message of messages" [message]="message.message" [incoming]="message.incoming"></app-message>
+    <!--<app-message [message]="sentMessage" [incoming]="false"></app-message>-->
+    <!--<app-message [message]="recvMe" [incoming]="true"></app-message>-->
+    <!--<app-message [message]="recvMessage" [incoming]="true"></app-message>-->
+    <!--<app-message [message]="sentMessage2" [incoming]="false"></app-message>-->
+    <!--<app-message [message]="recvMessage3" [incoming]="true"></app-message>-->
+    <!--<app-message [message]="recvMessage4" [incoming]="false"></app-message>-->
+    <!--<app-message [message]="sentMessage" [incoming]="false"></app-message>-->
+    <!--<app-message [message]="recvMe" [incoming]="true"></app-message>-->
+    <!--<app-message [message]="recvMessage" [incoming]="true"></app-message>-->
+    <!--<app-message [message]="sentMessage2" [incoming]="false"></app-message>-->
+    <!--<app-message [message]="recvMessage3" [incoming]="true"></app-message>-->
+    <!--<app-message [message]="recvMessage4" [incoming]="false"></app-message>-->
 </div>
 
 

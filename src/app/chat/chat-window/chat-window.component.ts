@@ -1,4 +1,7 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {
+  Component, ElementRef, Input, OnInit, ViewChild, OnChanges, SimpleChanges,
+  ChangeDetectionStrategy, AfterViewChecked
+} from '@angular/core';
 import {Message} from '../../share/model/message.model';
 import {Contact} from '../../share/model/contact.model';
 import {Observable} from 'rxjs/Observable';
@@ -6,10 +9,10 @@ import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'app-chat-window',
   templateUrl: './chat-window.component.html',
-  styleUrls: ['./chat-window.component.css']
+  styleUrls: ['./chat-window.component.css'],
 })
-export class ChatWindowComponent implements OnInit {
-
+export class ChatWindowComponent implements OnInit, AfterViewChecked {
+  @Input() messages;
   @ViewChild('scrollChat') private scrollContainer: ElementRef;
   sentMessage: Message;
   sentMessage2: Message;
@@ -21,7 +24,12 @@ export class ChatWindowComponent implements OnInit {
   me: Contact;
   inContact: Contact;
 
-  ngOnInit(): void {}
+  ngAfterViewChecked(): void {
+    this.scrollToBottom();
+  }
+
+  ngOnInit(): void {
+  }
 
   constructor() {
     Observable.timer(70).subscribe(() => this.scrollToBottom());
