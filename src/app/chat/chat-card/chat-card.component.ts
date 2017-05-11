@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Message} from '../../share/model/message.model';
 import {Contact} from '../../share/model/contact.model';
 import {ChatService} from '../../share/services/chat.service';
@@ -9,6 +9,8 @@ import {ChatService} from '../../share/services/chat.service';
   styleUrls: ['./chat-card.component.css']
 })
 export class ChatCardComponent implements OnInit, OnDestroy {
+  @Output() closeWindow = new EventEmitter();
+  @Input() contact;
   open = true;
   message: string;
   messages = [];
@@ -17,9 +19,6 @@ export class ChatCardComponent implements OnInit, OnDestroy {
 
   }
 
-  closeCard() {
-    this.open = false;
-  }
 
   sendMessage() {
     this.chatService.sendMessage(this.message);

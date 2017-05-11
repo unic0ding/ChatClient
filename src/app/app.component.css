@@ -10,3 +10,7 @@
 .multiple-chat {
   width: 90%;
 }
+
+.add-chat-card {
+  min-height: 100px;
+}

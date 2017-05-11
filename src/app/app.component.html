@@ -7,6 +7,12 @@
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
       <nav class="mdl-navigation">
+        <div class="mdl-tooltip" data-mdl-for="tt1">
+          Follow
+        </div>
+        <button class="mdl-button mdl-js-button mdl-button--icon" (click)="openNewChatCard()">
+          <i class="material-icons">add</i>
+        </button>
         <a class="mdl-navigation__link mdl-js-" href="/">About <i class="material-icons">info</i></a>
         <!--<a class="mdl-navigation__link" href="">Link</a>-->
       </nav>
@@ -22,9 +28,34 @@
     <div class="page-content">
       <div class="mdl-grid main-content"
            [ngClass]="{'one-chat': (openChats.length == 1), 'multiple-chat': (openChats.length > 1)}">
-        <app-chat-card *ngFor="let contact of openChats"
+
+        <div *ngIf="addNewChat" class="mdl-card mdl-shadow--2dp add-chat-card"
+             [ngClass]="{'mdl-cell--12-col': (openChats.length == 1), 'mdl-cell--8-col': (openChats > 1)}">
+
+          <!--new Chat Form-->
+          <div class="mdl-card__actions mdl-card--border">
+            <form novalidate [formGroup]="newChatForm" (ngSubmit)="onSubmitNewChat()">
+              <div class="mdl-textfield  mdl-js-textfield flex-input-field">
+                <input class="mdl-textfield__input" type="text" id="newChatNameInput" formControlName="name" placeholder="Name" style="width: 70%">
+              </div>
+              <button class="mdl-button mdl-js-button mdl-button--primary" [disabled]="!newChatForm.valid" type="submit">Start Chat</button>
+            </form>
+          </div>
+
+          <div class="mdl-card__menu">
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" (click)="closeNewChatCard()">
+              <i class="material-icons">close</i>
+            </button>
+          </div>
+        </div>
+
+
+
+
+
+        <app-chat-card *ngFor="let contact of openChats" (closeWindow)="onClose($event)"
                        [ngClass]="{'mdl-cell--12-col': (openChats.length == 1), 'mdl-cell--8-col': (openChats > 1)}"
-                       class="mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-phone"></app-chat-card>
+                       class="mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-phone" [contact]="contact"></app-chat-card>
       </div>
     </div>
   </main>

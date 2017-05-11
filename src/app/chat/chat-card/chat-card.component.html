@@ -6,7 +6,7 @@
     </button>
     <!--TODO: Menu-->
 
-    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" (click)="closeCard()">
+    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" (click)="closeWindow.emit({contact: contact})">
       <i class="material-icons">close</i>
     </button>
   </div>
@@ -18,7 +18,6 @@
     <app-chat-window [messages]="messages" ></app-chat-window>
   </div>
   <div class="mdl-card__actions mdl-card--border">
-    <!--<form action="#">-->
       <div class="flex-form-container">
         <button class=" mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab flex-attachment-button">
           <i class="material-icons">attachment</i>
@@ -32,6 +31,5 @@
           <i class="material-icons">send</i>
         </button>
       </div>
-    <!--</form>-->
   </div>
 </div>
