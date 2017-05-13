@@ -32,20 +32,25 @@
 .msg-receive-timestamp {
 }
 
+.msg-author {
+  font-size: 80%;
+  margin: 0;
+  top: 0;
+}
 
 
 .msg-timestamp {
   font-size: 70%;
   margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
   float: right;
   color: #767676;
 }
 
 .msg-text {
   float: left;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 .msg-text-link {
   color: white;

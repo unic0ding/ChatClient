@@ -93,7 +93,7 @@ export class ChatCardComponent implements OnInit, OnDestroy {
         this.messages.push({message: m, incoming: true});
       }
       if (event.type === 'open') {
-        const m = new Message(1, new Date(), this.contact, '/The socket connection has been established');
+        const m = new Message(1, new Date(), new Contact(12, 'Socket', ''), '/The socket connection has been established');
         this.messages.push({message: m, incoming: true});
       }
     });

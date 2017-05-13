@@ -30,7 +30,9 @@ export class AppComponent {
   }
 
   onConnectNewChannel(channel: Channel) {
-    this.openChats.push(channel);
+    if (this.openChats.indexOf(channel) === -1) {
+      this.openChats.push(channel);
+    }
   }
 
   openNewChatCard() {

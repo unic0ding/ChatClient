@@ -1,7 +1,8 @@
 .chat-window {
   overflow: scroll;
   min-height: 350px;
-  max-height: 550px;
+  height: 400px;
+  max-height: 400px;
 }
 
 .chat-window::-webkit-scrollbar {
