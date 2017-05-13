@@ -1,8 +1,13 @@
 /**
  * Created by basti on 13.05.17.
  */
-export class Channel {
+import {Contact} from './contact.model';
 
-  constructor(public name: string) {
+export class Channel {
+  static fromJson(json) {
+    return new Channel(json.name, json.members.map(c => new Contact(c.id, c.name, c.email)));
+  }
+
+  constructor(public name: string, public members: Array<Contact>) {
   }
 }

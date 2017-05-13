@@ -5,6 +5,6 @@
     <!--&gt;{{message.text}}-->
     </p>
     <p class="msg-timestamp flex-timestamp" [ngClass]="{'msg-sent-timestamp': !incoming, 'msg-receive-timestamp': incoming}">
-        {{message.sendAt | date:"mediumTime"}}</p>
+        {{message.sendAt | time}}</p>
     <div class="arrow bottom right"></div>
   </div>

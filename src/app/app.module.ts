@@ -12,7 +12,8 @@ import {MessageComponent} from './chat/message/message.component';
 import {HashStringPipe} from './share/pipes/hash-string.pipe';
 import {UrlStringPipe} from './share/pipes/url-string.pipe';
 import {ChatService} from './share/services/chat.service';
-import {WebsocketService} from "./share/services/websocket.service";
+import {WebsocketService} from './share/services/websocket.service';
+import { TimePipe } from './share/pipes/time.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {WebsocketService} from "./share/services/websocket.service";
     ChatWindowComponent,
     MessageComponent,
     HashStringPipe,
-    UrlStringPipe
+    UrlStringPipe,
+    TimePipe
   ],
   imports: [
     BrowserModule,

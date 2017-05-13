@@ -15,88 +15,90 @@ export class ChatCardComponent implements OnInit, OnDestroy {
   @Input() channel: Channel;
   @Input() contact: Contact;
   messages = [];
-  chatSubject;
+  // chatSubject;
   socket: WebSocket;
   listener: EventEmitter<any>;
   chatForm: FormGroup;
   private url = 'ws://echo.websocket.org';
+  // private url = 'ws://localhost:8080/echo';
 
 
   constructor(private chatService: ChatService, private formBuilder: FormBuilder) {
-    this.contact = new Contact(1, 'Drachenlord', 'altschauerberg8@emskirchen.de', '', 'asdf');
+    this.contact = new Contact(1, 'Drachenlord', 'altschauerberg8@emskirchen.de');
     this.chatForm = this.formBuilder.group({
       message: this.formBuilder.control(null, Validators.required)
     });
 
-    this.chatSubject = this.chatService.getMessages(this.url);
-    this.chatSubject.subscribe(
-      (msg) => {
-        const message = new Message(1, new Date(), new Contact(1, '', '', '', ''), msg);
-        this.messages.push({message: message, incoming: true});
-      },
-      (error) => {
-        const message = new Message(1, new Date(), new Contact(1, '', '', '', ''), 'An error occurred');
-        this.messages.push({message: message, incoming: true});
-      },
+    // this.chatSubject = this.chatService.getMessages(this.url);
+    // this.chatSubject.subscribe(
+    //   (msg) => {
+    //     const message = new Message(1, new Date(), new Contact(1, '', ''), msg);
+    //     this.messages.push({message: message, incoming: true});
+    //   },
+    //   (error) => {
+    //     const message = new Message(1, new Date(), new Contact(1, '', ''), 'An error occurred');
+    //     this.messages.push({message: message, incoming: true});
+    //   },
 
-      // (complete) => {
-      //   const message = new Message(1, new Date(), new Contact(1, '', '', '', ''), 'Channel closed');
-      //   this.messages.push({message: message, incoming: true});
-      // }
-    );
+    // (complete) => {
+    //   const message = new Message(1, new Date(), new Contact(1, '', '', '', ''), 'Channel closed');
+    //   this.messages.push({message: message, incoming: true});
+    // }
+    // );
   }
 
 
+  // sendMessage() {
+  //   let message = this.chatForm.value.message;
+  //   this.chatSubject.next(message);
+  //   message = new Message(1, new Date(), this.contact, message);
+  //   this.messages.push({message: message, incoming: false});
+  //   this.chatForm.reset();
+  // }
+
   sendMessage() {
-    let message = this.chatForm.value.message;
-    this.chatSubject.next(message);
-    message = new Message(1, new Date(), this.contact, message);
-    this.messages.push({message: message, incoming: false});
+    const message = this.chatForm.value.message;
+    const m = new Message(1, new Date(), this.contact, message);
+    try {
+      this.socket.send(m.toJson());
+    } catch (e) {
+      console.log('Still connecting...');
+    }
+    this.messages.push({message: m, incoming: false});
     this.chatForm.reset();
   }
 
-  // sendMessage() {
-  //   const message = this.chatForm.value.message;
-  //   this.chatService.sendMessage(this.message);
-  // this.socket.send(message);
-  // const m = new Message(1, new Date(), this.contact, message);
-  // this.messages.push({message: m, incoming: false});
-  // this.chatForm.reset();
-  // }
-
   ngOnInit() {
-    // this.socket = new WebSocket(this.url);
-    // this.listener = new EventEmitter();
-    // this.socket.onopen = event => {
-    //   this.listener.emit({'type': 'open', 'data': event});
-    // };
-    // this.socket.onclose = event => {
-    //   this.listener.emit({'type': 'close', 'data': event});
-    // };
-    // this.socket.onmessage = event => {
-    //   this.listener.emit({'type': 'message', 'data': event.data});
-    // };
-    //
-    // this.listener.subscribe(event => {
-    //   if (event.type === 'message') {
-    //     const data = event.data;
-    //     const m = new Message(1, new Date(), this.contact, data);
-    //     this.messages.push({message: m, incoming: true});
-    //   }
-    //   if (event.type === 'close') {
-    //     const m = new Message(1, new Date(), this.contact, '/The socket connection has been closed');
-    //     this.messages.push({message: m, incoming: true});
-    //   }
-    //   if (event.type === 'open') {
-    //     const m = new Message(1, new Date(), this.contact, '/The socket connection has been established');
-    //     this.messages.push({message: m, incoming: true});
-    //   }
-    // });
+    this.socket = new WebSocket(this.url);
+    this.listener = new EventEmitter();
+    this.socket.onopen = event => {
+      this.listener.emit({'type': 'open', 'data': event});
+    };
+    this.socket.onclose = event => {
+      this.listener.emit({'type': 'close', 'data': event});
+    };
+    this.socket.onmessage = event => {
+      this.listener.emit({'type': 'message', 'data': event.data});
+    };
+
+    this.listener.subscribe(event => {
+      if (event.type === 'message') {
+        const message = Message.fromJson(event.data);
+        this.messages.push({message: message, incoming: true});
+      }
+      if (event.type === 'close') {
+        const m = new Message(1, new Date(), this.contact, '/The socket connection has been closed');
+        this.messages.push({message: m, incoming: true});
+      }
+      if (event.type === 'open') {
+        const m = new Message(1, new Date(), this.contact, '/The socket connection has been established');
+        this.messages.push({message: m, incoming: true});
+      }
+    });
   }
 
   ngOnDestroy(): void {
-    // this.chatService.close();
-    // this.socket.close();
-    this.chatSubject.complete();
+    this.socket.close();
+    // this.chatSubject.complete();
   }
 }

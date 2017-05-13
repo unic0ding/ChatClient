@@ -12,12 +12,12 @@ export class ContactListComponent implements AfterViewInit {
   viewContactList = [];
 
   constructor() {
-    this.contactList.push(new Contact(1, 'Rainer Winkler', 'dracheoffiziell@altschauerberg.de', 'a', ''));
-    this.contactList.push(new Contact(1, 'Bryan Cranston', 'bryan@example.de', 'a', ''));
-    this.contactList.push(new Contact(1, 'Aaron Paul', 'aaron@example.de', 'a', ''));
-    this.contactList.push(new Contact(1, 'Bob Odenkirk', 'Bob@example.de', 'a', ''));
-    this.contactList.push(new Contact(1, 'Harrison Ford', 'Harrison@example.de', 'a', ''));
-    this.contactList.push(new Contact(1, 'Mark Hamill', 'Mark@example.de', 'a', ''));
+    this.contactList.push(new Contact(1, 'Rainer Winkler', 'dracheoffiziell@altschauerberg.de'));
+    this.contactList.push(new Contact(1, 'Bryan Cranston', 'bryan@example.de'));
+    this.contactList.push(new Contact(1, 'Aaron Paul', 'aaron@example.de'));
+    this.contactList.push(new Contact(1, 'Bob Odenkirk', 'Bob@example.de'));
+    this.contactList.push(new Contact(1, 'Harrison Ford', 'Harrison@example.de'));
+    this.contactList.push(new Contact(1, 'Mark Hamill', 'Mark@example.de'));
     this.viewContactList = this.contactList;
   }
 

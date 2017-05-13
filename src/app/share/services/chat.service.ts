@@ -4,8 +4,8 @@ import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class ChatService {
-  public messages: Subject<any>;
-  private url = 'ws://echo.websocket.org';
+  // public messages: Subject<any>;
+  // private url = 'ws://echo.websocket.org';
 
 
   constructor(private wsService: WebsocketService) {
@@ -16,7 +16,7 @@ export class ChatService {
     //   });
   }
 
-  getMessages(url): Subject<any>{
+  getMessages(url): Subject<any> {
     const messages = <Subject<any>> this.wsService
       .connect(url)
       .map((response: MessageEvent) => {
