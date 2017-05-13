@@ -10,6 +10,14 @@
   background-color: #c85a54;
 }
 
+btn-primary:active {
+  background-color: #c85a54;
+}
+
+btn-primary:focus {
+  background-color: #c85a54;
+}
+
 .card-wide > .mdl-card__media {
   background: #fff url('../../../assets/img/wallpaper.jpg') no-repeat bottom;
   background-size: cover;
@@ -27,7 +35,7 @@
 
 .flex-input-field {
   order: 2;
-  flex-grow: 8;
+  flex-grow: 9;
 }
 
 .flex-send-button {

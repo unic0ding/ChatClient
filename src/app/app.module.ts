@@ -12,6 +12,7 @@ import {MessageComponent} from './chat/message/message.component';
 import {HashStringPipe} from './share/pipes/hash-string.pipe';
 import {UrlStringPipe} from './share/pipes/url-string.pipe';
 import {ChatService} from './share/services/chat.service';
+import {WebsocketService} from "./share/services/websocket.service";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import {ChatService} from './share/services/chat.service';
     HttpModule,
     ReactiveFormsModule
   ],
-  providers: [ChatService],
+  providers: [ChatService, WebsocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

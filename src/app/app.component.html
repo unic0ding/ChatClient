@@ -48,14 +48,9 @@
             </button>
           </div>
         </div>
-
-
-
-
-
-        <app-chat-card *ngFor="let contact of openChats" (closeWindow)="onClose($event)"
+        <app-chat-card *ngFor="let channel of openChats" (closeWindow)="onClose($event)"
                        [ngClass]="{'mdl-cell--12-col': (openChats.length == 1), 'mdl-cell--8-col': (openChats > 1)}"
-                       class="mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-phone" [contact]="contact"></app-chat-card>
+                       class="mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-phone" [channel]="channel"></app-chat-card>
       </div>
     </div>
   </main>

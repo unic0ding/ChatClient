@@ -25,7 +25,7 @@ export class ContactListComponent implements AfterViewInit {
     const search: any = document.getElementById('contactSearchInput');
     const contactSource$ = Observable.fromEvent(search, 'input')
       .debounceTime(250)
-      .do(() => this.viewContactList = [])
+        .do(() => this.viewContactList = [])
       .switchMap(() => Observable.from(this.contactList))
       .filter(c => {
         if (c.name.toLowerCase().includes(search.value.toLowerCase())) {

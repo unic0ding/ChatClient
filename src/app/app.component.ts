@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Contact} from './share/model/contact.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Channel} from './share/model/channel.model';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +10,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class AppComponent {
   addNewChat = false;
   newChatForm: FormGroup;
-  openChats = [{contact: new Contact(1, 'adsf', 'asdf', 'asdf', 'asdf')}];
-  // , {contact: new Contact(1, 'aa', 'asdf', 'asdf', 'asdf')}, {contact: new Contact(1, 'lkj', 'asdf', 'asdf', 'asdf')}];
+  openChats: Array<Channel>;
 
   constructor(private formBuilder: FormBuilder) {
+    this.openChats = [new Channel('Channel Name')];
     if (this.openChats.length === 0) {
       this.addNewChat = true;
     }
@@ -24,8 +24,7 @@ export class AppComponent {
   }
 
   onSubmitNewChat() {
-    console.log(this.newChatForm.value);
-    this.openChats.push({contact: new Contact(1, this.newChatForm.value, 'asdf', 'asdf', 'asdf')});
+    this.openChats.push(new Channel(this.newChatForm.value.name));
     this.newChatForm.reset();
     this.addNewChat = false;
   }
@@ -40,7 +39,7 @@ export class AppComponent {
 
   onClose(event) {
     if (confirm('Do you really want to close the Chat?')) {
-      const index = this.openChats.indexOf(event.contact, 0);
+      const index = this.openChats.indexOf(event, 0);
       if (index > -1) {
         this.openChats.splice(index, 1);
       }
