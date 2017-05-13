@@ -14,6 +14,8 @@ import {UrlStringPipe} from './share/pipes/url-string.pipe';
 import {ChatService} from './share/services/chat.service';
 import {WebsocketService} from './share/services/websocket.service';
 import { TimePipe } from './share/pipes/time.pipe';
+import { ChannelListComponent } from './channel/channel-list/channel-list.component';
+import { ChannelListDetailComponent } from './channel/channel-list-detail/channel-list-detail.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { TimePipe } from './share/pipes/time.pipe';
     MessageComponent,
     HashStringPipe,
     UrlStringPipe,
-    TimePipe
+    TimePipe,
+    ChannelListComponent,
+    ChannelListDetailComponent
   ],
   imports: [
     BrowserModule,

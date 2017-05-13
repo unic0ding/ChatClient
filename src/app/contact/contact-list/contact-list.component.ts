@@ -23,7 +23,7 @@ export class ContactListComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     const search: any = document.getElementById('contactSearchInput');
-    const contactSource$ = Observable.fromEvent(search, 'input')
+    const channelSource$ = Observable.fromEvent(search, 'input')
       .debounceTime(250)
         .do(() => this.viewContactList = [])
       .switchMap(() => Observable.from(this.contactList))
@@ -32,7 +32,7 @@ export class ContactListComponent implements AfterViewInit {
           return c;
         }
       });
-    contactSource$.subscribe(
+    channelSource$.subscribe(
       (contact) => {
         this.viewContactList.push(contact);
       },

@@ -19,8 +19,10 @@
     </div>
   </header>
   <div class="mdl-layout__drawer">
-    <span class="mdl-layout-title">Contacts</span>
     <nav class="mdl-navigation">
+      <span class="mdl-layout-title">Channels</span>
+      <app-channel-list (newChannel)="onConnectNewChannel($event)"></app-channel-list>
+      <span class="mdl-layout-title">Contacts</span>
       <app-contact-list></app-contact-list>
     </nav>
   </div>

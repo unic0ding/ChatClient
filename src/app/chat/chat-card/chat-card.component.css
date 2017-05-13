@@ -3,10 +3,12 @@
   width: 100%;
 }
 
-.btn-primary{
+.btn-primary {
+  color: white;
   background-color: #ff8a80;
 }
-.btn-primary:hover{
+.btn-primary:hover {
+  color: white;
   background-color: #c85a54;
 }
 

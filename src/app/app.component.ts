@@ -29,6 +29,10 @@ export class AppComponent {
     this.addNewChat = false;
   }
 
+  onConnectNewChannel(channel: Channel) {
+    this.openChats.push(channel);
+  }
+
   openNewChatCard() {
     this.addNewChat = !this.addNewChat;
   }

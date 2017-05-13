@@ -19,6 +19,7 @@ export class ChatCardComponent implements OnInit, OnDestroy {
   socket: WebSocket;
   listener: EventEmitter<any>;
   chatForm: FormGroup;
+  notification;
   private url = 'ws://echo.websocket.org';
   // private url = 'ws://localhost:8080/echo';
 
@@ -83,6 +84,7 @@ export class ChatCardComponent implements OnInit, OnDestroy {
 
     this.listener.subscribe(event => {
       if (event.type === 'message') {
+        this.updateNotification();
         const message = Message.fromJson(event.data);
         this.messages.push({message: message, incoming: true});
       }
@@ -95,6 +97,18 @@ export class ChatCardComponent implements OnInit, OnDestroy {
         this.messages.push({message: m, incoming: true});
       }
     });
+  }
+
+  updateNotification(event?) {
+    if (event === 0) {
+      this.notification = null;
+      return;
+    }
+    if (this.notification) {
+      this.notification++;
+    } else {
+      this.notification = 1;
+    }
   }
 
   ngOnDestroy(): void {
