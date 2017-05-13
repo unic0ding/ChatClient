@@ -13,7 +13,7 @@ export class AppComponent {
   openChats: Array<Channel>;
 
   constructor(private formBuilder: FormBuilder) {
-    this.openChats = [new Channel('Channel Name')];
+    this.openChats = [new Channel('Channel Name', [])];
     if (this.openChats.length === 0) {
       this.addNewChat = true;
     }
@@ -24,7 +24,7 @@ export class AppComponent {
   }
 
   onSubmitNewChat() {
-    this.openChats.push(new Channel(this.newChatForm.value.name));
+    this.openChats.push(new Channel(this.newChatForm.value.name, []));
     this.newChatForm.reset();
     this.addNewChat = false;
   }
