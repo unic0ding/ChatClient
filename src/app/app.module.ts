@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {MaterialModule, MdGridListModule} from '@angular/material';
+import {MaterialModule, MdButtonModule, MdCardModule, MdInputModule} from '@angular/material';
 
 import {AppComponent} from './app.component';
 import {routes} from './app.router';
@@ -46,7 +46,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     routes,
     BrowserAnimationsModule,
-    MdGridListModule
+    MdButtonModule,
+    MdCardModule,
+    MdInputModule
   ],
   providers: [ChatService, WebsocketService],
   bootstrap: [AppComponent]

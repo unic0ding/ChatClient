@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MaterialModule} from '@angular/material';
+import {MdButtonModule, MdInputModule} from '@angular/material';
 
 @Component({
   selector: 'app-auth-login',
