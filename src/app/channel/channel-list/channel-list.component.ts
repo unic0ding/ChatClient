@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Channel} from '../../share/model/channel.model';
 import {Observable} from 'rxjs/Observable';
+import {ChatFrameComponent} from '../../chat/chat-frame/chat-frame.component';
 
 @Component({
   selector: 'app-channel-list',

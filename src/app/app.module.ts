@@ -6,6 +6,7 @@ import {HttpModule} from '@angular/http';
 import {AppComponent} from './app.component';
 import {ContactDetailComponent} from './contact/contact-detail/contact-detail.component';
 import {ContactListComponent} from './contact/contact-list/contact-list.component';
+import {ChatFrameComponent} from './chat/chat-frame/chat-frame.component';
 import {ChatCardComponent} from './chat/chat-card/chat-card.component';
 import {ChatWindowComponent} from './chat/chat-window/chat-window.component';
 import {MessageComponent} from './chat/message/message.component';
@@ -22,6 +23,7 @@ import { ChannelListDetailComponent } from './channel/channel-list-detail/channe
     AppComponent,
     ContactDetailComponent,
     ContactListComponent,
+    ChatFrameComponent,
     ChatCardComponent,
     ChatWindowComponent,
     MessageComponent,
