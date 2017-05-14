@@ -1,9 +1,8 @@
-
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {MaterialModule, MdButtonModule, MdCardModule, MdInputModule, MdToolbarModule} from '@angular/material';
+import {MdButtonModule, MdCardModule, MdInputModule, MdToolbarModule} from '@angular/material';
 
 import {AppComponent} from './app.component';
 import {routes} from './app.router';
@@ -22,6 +21,7 @@ import {TimePipe} from './share/pipes/time.pipe';
 import {ChannelListComponent} from './channel/channel-list/channel-list.component';
 import {ChannelListDetailComponent} from './channel/channel-list-detail/channel-list-detail.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MDL} from './share/directives/mdl.directive';
 
 
 @NgModule({
@@ -38,7 +38,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     TimePipe,
     ChannelListComponent,
     ChannelListDetailComponent,
-    AuthLoginComponent
+    AuthLoginComponent,
+    MDL
 
   ],
   imports: [
