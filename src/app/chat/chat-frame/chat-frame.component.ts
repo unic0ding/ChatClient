@@ -12,6 +12,9 @@ export class ChatFrameComponent {
     addNewChat = false;
     newChatForm: FormGroup;
     openChats: Array<Channel>;
+    set addnewChannel(value: Channel) {
+      this.openChats.push(value);
+    }  
 
     constructor(private formBuilder: FormBuilder) {
       this.openChats = [new Channel('Channel Name', [])];
