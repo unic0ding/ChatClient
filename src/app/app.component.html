@@ -7,28 +7,18 @@
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
       <nav class="mdl-navigation">
-        <div class="mdl-tooltip" data-mdl-for="tt1">
-          Follow
-        </div>
         <button class="mdl-button mdl-js-button mdl-button--icon" (click)="openNewChatCard()">
           <i class="material-icons">add</i>
         </button>
-        <a class="mdl-navigation__link mdl-js-" href="/">About <i class="material-icons">info</i></a>
-        <li>
-        <a routerLink="start">Start</a>
-        </li>
-        <li>
-        <a routerLink="services">Chat</a>
-        </li>
+        <button routerLink="chat" class="mdl-button mdl-js-button mdl-button--icon" routerLink="chat">
+          <i class="material-icons">chat</i>
+        </button>
       </nav>
     </div>
   </header>
   <div class="mdl-layout__drawer">
     <nav class="mdl-navigation">
-      <span class="mdl-layout-title">Channels</span>
-      <app-channel-list (newChannel)="onConnectNewChannel($event)"></app-channel-list>
-      <span class="mdl-layout-title">Contacts</span>
-      <app-contact-list></app-contact-list>
+
     </nav>
   </div>
   <main class="mdl-layout__content">

@@ -1,23 +1,36 @@
-<div [ngClass]="{'one-chat': (openChats.length == 1), 'multiple-chat': (openChats.length > 1)}">
-   <div *ngIf="addNewChat" class="mdl-card mdl-shadow--2dp add-chat-card"
-        [ngClass]="{'mdl-cell--12-col': (openChats.length == 1), 'mdl-cell--8-col': (openChats > 1)}">
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--3-col">
+    <!-- sidenav content -->
+    <span class="mdl-layout-title cc-chat-overview-channels">Channels</span>
+    <app-channel-list (newChannel)="onConnectNewChannel($event)"></app-channel-list>
+    <span class="mdl-layout-title cc-chat-overview-channels">Contacts</span>
+    <app-contact-list></app-contact-list>
+  </div>
+  <div class="mdl-cell mdl-cell--9-col">
 
-     <!--new Chat Form-->
-     <div class="mdl-card__actions mdl-card--border">
-       <form novalidate [formGroup]="newChatForm" (ngSubmit)="onSubmitNewChat()">
-         <div class="mdl-textfield  mdl-js-textfield flex-input-field">
-           <input class="mdl-textfield__input" type="text" id="newChatNameInput" formControlName="name" placeholder="Name" style="width: 70%">
-         </div>
-         <button class="mdl-button mdl-js-button mdl-button--primary" [disabled]="!newChatForm.valid" type="submit">Start Chat</button>
-       </form>
+    <!-- Chat card -->
+    <div [ngClass]="{'one-chat': (openChats.length == 1), 'multiple-chat': (openChats.length > 1)}">
+     <div *ngIf="addNewChat" class="mdl-card mdl-shadow--2dp add-chat-card"
+          [ngClass]="{'mdl-cell--12-col': (openChats.length == 1), 'mdl-cell--8-col': (openChats > 1)}">
+
+       <!--new Chat Form-->
+       <div class="mdl-card__actions mdl-card--border">
+         <form novalidate [formGroup]="newChatForm" (ngSubmit)="onSubmitNewChat()">
+           <div class="mdl-textfield  mdl-js-textfield flex-input-field">
+             <input class="mdl-textfield__input" type="text" id="newChatNameInput" formControlName="name" placeholder="Name" style="width: 70%">
+           </div>
+           <button class="mdl-button mdl-js-button mdl-button--primary" [disabled]="!newChatForm.valid" type="submit">Start Chat</button>
+         </form>
+       </div>
+       <div class="mdl-card__menu">
+         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" (click)="closeNewChatCard()">
+           <i class="material-icons">close</i>
+         </button>
+       </div>
      </div>
-     <div class="mdl-card__menu">
-       <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" (click)="closeNewChatCard()">
-         <i class="material-icons">close</i>
-       </button>
-     </div>
-   </div>
-   <app-chat-card *ngFor="let channel of openChats" (closeWindow)="onClose($event)"
-                  [ngClass]="{'mdl-cell--12-col': (openChats.length == 1), 'mdl-cell--8-col': (openChats > 1)}"
-                  class="mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-phone" [channel]="channel"></app-chat-card>
+     <app-chat-card *ngFor="let channel of openChats" (closeWindow)="onClose($event)"
+                    [ngClass]="{'mdl-cell--12-col': (openChats.length == 1), 'mdl-cell--8-col': (openChats > 1)}"
+                    class="mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-phone" [channel]="channel"></app-chat-card>
+    </div>
+  </div>
 </div>

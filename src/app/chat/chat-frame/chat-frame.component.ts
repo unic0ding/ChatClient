@@ -1,7 +1,9 @@
-import {AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, Input, Output, EventEmitter, OnInit, ViewChild} from '@angular/core';
 import {Channel} from '../../share/model/channel.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-
+import {MdButtonModule, MdCheckboxModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MdGridList} from '@angular/material';
 
 @Component({
   selector: 'app-chat-frame',
@@ -12,8 +14,11 @@ export class ChatFrameComponent {
     addNewChat = false;
     newChatForm: FormGroup;
     openChats: Array<Channel>;
+    @Input() channel: Channel;
+    @Output()
+    newChannel:EventEmitter<any> = new EventEmitter();
 
-    set addnewChannel(value: Channel) {
+    set addNewChannel(value: Channel) {
       this.openChats.push(value);
     }
 
@@ -35,6 +40,7 @@ export class ChatFrameComponent {
     }
 
     onConnectNewChannel(channel: Channel) {
+      console.log("Hello");
       if (this.openChats.indexOf(channel) === -1) {
         this.openChats.push(channel);
       }
@@ -49,6 +55,7 @@ export class ChatFrameComponent {
     }
 
     onClose(event) {
+
       if (confirm('Do you really want to close the Chat?')) {
         const index = this.openChats.indexOf(event, 0);
         if (index > -1) {

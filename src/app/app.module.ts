@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
+import {MdGridListModule} from '@angular/material';
 
 import {AppComponent} from './app.component';
 import {routes} from './app.router';
@@ -18,6 +19,7 @@ import {WebsocketService} from './share/services/websocket.service';
 import {TimePipe} from './share/pipes/time.pipe';
 import {ChannelListComponent} from './channel/channel-list/channel-list.component';
 import {ChannelListDetailComponent} from './channel/channel-list-detail/channel-list-detail.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import {ChannelListDetailComponent} from './channel/channel-list-detail/channel-
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    routes
+    routes,
+    BrowserAnimationsModule,
+    MdGridListModule
   ],
   providers: [ChatService, WebsocketService],
   bootstrap: [AppComponent]
