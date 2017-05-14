@@ -2,10 +2,11 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {MdGridListModule} from '@angular/material';
+import {MaterialModule, MdGridListModule} from '@angular/material';
 
 import {AppComponent} from './app.component';
 import {routes} from './app.router';
+import {AuthLoginComponent} from './auth/auth-login/auth-login.component';
 import {ContactDetailComponent} from './contact/contact-detail/contact-detail.component';
 import {ContactListComponent} from './contact/contact-list/contact-list.component';
 import {ChatFrameComponent} from './chat/chat-frame/chat-frame.component';
@@ -35,7 +36,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     UrlStringPipe,
     TimePipe,
     ChannelListComponent,
-    ChannelListDetailComponent
+    ChannelListDetailComponent,
+    AuthLoginComponent
   ],
   imports: [
     BrowserModule,
