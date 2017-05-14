@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
+import {routes} from './app.router';
 import {ContactDetailComponent} from './contact/contact-detail/contact-detail.component';
 import {ContactListComponent} from './contact/contact-list/contact-list.component';
 import {ChatFrameComponent} from './chat/chat-frame/chat-frame.component';
@@ -14,9 +15,10 @@ import {HashStringPipe} from './share/pipes/hash-string.pipe';
 import {UrlStringPipe} from './share/pipes/url-string.pipe';
 import {ChatService} from './share/services/chat.service';
 import {WebsocketService} from './share/services/websocket.service';
-import { TimePipe } from './share/pipes/time.pipe';
-import { ChannelListComponent } from './channel/channel-list/channel-list.component';
-import { ChannelListDetailComponent } from './channel/channel-list-detail/channel-list-detail.component';
+import {TimePipe} from './share/pipes/time.pipe';
+import {ChannelListComponent} from './channel/channel-list/channel-list.component';
+import {ChannelListDetailComponent} from './channel/channel-list-detail/channel-list-detail.component';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { ChannelListDetailComponent } from './channel/channel-list-detail/channe
     BrowserModule,
     FormsModule,
     HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    routes
   ],
   providers: [ChatService, WebsocketService],
   bootstrap: [AppComponent]
