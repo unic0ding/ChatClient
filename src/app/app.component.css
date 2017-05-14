@@ -1,6 +1,11 @@
-.main-content{
-  background-color: #FAFAFA;
-  justify-content: center;
+.oc-content-wrapper {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.mat-toolbar.mat-primary {
+  background-color: #363636;
 }
 
 .one-chat {
@@ -13,8 +18,4 @@
 
 .add-chat-card {
   min-height: 100px;
-}
-
-.card-wrapper {
-  width: 80%;
 }
