@@ -22,7 +22,6 @@ import {ChannelListComponent} from './channel/channel-list/channel-list.componen
 import {ChannelListDetailComponent} from './channel/channel-list-detail/channel-list-detail.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MDL} from './share/directives/mdl.directive';
-import {ChatTabComponent} from './chat/chat-tab/chat-tab.component';
 
 
 @NgModule({
@@ -41,7 +40,6 @@ import {ChatTabComponent} from './chat/chat-tab/chat-tab.component';
     ChannelListDetailComponent,
     AuthLoginComponent,
     MDL,
-    ChatTabComponent,
   ],
   imports: [
     BrowserModule,
