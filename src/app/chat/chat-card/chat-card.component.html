@@ -1,6 +1,7 @@
-<div app-mdl class="card-wide mdl-card mdl-shadow--2dp">
+<div app-mdl class="card-wide mdl-card mdl-shadow--2dp" style="background-color: #363636;">
+  <md-progress-bar *ngIf="showSpinner" mode="query" style="padding: 1px;"></md-progress-bar>
   <div class="mdl-card__menu">
-    <button id="chat-card-menu"
+    <button id="chat-card-menu" style="color: #FAFAFA"
             class="mdl-button mdl-js-button mdl-button--icon">
       <i class="material-icons">more_vert</i>
     </button>
@@ -10,16 +11,15 @@
       <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" (click)="clearHistory()">Clear History</li>
       <li disabled class="mdl-menu__item">View Info</li>
     </ul>
-    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" style="color: #FAFAFA"
             (click)="closeWindow.emit(channel)">
       <i class="material-icons">close</i>
     </button>
   </div>
-  <md-progress-bar *ngIf="showSpinner" mode="query" style="padding: 1px;"></md-progress-bar>
   <div class="mdl-card__title">
     <i *ngIf="connectionClosed" class="material-icons">cloud_off</i>
     <span class="mdl-chip__contact mdl-color-text--white" style="background-color: #FD4282" >{{channel.name.charAt(0).toUpperCase()}}</span>
-    <h2 class="mdl-card__title-text">{{channel.name}}</h2>
+    <h2 class="mdl-card__title-text" style="color: #FAFAFA">{{channel.name}}</h2>
     <span class="mdl-badge" [attr.data-badge]="notification"></span>
   </div>
   <div class="mdl-card__media" style="padding: 0 10px 0 10px;">
@@ -28,15 +28,13 @@
   <div class="mdl-card__actions mdl-card--border">
     <form novalidate [formGroup]="chatForm" (ngSubmit)="sendMessage()">
       <div class="flex-form-container">
-        <button type="button"
+        <button type="button" style="color: #FAFAFA; background-color: #424242"
                 class=" mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab flex-attachment-button">
           <i class="material-icons">attachment</i>
         </button>
-        <div class="mdl-textfield  mdl-js-textfield flex-input-field" style="width: 90%">
-          <input class="mdl-textfield__input" type="text" id="{{name}}-input" formControlName="message"
-                 (focus)="updateNotification(0)" placeholder="Send a Message...">
-          <label class="mdl-textfield__label" for="{{name}}-input"></label>
-        </div>
+        <md-input-container class="flex-input-field">
+          <input mdInput placeholder="Send a Message..." id="{{name}}-input" spellcheck="false" formControlName="message" (focus)="updateNotification(0)" style="color: #FAFAFA" >
+        </md-input-container>
         <button
           class="btn-primary mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored flex-send-button"
           [disabled]="!chatForm.valid" [hidden]="!chatForm.valid" type="submit">
@@ -46,3 +44,4 @@
     </form>
   </div>
 </div>
+

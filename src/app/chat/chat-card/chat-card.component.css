@@ -28,6 +28,7 @@
 
 .flex-input-field {
   order: 2;
+  width: 90%;
   flex-grow: 9;
 }
 
