@@ -2,7 +2,10 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {MdButtonModule, MdCardModule, MdInputModule, MdTabsModule, MdToolbarModule} from '@angular/material';
+import {
+  MdButtonModule, MdCardModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerModule, MdTabsModule,
+  MdToolbarModule
+} from '@angular/material';
 
 import {AppComponent} from './app.component';
 import {routes} from './app.router';
@@ -54,7 +57,9 @@ import {MDL} from './share/directives/mdl.directive';
     MdCardModule,
     MdInputModule,
     MdToolbarModule,
-    MdTabsModule
+    MdTabsModule,
+    MdProgressSpinnerModule,
+    MdProgressBarModule
   ],
   providers: [ChatService, WebsocketService],
   bootstrap: [AppComponent]
