@@ -18,7 +18,7 @@
   </div>
   <div class="mdl-card__title">
     <i *ngIf="connectionClosed" class="material-icons">cloud_off</i>
-    <span class="mdl-chip__contact mdl-color-text--white" style="background-color: #FD4282" >{{channel.name.charAt(0).toUpperCase()}}</span>
+    <span class="mdl-chip__contact mdl-color-text--white" style="background-color: #FD4282">{{channel.name.charAt(0).toUpperCase()}}</span>
     <h2 class="mdl-card__title-text" style="color: #FAFAFA">{{channel.name}}</h2>
     <span class="mdl-badge" [attr.data-badge]="notification"></span>
   </div>
@@ -33,7 +33,8 @@
           <i class="material-icons">attachment</i>
         </button>
         <md-input-container class="flex-input-field">
-          <input mdInput placeholder="Send a Message..." id="{{name}}-input" spellcheck="false" formControlName="message" (focus)="updateNotification(0)" style="color: #FAFAFA" >
+          <input mdInput placeholder="Send a Message..." id="{{name}}-input" spellcheck="false"
+                 formControlName="message" (focus)="updateNotification(0)" style="color: #FAFAFA">
         </md-input-container>
         <button
           class="btn-primary mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored flex-send-button"

@@ -1,5 +1,4 @@
   <div class="msg-container flex-msg-container" [ngClass]="{'msg-sent-container': !incoming, 'msg-receive-container': incoming}">
-    <!--<p *ngIf="incoming" style="margin: 0;" class="msg-author">{{message.author.name}}</p>-->
     <div>
       <a *ngIf="incoming" style="margin: 0;" class="msg-author">{{message.author.name}}</a>
     </div>
