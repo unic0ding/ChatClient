@@ -15,10 +15,10 @@
       <i class="material-icons">close</i>
     </button>
   </div>
+  <md-progress-bar *ngIf="showSpinner" mode="query" style="padding: 1px;"></md-progress-bar>
   <div class="mdl-card__title">
     <i *ngIf="connectionClosed" class="material-icons">cloud_off</i>
-    <span *ngIf="!showSpinner" class="mdl-chip__contact mdl-color-text--white" style="background-color: #FD4282" >{{channel.name.charAt(0).toUpperCase()}}</span>
-    <div *ngIf="showSpinner" class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active" style="margin-right:5px;"></div>
+    <span class="mdl-chip__contact mdl-color-text--white" style="background-color: #FD4282" >{{channel.name.charAt(0).toUpperCase()}}</span>
     <h2 class="mdl-card__title-text">{{channel.name}}</h2>
     <span class="mdl-badge" [attr.data-badge]="notification"></span>
   </div>
