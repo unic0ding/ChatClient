@@ -7,6 +7,7 @@ import {MdButtonModule, MdCardModule, MdInputModule, MdToolbarModule} from '@ang
 import {AppComponent} from './app.component';
 import {routes} from './app.router';
 import {AuthLoginComponent} from './auth/auth-login/auth-login.component';
+import {SettingsMainComponent} from './settings/settings-main/settings-main.component';
 import {ContactDetailComponent} from './contact/contact-detail/contact-detail.component';
 import {ContactListComponent} from './contact/contact-list/contact-list.component';
 import {ChatFrameComponent} from './chat/chat-frame/chat-frame.component';
@@ -27,6 +28,7 @@ import {MDL} from './share/directives/mdl.directive';
 @NgModule({
   declarations: [
     AppComponent,
+    SettingsMainComponent,
     ContactDetailComponent,
     ContactListComponent,
     ChatFrameComponent,

@@ -19,3 +19,7 @@
 .add-chat-card {
   min-height: 100px;
 }
+
+.oc-navbar-icon-margin {
+  margin-right: 10px;
+}
