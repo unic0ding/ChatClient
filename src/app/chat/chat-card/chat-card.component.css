@@ -6,19 +6,9 @@
 
 .btn-primary {
   color: white;
-  background-color: #ff8a80;
 }
 .btn-primary:hover {
   color: white;
-  background-color: #c85a54;
-}
-
-.btn-primary:active {
-  background-color: #c85a54;
-}
-
-.btn-primary:focus {
-  background-color: #c85a54;
 }
 
 .card-wide > .mdl-card__media {
