@@ -1,6 +1,7 @@
 
 .card-wide.mdl-card {
   width: 100%;
+  border: 3px solid #363636;
   max-height: 588px;
 }
 
@@ -12,8 +13,7 @@
 }
 
 .card-wide > .mdl-card__media {
-  background: #fff url('../../../assets/img/wallpaper.jpg') no-repeat bottom;
-  background-size: cover;
+  background: #424242 url('../../../assets/img/wallpaper.svg');
 }
 
 .flex-form-container {
