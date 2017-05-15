@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {MdButtonModule, MdCardModule, MdInputModule, MdToolbarModule} from '@angular/material';
+import {MdButtonModule, MdCardModule, MdInputModule, MdTabsModule, MdToolbarModule} from '@angular/material';
 
 import {AppComponent} from './app.component';
 import {routes} from './app.router';
@@ -23,6 +23,7 @@ import {ChannelListComponent} from './channel/channel-list/channel-list.componen
 import {ChannelListDetailComponent} from './channel/channel-list-detail/channel-list-detail.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MDL} from './share/directives/mdl.directive';
+import {ChatTabComponent} from './chat/chat-tab/chat-tab.component';
 
 
 @NgModule({
@@ -41,8 +42,8 @@ import {MDL} from './share/directives/mdl.directive';
     ChannelListComponent,
     ChannelListDetailComponent,
     AuthLoginComponent,
-    MDL
-
+    MDL,
+    ChatTabComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +55,8 @@ import {MDL} from './share/directives/mdl.directive';
     MdButtonModule,
     MdCardModule,
     MdInputModule,
-    MdToolbarModule
+    MdToolbarModule,
+    MdTabsModule
   ],
   providers: [ChatService, WebsocketService],
   bootstrap: [AppComponent]
