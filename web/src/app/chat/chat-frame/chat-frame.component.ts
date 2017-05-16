@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {Channel} from '../../share/model/channel.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
@@ -7,17 +7,12 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   templateUrl: './chat-frame.component.html',
   styleUrls: ['./chat-frame.component.css'],
 })
-export class ChatFrameComponent {
+export class ChatFrameComponent implements AfterViewInit {
   addNewChat = false;
   newChatForm: FormGroup;
   openChats: Array<Channel>;
-  @Input() channel: Channel;
-  @Output()
-  newChannel: EventEmitter<any> = new EventEmitter();
-
-  set addNewChannel(value: Channel) {
-    this.openChats.push(value);
-  }
+  @ViewChild('chatTabGroup') chatTabGroup;
+  selectedTab = 0;
 
   constructor(private formBuilder: FormBuilder) {
     this.openChats = [new Channel('Channel Name', [])];
@@ -30,10 +25,10 @@ export class ChatFrameComponent {
     });
   }
 
-  onSubmitNewChat() {
-    this.openChats.push(new Channel(this.newChatForm.value.name, []));
-    this.newChatForm.reset();
-    this.addNewChat = false;
+  ngAfterViewInit(): void {
+    if (this.chatTabGroup) {
+      this.openChats[this.chatTabGroup.selectedIndex].setNotification(false);
+    }
   }
 
   onConnectNewChannel(channel: Channel) {
@@ -42,12 +37,15 @@ export class ChatFrameComponent {
     }
   }
 
-  openNewChatCard() {
-    this.addNewChat = !this.addNewChat;
-  }
-
-  closeNewChatCard() {
-    this.addNewChat = false;
+  unsetNotification(index: number) {
+    console.log(index);
+    // set notification on old tab
+    if (this.openChats[this.selectedTab]) {
+      this.openChats[this.selectedTab].setNotification(true);
+    }
+    // unset notification on new tab
+    this.openChats[index].setNotification(false);
+    this.selectedTab = index;
   }
 
   onClose(event) {
@@ -55,7 +53,9 @@ export class ChatFrameComponent {
     if (confirm('Do you really want to close the Chat?')) {
       const index = this.openChats.indexOf(event, 0);
       if (index > -1) {
+        this.openChats[index].setNotification(true);
         this.openChats.splice(index, 1);
+        this.openChats[this.selectedTab].setNotification(false);
       }
     }
   }
