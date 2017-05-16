@@ -1,0 +1,22 @@
+<md-card style="background-color: #363636">
+  <md-card-title>
+    <span class="mdl-layout-title cc-chat-overview-channels">Channels</span>
+  </md-card-title>
+  <form action="#">
+    <md-input-container class="example-full-width">
+      <input mdInput placeholder="Search" #channelSearch id="channelSearchInput">
+    </md-input-container>
+  </form>
+  <md-card-content>
+    <ul class="mdl-list">
+      <div style="text-align: center">
+  <span *ngIf="!channelList.length" class="mdl-chip" style="display: inline-block">
+      <span class="mdl-chip__text" style="text-align: center">No Results were Found</span>
+  </span>
+      </div>
+      <app-channel-list-detail *ngFor="let channel of viewChannelList" [channel]="channel"
+                               (addNewChannel)="onConnectNewChannel($event)">Searching for Channels
+      </app-channel-list-detail>
+    </ul>
+  </md-card-content>
+</md-card>

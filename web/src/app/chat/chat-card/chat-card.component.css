@@ -1,0 +1,38 @@
+
+.card-wide.mdl-card {
+  width: 100%;
+  border: 3px solid #363636;
+  max-height: 588px;
+}
+
+.btn-primary {
+  color: white;
+}
+.btn-primary:hover {
+  color: white;
+}
+
+.card-wide > .mdl-card__media {
+  background: #424242 url('../../../assets/img/wallpaper.svg');
+}
+
+.flex-form-container {
+  display: flex;
+}
+.flex-attachment-button {
+  order: 1;
+  flex-grow: 1;
+  margin-right: 5px;
+  background-color: transparent;
+}
+
+.flex-input-field {
+  order: 2;
+  width: 90%;
+  flex-grow: 9;
+}
+
+.flex-send-button {
+  order: 2;
+  flex-grow: 1;
+}

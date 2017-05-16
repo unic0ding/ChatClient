@@ -1,0 +1,63 @@
+
+.msg-receive-container {
+  float: left;
+  background-color: #363636;
+  border-radius: 15px 15px 15px 1px;
+}
+
+.msg-sent-container {
+  float: right;
+  background-color: #FD4282;
+  border-radius: 15px 15px 1px 15px;
+}
+
+.msg-sent-text {
+}
+
+
+.msg-sent-timestamp {
+  color: #424242;
+}
+
+.msg-receive-text {
+}
+
+.msg-receive-timestamp {
+  color: #767676;
+}
+
+.msg-author {
+  font-size: 80%;
+  margin: 0;
+  top: 0;
+}
+
+
+.msg-timestamp {
+  font-size: 70%;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 0;
+  float: right;
+}
+
+.msg-text {
+  float: left;
+  margin-bottom: 0;
+  color: #FAFAFA;
+}
+.msg-text-link {
+  color: white;
+}
+
+.msg-container {
+  max-width: 80%;
+  display: inline-block;
+  clear: both;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  /*top right bottom left*/
+  padding: 4px 8px 4px 8px;
+  color: #000a12;
+}
+
