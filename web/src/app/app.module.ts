@@ -3,8 +3,8 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {
-  MdButtonModule, MdCardModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerModule, MdTabsModule,
-  MdToolbarModule
+  MdButtonModule, MdCardModule, MdChipsModule, MdIconModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerModule, MdTabsModule,
+  MdToolbarModule, MdTooltipModule
 } from '@angular/material';
 
 import {AppComponent} from './app.component';
@@ -59,7 +59,10 @@ import {MDL} from './share/directives/mdl.directive';
     MdToolbarModule,
     MdTabsModule,
     MdProgressSpinnerModule,
-    MdProgressBarModule
+    MdProgressBarModule,
+    MdTooltipModule,
+    MdIconModule,
+    MdChipsModule
   ],
   providers: [ChatService, WebsocketService],
   bootstrap: [AppComponent]

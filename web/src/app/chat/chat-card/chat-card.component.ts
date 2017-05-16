@@ -21,6 +21,7 @@ export class ChatCardComponent implements OnInit, OnDestroy {
   private notification;
   private showSpinner = true;
   private connectionClosed = false;
+  // private url = 'ws://localhost:8080/room';
   private url = 'ws://echo.websocket.org';
 
 
@@ -41,6 +42,7 @@ export class ChatCardComponent implements OnInit, OnDestroy {
         this.updateNotification();
         const message = Message.fromJson(event.data);
         this.messages.push({message: message, incoming: true});
+        this.channel.updateNotification();
       },
       (error) => {
         console.log(error);
