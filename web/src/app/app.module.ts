@@ -4,7 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {
   MdButtonModule, MdCardModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerModule, MdTabsModule,
-  MdToolbarModule
+  MdToolbarModule, MdTooltipModule
 } from '@angular/material';
 
 import {AppComponent} from './app.component';
@@ -59,7 +59,8 @@ import {MDL} from './share/directives/mdl.directive';
     MdToolbarModule,
     MdTabsModule,
     MdProgressSpinnerModule,
-    MdProgressBarModule
+    MdProgressBarModule,
+    MdTooltipModule
   ],
   providers: [ChatService, WebsocketService],
   bootstrap: [AppComponent]
