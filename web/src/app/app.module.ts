@@ -3,7 +3,8 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {
-  MdButtonModule, MdCardModule, MdChipsModule, MdIconModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerModule, MdTabsModule,
+  MdButtonModule, MdCardModule, MdChipsModule, MdIconModule, MdInputModule, MdMenuModule, MdProgressBarModule, MdProgressSpinnerModule,
+  MdTabsModule,
   MdToolbarModule, MdTooltipModule
 } from '@angular/material';
 
@@ -65,7 +66,8 @@ import {RoomService} from './share/services/room.service';
     MdProgressBarModule,
     MdTooltipModule,
     MdIconModule,
-    MdChipsModule
+    MdChipsModule,
+    MdMenuModule
   ],
   providers: [MessageService, AuthService, RoomService, ChatService, WebsocketService],
   bootstrap: [AppComponent]
