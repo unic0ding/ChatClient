@@ -55,7 +55,16 @@ export class ChatFrameComponent implements AfterViewInit {
       if (index > -1) {
         this.openChats[index].setNotification(true);
         this.openChats.splice(index, 1);
-        this.openChats[this.selectedTab].setNotification(false);
+        if (this.openChats.length === 0) {
+          return;
+        }
+        if (index === this.openChats.length) {
+          this.openChats[this.selectedTab - 1].setNotification(false);
+        } else {
+          if (this.openChats.length > 0) {
+            this.openChats[this.selectedTab].setNotification(false);
+          }
+        }
       }
     }
   }
