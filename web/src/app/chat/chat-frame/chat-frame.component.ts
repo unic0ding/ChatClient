@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {Channel} from '../../share/model/channel.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {RoomService} from '../../share/services/room.service';
 
 @Component({
   selector: 'app-chat-frame',
@@ -14,8 +15,9 @@ export class ChatFrameComponent implements AfterViewInit {
   @ViewChild('chatTabGroup') chatTabGroup;
   selectedTab = 0;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private roomService: RoomService, private formBuilder: FormBuilder) {
     this.openChats = [new Channel('Channel Name', [])];
+    // this.openChats = [];
     if (this.openChats.length === 0) {
       this.addNewChat = true;
     }
@@ -26,7 +28,7 @@ export class ChatFrameComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.chatTabGroup) {
+    if (this.openChats.length > 0) {
       this.openChats[this.chatTabGroup.selectedIndex].setNotification(false);
     }
   }
@@ -61,5 +63,14 @@ export class ChatFrameComponent implements AfterViewInit {
         }
       }
     }
+  }
+
+  collapseNewChatForm() {
+    this.addNewChat = !this.addNewChat;
+  }
+
+  onSubmitNewChat() {
+    console.log(this.newChatForm.value);
+    // this.roomService.createRoom(this.newChatForm.value.name);
   }
 }

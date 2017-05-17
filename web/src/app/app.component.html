@@ -20,10 +20,8 @@
   </a>
 
 </md-toolbar>
+<md-progress-bar mode="query" *ngIf="!loaded"></md-progress-bar>
 <div class="oc-content-wrapper">
-  <md-spinner *ngIf="!loaded"></md-spinner>
-</div>
-<div *ngIf="loaded" class="oc-content-wrapper">
   <router-outlet>
   </router-outlet>
 </div>

@@ -26,6 +26,9 @@ import {ChannelListComponent} from './channel/channel-list/channel-list.componen
 import {ChannelListDetailComponent} from './channel/channel-list-detail/channel-list-detail.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MDL} from './share/directives/mdl.directive';
+import {MessageService} from './share/services/message.service';
+import {AuthService} from './auth.service';
+import {RoomService} from './share/services/room.service';
 
 
 @NgModule({
@@ -64,7 +67,7 @@ import {MDL} from './share/directives/mdl.directive';
     MdIconModule,
     MdChipsModule
   ],
-  providers: [ChatService, WebsocketService],
+  providers: [MessageService, AuthService, RoomService, ChatService, WebsocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

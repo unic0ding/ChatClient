@@ -8,12 +8,12 @@ export class RoomService {
   }
 
   createRoom(name: string) {
-    const command = {type: 'command', command: 'message', data: name};
+    const command = {type: 'command', command: 'room', data: name};
     this.webSocketService.emit(command);
   }
 
   getAllRooms() {
-    const command = {type: 'command', command: 'message'};
+    const command = {type: 'command', command: 'room'};
     this.webSocketService.emit(command);
   }
 
