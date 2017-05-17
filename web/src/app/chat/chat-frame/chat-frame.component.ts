@@ -38,14 +38,15 @@ export class ChatFrameComponent implements AfterViewInit {
   }
 
   unsetNotification(index: number) {
-    console.log(index);
     // set notification on old tab
     if (this.openChats[this.selectedTab]) {
       this.openChats[this.selectedTab].setNotification(true);
     }
     // unset notification on new tab
-    this.openChats[index].setNotification(false);
-    this.selectedTab = index;
+    if (index > -1) {
+      this.openChats[index].setNotification(false);
+      this.selectedTab = index;
+    }
   }
 
   onClose(event) {
@@ -55,7 +56,9 @@ export class ChatFrameComponent implements AfterViewInit {
       if (index > -1) {
         this.openChats[index].setNotification(true);
         this.openChats.splice(index, 1);
-        this.openChats[this.selectedTab].setNotification(false);
+        if (this.openChats.length > 0) {
+          this.openChats[this.selectedTab].setNotification(false);
+        }
       }
     }
   }
