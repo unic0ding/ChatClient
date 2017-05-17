@@ -19,7 +19,12 @@ export class AuthService {
   }
 
   login(value) {
-    const command = {type: 'command', command: 'message', method: 'login', data: value};
+    const command = {type: 'command', command: 'auth', method: 'login', data: value};
+    this.webSocketService.emit(command);
+  }
+
+  logout() {
+    const command = {type: 'command', command: 'auth', method: 'logout'};
     this.webSocketService.emit(command);
   }
 }

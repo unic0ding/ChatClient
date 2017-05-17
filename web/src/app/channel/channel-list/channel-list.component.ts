@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Channel} from '../../share/model/channel.model';
 import {Observable} from 'rxjs/Observable';
-import {ChatFrameComponent} from '../../chat/chat-frame/chat-frame.component';
+import {RoomService} from '../../share/services/room.service';
 
 @Component({
   selector: 'app-channel-list',
@@ -13,7 +13,9 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
   viewChannelList = [];
   channelList = [];
 
-  constructor() {
+  constructor(private roomService: RoomService) {
+    // TODO: get All Rooms from RoomService
+    // const roomListener$ = this.roomService.getListener();
     this.channelList.push(new Channel('AngularChannel', []));
     this.channelList.push(new Channel('PythonChannel', []));
     this.channelList.push(new Channel('JS_Channel', []));
