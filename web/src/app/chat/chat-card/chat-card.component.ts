@@ -4,6 +4,7 @@ import {Contact} from '../../share/model/contact.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Channel} from '../../share/model/channel.model';
 import {Observable} from 'rxjs/Observable';
+import {ChatService} from '../../share/services/chat.service';
 
 @Component({
   selector: 'app-chat-card',
@@ -25,7 +26,7 @@ export class ChatCardComponent implements OnInit, OnDestroy {
   // private url = 'ws://echo.websocket.org';
 
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private chatService: ChatService, private formBuilder: FormBuilder) {
     this.contact = new Contact(1, 'Drachenlord', 'altschauerberg8@emskirchen.de');
 
     this.chatForm = this.formBuilder.group({
