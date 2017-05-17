@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MdButtonModule, MdInputModule} from '@angular/material';
+import {AuthService} from '../../auth.service';
 
 @Component({
   selector: 'app-auth-login',
@@ -9,4 +8,10 @@ import {MdButtonModule, MdInputModule} from '@angular/material';
 })
 export class AuthLoginComponent {
 
+  constructor(private authService: AuthService) {
+  }
+
+  login(value) {
+    this.authService.login(value);
+  }
 }

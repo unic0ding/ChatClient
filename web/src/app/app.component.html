@@ -21,6 +21,9 @@
 
 </md-toolbar>
 <div class="oc-content-wrapper">
+  <md-spinner *ngIf="!loaded"></md-spinner>
+</div>
+<div *ngIf="loaded" class="oc-content-wrapper">
   <router-outlet>
   </router-outlet>
 </div>

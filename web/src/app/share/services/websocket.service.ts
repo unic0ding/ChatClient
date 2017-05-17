@@ -23,6 +23,13 @@ export class WebsocketService {
     return listener$;
   }
 
+  getClosedListener(): Observable<MessageEvent> {
+    const closedListener$ = Observable.fromEvent(this.socket, 'close')
+      .map((event) => <MessageEvent> event);
+
+    return closedListener$;
+  }
+
   emit(command) {
     this.socket.send(JSON.stringify(command));
   }

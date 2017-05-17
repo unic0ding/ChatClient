@@ -17,4 +17,9 @@ export class AuthService {
 
     return listener$;
   }
+
+  login(value) {
+    const command = {type: 'command', command: 'message', method: 'login', data: value};
+    this.webSocketService.emit(command);
+  }
 }
