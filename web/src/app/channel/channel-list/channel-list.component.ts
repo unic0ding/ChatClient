@@ -31,10 +31,11 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
     channelListener$.subscribe(event => {
       if (event.subtype === 'newRoom') {
         this.channelList.push(Channel.fromJson(event.data));
+        this.viewChannelList = this.channelList.sort(this.compare);
       }
       if (event.subtype === 'allRooms') {
         this.channelList = Channel.fromJsonArray(event.data);
-        this.viewChannelList = this.channelList.sort();
+        this.viewChannelList = this.channelList.sort(this.compare);
       }
     });
 
@@ -62,6 +63,16 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
 
   onConnectNewChannel(channel: Channel) {
     this.newChannel.emit(channel);
+  }
+
+  compare(a, b) {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
   }
 
   ngOnInit() {
