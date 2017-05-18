@@ -14,12 +14,6 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
   channelList = [];
 
   constructor(private roomService: RoomService) {
-    // TODO: get All Rooms from RoomService
-    // this.channelList.push(new Channel('AngularChannel', []));
-    // this.channelList.push(new Channel('PythonChannel', []));
-    // this.channelList.push(new Channel('JS_Channel', []));
-    // this.channelList.push(new Channel('Android_Channel', []));
-    // this.channelList.push(new Channel('JavaChan', []));
     this.viewChannelList = this.channelList;
   }
 
