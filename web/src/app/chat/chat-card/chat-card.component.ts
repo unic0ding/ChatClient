@@ -36,7 +36,7 @@ export class ChatCardComponent implements OnInit, OnDestroy {
     messageListener$
       .takeUntil(this.ngUnsubscribe)
       .subscribe(event => {
-        if (event.subtype === 'message') {
+        if (event.subtype === 'message' && event.roomName === this.channel.name) {
           this.messages.push({message: Message.fromJson(event.data), incoming: true});
           this.channel.updateNotification();
         }

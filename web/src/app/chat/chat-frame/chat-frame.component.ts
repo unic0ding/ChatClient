@@ -18,8 +18,8 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   selectedTab = 0;
 
   constructor(private roomService: RoomService, private formBuilder: FormBuilder) {
-    this.openChats = [new Channel('Channel_Name', [])];
-    // this.openChats = [];
+    // this.openChats = [new Channel('Channel_Name', [])];
+    this.openChats = [];
     if (this.openChats.length === 0) {
       this.addNewChat = true;
     }
@@ -88,6 +88,7 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onSubmitNewChat() {
     console.log(this.newChatForm.value);
+    // TODO: Create Rooms
     // this.roomService.createRoom(this.newChatForm.value.name);
   }
 
