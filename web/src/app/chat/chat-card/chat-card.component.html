@@ -1,4 +1,5 @@
-<div app-mdl class="card-wide mdl-card mdl-shadow--2dp" style="background-color: #363636;" (blur)="this.channel.resetNotification()">
+<div app-mdl class="card-wide mdl-card mdl-shadow--2dp" style="background-color: #363636;"
+     (blur)="this.channel.resetNotification()">
   <div class="mdl-card__menu">
     <button md-icon-button [matMenuTriggerFor]="menu" style="color: #FAFAFA">
       <md-icon>more_vert</md-icon>
@@ -40,10 +41,9 @@
           <input mdInput placeholder="Send a Message..." id="{{name}}-input" spellcheck="false"
                  formControlName="message" style="color: #FAFAFA">
         </md-input-container>
-        <button
-          class="btn-primary mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored flex-send-button"
-          [disabled]="!chatForm.valid" [hidden]="!chatForm.valid" type="submit">
-          <i class="material-icons">send</i>
+        <button md-mini-fab class="flex-send-button" [disabled]="!chatForm.valid" [hidden]="!chatForm.valid"
+                type="submit" style="color: #FAFAFA; background-color: #FD4282">
+          <md-icon>send</md-icon>
         </button>
       </div>
     </form>
