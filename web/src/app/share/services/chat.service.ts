@@ -16,12 +16,7 @@ export class ChatService {
 
   getListener(): Observable<any> {
     const listener$ = this.webSocketService.getListener()
-      .filter((data) => {
-        if (data.event === 'chat') {
-          return data;
-        }
-      })
-      .do(console.log);
+      .filter((data) => data.event === 'chat');
 
     return listener$;
   }
