@@ -35,40 +35,6 @@ export class ChatCardComponent implements OnInit, OnDestroy {
       this.messages.push({message: Message.fromJson(event.data), incoming: true});
           this.channel.updateNotification();
     });
-    // this.socket = new WebSocket(this.url);
-    // const listener = Observable.fromEvent(this.socket, 'message')
-    //   .map((event) => <MessageEvent>event);
-    //
-    // listener.subscribe((event) => {
-    //     this.updateNotification();
-    //     const message = Message.fromJson(event.data);
-    //     this.messages.push({message: message, incoming: true});
-    //     this.channel.updateNotification();
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   },
-    //
-    //   () => {
-    //     const message = new Message(0, new Date(), new Contact(0, 'Socket', ''), 'Socket Connection Closed');
-    //     this.messages.push({message: message, incoming: true});
-    //     this.connectionClosed = true;
-    //   }
-    // );
-
-    // const openListener = Observable.fromEvent(this.socket, 'open');
-    //
-    // openListener.subscribe(() => {
-    //   for (const message of this.unsentMessages) {
-    //     this.sendMessage(message);
-    //   }
-    //   this.unsentMessages = [];
-    // });
-    //
-    // const closeListener = Observable.fromEvent(this.socket, 'close')
-    //   .map((event) => <MessageEvent>event);
-    //
-    // closeListener.subscribe((event) => console.log(event));
   }
 
   private sendMessage(message?: Message) {
