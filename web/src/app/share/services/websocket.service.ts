@@ -18,7 +18,8 @@ export class WebsocketService {
   getListener() {
     const listener$ = Observable.fromEvent(this.socket, 'message')
       .map((event) => <MessageEvent> event)
-      .map((event) => JSON.parse(event.data));
+      .map((event) => JSON.parse(event.data))
+      .filter((event) => event.type === 'event' || event.type === 'error');
     return listener$;
   }
 

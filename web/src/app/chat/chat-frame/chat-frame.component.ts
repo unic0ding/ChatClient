@@ -51,10 +51,10 @@ export class ChatFrameComponent implements AfterViewInit {
     }
   }
 
-  onClose(event) {
-
+  onClose(channel: Channel) {
     if (confirm('Do you really want to close the Chat?')) {
-      const index = this.openChats.indexOf(event, 0);
+      // this.roomService.leaveRoom(event);
+      const index = this.openChats.indexOf(channel, 0);
       if (index > -1) {
         this.openChats[index].setNotification(true);
         this.openChats.splice(index, 1);

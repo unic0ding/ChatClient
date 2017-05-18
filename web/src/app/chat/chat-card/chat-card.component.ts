@@ -4,6 +4,7 @@ import {Contact} from '../../share/model/contact.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Channel} from '../../share/model/channel.model';
 import {ChatService} from '../../share/services/chat.service';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'app-chat-card',
@@ -18,6 +19,7 @@ export class ChatCardComponent implements OnInit, OnDestroy {
   private unsentMessages = [];
   private chatForm: FormGroup;
   private connectionClosed = false;
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(private chatService: ChatService, private formBuilder: FormBuilder) {
     this.contact = new Contact(1, 'Drachenlord', 'altschauerberg8@emskirchen.de');
@@ -29,12 +31,16 @@ export class ChatCardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const messageListener$ = this.chatService.getListener()
-      .filter(event => event.subtype === 'message');
+      .filter(event => event.subtype === 'message' || event.event === 'chatError');
 
-    messageListener$.subscribe(event => {
-      this.messages.push({message: Message.fromJson(event.data), incoming: true});
+    messageListener$
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(event => {
+        if (event.subtype === 'message') {
+          this.messages.push({message: Message.fromJson(event.data), incoming: true});
           this.channel.updateNotification();
-    });
+        }
+      });
   }
 
   private sendMessage(message?: Message) {
@@ -57,5 +63,7 @@ export class ChatCardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

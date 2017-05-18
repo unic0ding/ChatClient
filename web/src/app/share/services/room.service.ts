@@ -19,7 +19,7 @@ export class RoomService {
 
   getListener() {
     const listener$ = this.webSocketService.getListener()
-      .filter((data) => data.event === 'room');
+      .filter((data) => data.event === 'room' || data.event === 'roomError');
 
     return listener$;
   }
