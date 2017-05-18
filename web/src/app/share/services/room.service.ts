@@ -20,11 +20,6 @@ export class RoomService {
     this.webSocketService.emit(command);
   }
 
-  getAllRooms() {
-    const command = {type: 'command', command: 'room'};
-    this.webSocketService.emit(command);
-  }
-
   getListener() {
     const listener$ = this.webSocketService.getListener()
       .filter((data) => data.event === 'room' || data.event === 'roomError');
