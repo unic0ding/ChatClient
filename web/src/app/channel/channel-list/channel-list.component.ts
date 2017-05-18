@@ -26,11 +26,9 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
 
     // get Channel Listener
-    const channelListener$ = this.roomService.getListener()
-      .do(console.log);
+    const channelListener$ = this.roomService.getListener();
 
     channelListener$.subscribe(event => {
-      console.log(event);
       if (event.subtype === 'newRoom') {
         this.channelList.push(Channel.fromJson(event.data));
       }
