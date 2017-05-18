@@ -13,8 +13,14 @@ export class AppComponent {
 
   constructor(private webSocketService: WebsocketService) {
     const openListener$ = this.webSocketService.connect(this.url)
+      .delay(2000) // Just for tests
       .subscribe(() => {
         this.loaded = true;
+      });
+
+    const closeListener$ = this.webSocketService.getClosedListener()
+      .subscribe((error) => {
+        console.log('Connection Closed');
       });
   }
 }
