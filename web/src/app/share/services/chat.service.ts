@@ -10,7 +10,7 @@ export class ChatService {
   }
 
   sendMessage(message: Message) {
-    const command = {type: 'command', command: 'message', data: message};
+    const command = {type: 'command', subtype: 'message', command: 'newMessage', data: message};
     this.webSocketService.emit(command);
   }
 
