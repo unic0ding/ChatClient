@@ -1,18 +1,20 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Channel} from '../../share/model/channel.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RoomService} from '../../share/services/room.service';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'app-chat-frame',
   templateUrl: './chat-frame.component.html',
   styleUrls: ['./chat-frame.component.css'],
 })
-export class ChatFrameComponent implements AfterViewInit {
-  addNewChat = false;
-  newChatForm: FormGroup;
-  openChats: Array<Channel>;
+export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('chatTabGroup') chatTabGroup;
+  openChats: Array<Channel>;
+  newChatForm: FormGroup;
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
+  addNewChat = false;
   selectedTab = 0;
 
   constructor(private roomService: RoomService, private formBuilder: FormBuilder) {
@@ -25,6 +27,14 @@ export class ChatFrameComponent implements AfterViewInit {
     this.newChatForm = this.formBuilder.group({
       name: this.formBuilder.control(null, Validators.compose([Validators.required, Validators.pattern('(\\w{2,})')]))
     });
+  }
+
+  ngOnInit(): void {
+    const roomListener$ = this.roomService.getListener();
+
+    roomListener$
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe();
   }
 
   ngAfterViewInit(): void {
@@ -79,5 +89,10 @@ export class ChatFrameComponent implements AfterViewInit {
   onSubmitNewChat() {
     console.log(this.newChatForm.value);
     // this.roomService.createRoom(this.newChatForm.value.name);
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }
