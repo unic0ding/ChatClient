@@ -3,7 +3,6 @@ import {Message} from '../../share/model/message.model';
 import {Contact} from '../../share/model/contact.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Channel} from '../../share/model/channel.model';
-import {Observable} from 'rxjs/Observable';
 import {ChatService} from '../../share/services/chat.service';
 
 @Component({
@@ -17,14 +16,8 @@ export class ChatCardComponent implements OnInit, OnDestroy {
   @Input() contact: Contact;
   private messages = [];
   private unsentMessages = [];
-  private socket: WebSocket;
   private chatForm: FormGroup;
-  private notification;
-  private showSpinner = true;
   private connectionClosed = false;
-  private url = 'ws://localhost:8080/room';
-  // private url = 'ws://echo.websocket.org';
-
 
   constructor(private chatService: ChatService, private formBuilder: FormBuilder) {
     this.contact = new Contact(1, 'Drachenlord', 'altschauerberg8@emskirchen.de');
@@ -39,9 +32,8 @@ export class ChatCardComponent implements OnInit, OnDestroy {
       .filter(event => event.subtype === 'message');
 
     messageListener$.subscribe(event => {
-      const m = Message.fromJson(event.data);
-      console.log(m);
-      this.messages.push({message: m, incoming: true});
+      this.messages.push({message: Message.fromJson(event.data), incoming: true});
+          this.channel.updateNotification();
     });
     // this.socket = new WebSocket(this.url);
     // const listener = Observable.fromEvent(this.socket, 'message')
@@ -67,7 +59,6 @@ export class ChatCardComponent implements OnInit, OnDestroy {
     // const openListener = Observable.fromEvent(this.socket, 'open');
     //
     // openListener.subscribe(() => {
-    //   this.showSpinner = false;
     //   for (const message of this.unsentMessages) {
     //     this.sendMessage(message);
     //   }
@@ -88,22 +79,10 @@ export class ChatCardComponent implements OnInit, OnDestroy {
       this.chatForm.reset();
     }
     try {
-      this.socket.send(message.toJson());
+      this.chatService.sendMessage(message);
     } catch (e) {
       this.unsentMessages.push(message);
-      console.log('Still connecting...');
-    }
-  }
-
-  private updateNotification(event?) {
-    if (event === 0) {
-      this.notification = null;
-      return;
-    }
-    if (this.notification) {
-      this.notification++;
-    } else {
-      this.notification = 1;
+      console.log('No Connection');
     }
   }
 
@@ -112,6 +91,5 @@ export class ChatCardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.socket.close();
   }
 }
