@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core';
 import {WebsocketService} from './share/services/websocket.service';
+import {Contact} from './share/model/contact.model';
 
 @Injectable()
 export class AuthService {
+  public user: Contact;
 
   constructor(private webSocketService: WebsocketService) {
+    this.user = new Contact(1, 'Drachenlord', 'altschauerberg8@emskirchen.de');
   }
 
   getListener() {

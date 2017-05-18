@@ -3,6 +3,7 @@ import {Channel} from '../../share/model/channel.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RoomService} from '../../share/services/room.service';
 import {Subject} from 'rxjs/Subject';
+import {AuthService} from '../../auth.service';
 
 @Component({
   selector: 'app-chat-frame',
@@ -17,7 +18,7 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   addNewChat = false;
   selectedTab = 0;
 
-  constructor(private roomService: RoomService, private formBuilder: FormBuilder) {
+  constructor(private roomService: RoomService, private authService: AuthService, private formBuilder: FormBuilder) {
     // this.openChats = [new Channel('Channel_Name', [])];
     this.openChats = [];
     if (this.openChats.length === 0) {
@@ -88,6 +89,7 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onSubmitNewChat() {
     console.log(this.newChatForm.value);
+    const channel = new Channel(this.newChatForm.value, [this.authService.user]);
     // TODO: Create Rooms
     // this.roomService.createRoom(this.newChatForm.value.name);
   }

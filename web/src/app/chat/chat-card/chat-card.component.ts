@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Message} from '../../share/model/message.model';
-import {Contact} from '../../share/model/contact.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Channel} from '../../share/model/channel.model';
 import {ChatService} from '../../share/services/chat.service';
 import {Subject} from 'rxjs/Subject';
+import {AuthService} from '../../auth.service';
 
 @Component({
   selector: 'app-chat-card',
@@ -14,15 +14,13 @@ import {Subject} from 'rxjs/Subject';
 export class ChatCardComponent implements OnInit, OnDestroy {
   @Output() closeWindow = new EventEmitter();
   @Input() channel: Channel;
-  @Input() contact: Contact;
   private messages = [];
   private unsentMessages = [];
   private chatForm: FormGroup;
   private connectionClosed = false;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
-  constructor(private chatService: ChatService, private formBuilder: FormBuilder) {
-    this.contact = new Contact(1, 'Drachenlord', 'altschauerberg8@emskirchen.de');
+  constructor(private chatService: ChatService, private authService: AuthService, private formBuilder: FormBuilder) {
 
     this.chatForm = this.formBuilder.group({
       message: this.formBuilder.control(null, Validators.required)
@@ -51,7 +49,7 @@ export class ChatCardComponent implements OnInit, OnDestroy {
   private sendMessage(message?: Message) {
     if (!message) {
       const text = this.chatForm.value.message;
-      message = new Message(1, new Date(), this.contact, text);
+      message = new Message(1, new Date(), this.authService.user, text);
       this.messages.push({message: message, incoming: false});
       this.chatForm.reset();
     }

@@ -8,7 +8,7 @@ export class RoomService {
   }
 
   createRoom(name: string) {
-    const command = {type: 'command', command: 'room', data: name};
+    const command = {type: 'command', command: 'room', subtype: 'createRoom', data: name};
     this.webSocketService.emit(command);
   }
 
