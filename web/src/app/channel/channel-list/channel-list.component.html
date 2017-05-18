@@ -1,4 +1,4 @@
-<md-card style="background-color: #363636">
+<md-card class="dark-card">
   <md-card-title>
     <span class="mdl-layout-title cc-chat-overview-channels">Channels</span>
   </md-card-title>
@@ -9,10 +9,10 @@
   </form>
   <md-card-content class="channel-list">
     <ul class="mdl-list">
-      <div style="text-align: center">
-  <span *ngIf="!viewChannelList.length" class="mdl-chip" id="no-result">
-      <span class="mdl-chip__text">No Channels were Found</span>
-  </span>
+      <div>
+        <span *ngIf="!viewChannelList.length" class="mdl-chip">
+          <span class="mdl-chip__text">No Channels were Found</span>
+        </span>
       </div>
       <li>
         <app-channel-list-detail *ngFor="let channel of viewChannelList" [channel]="channel"

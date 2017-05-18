@@ -1,17 +1,17 @@
-<md-card style="background-color: #363636">
+<md-card class="dark-card">
   <md-card-title>
     <span class="mdl-layout-title cc-chat-overview-channels">Contacts</span>
   </md-card-title>
   <form action="#">
-    <md-input-container class="example-full-width">
+    <md-input-container class="example-full-width" id="contactSearchInputContainer">
       <input mdInput placeholder="Search" #contactSearch id="contactSearchInput">
     </md-input-container>
   </form>
-  <md-card-content>
+  <md-card-content class="contact-list">
     <ul class="mdl-list">
-      <div style="text-align: center">
-        <span *ngIf="!contactList.length" class="mdl-chip" style="display: inline-block">
-          <span class="mdl-chip__text" style="text-align: center">No Results were Found</span>
+      <div>
+        <span *ngIf="!contactList.length" class="mdl-chip">
+          <span class="mdl-chip__text">No Contacts were Found</span>
         </span>
       </div>
       <app-contact-detail *ngFor="let contact of viewContactList" [contact]="contact">Searching for Contacts

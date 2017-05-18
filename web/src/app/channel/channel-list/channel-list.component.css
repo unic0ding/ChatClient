@@ -3,7 +3,11 @@
   overflow: auto;
 }
 
-.channel-list:hover{
+.mdl-list div {
+  text-align: center;
+}
+
+.channel-list:hover {
   border: 1px solid #424242;
 }
 
@@ -11,10 +15,7 @@
   display: none;
 }
 
-#no-result {
-  display: inline-block
-}
-
 #channelSearchInputContainer {
   width: 100%;
 }
+
