@@ -22,12 +22,12 @@ export class AuthService {
   }
 
   login(value) {
-    const command = {type: 'command', command: 'auth', method: 'login', data: value};
+    const command = {type: 'command', subtype: 'auth', command: 'login', data: value};
     this.webSocketService.emit(command);
   }
 
   logout() {
-    const command = {type: 'command', command: 'auth', method: 'logout'};
+    const command = {type: 'command', subtype: 'auth', command: 'logout'};
     this.webSocketService.emit(command);
   }
 }

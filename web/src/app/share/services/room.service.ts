@@ -9,7 +9,7 @@ export class RoomService {
   }
 
   createRoom(channel: Channel) {
-    const command = {type: 'command', command: 'room', subtype: 'createRoom', data: channel};
+    const command = {type: 'command', subtype: 'room', command: 'createRoom', data: channel};
     console.log(command);
     this.webSocketService.emit(command);
   }
