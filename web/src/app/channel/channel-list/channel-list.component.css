@@ -1,0 +1,20 @@
+.channel-list {
+  max-height: 320px;
+  overflow: auto;
+}
+
+.channel-list:hover{
+  border: 1px solid #424242;
+}
+
+.channel-list::-webkit-scrollbar {
+  display: none;
+}
+
+#no-result {
+  display: inline-block
+}
+
+#channelSearchInputContainer {
+  width: 100%;
+}

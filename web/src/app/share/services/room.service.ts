@@ -24,6 +24,7 @@ export class RoomService {
           return data;
         }
       });
+    return listener$;
   }
 
 }

@@ -18,7 +18,8 @@ export class WebsocketService {
   getListener() {
     const listener$ = Observable.fromEvent(this.socket, 'message')
       .map((event) => <MessageEvent> event)
-      .map((event) => event.data);
+      .map((event) => JSON.parse(event.data))
+      .do(console.log);
 
     return listener$;
   }

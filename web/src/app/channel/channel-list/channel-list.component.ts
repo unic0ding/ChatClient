@@ -15,16 +15,33 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
 
   constructor(private roomService: RoomService) {
     // TODO: get All Rooms from RoomService
-    // const roomListener$ = this.roomService.getListener();
-    this.channelList.push(new Channel('AngularChannel', []));
-    this.channelList.push(new Channel('PythonChannel', []));
-    this.channelList.push(new Channel('JS_Channel', []));
-    this.channelList.push(new Channel('Android_Channel', []));
-    this.channelList.push(new Channel('JavaChan', []));
+    // this.channelList.push(new Channel('AngularChannel', []));
+    // this.channelList.push(new Channel('PythonChannel', []));
+    // this.channelList.push(new Channel('JS_Channel', []));
+    // this.channelList.push(new Channel('Android_Channel', []));
+    // this.channelList.push(new Channel('JavaChan', []));
     this.viewChannelList = this.channelList;
   }
 
   ngAfterViewInit(): void {
+
+    // get Channel Listener
+    const channelListener$ = this.roomService.getListener()
+      .do(console.log);
+
+    channelListener$.subscribe(event => {
+      console.log(event);
+      if (event.subtype === 'newRoom') {
+        this.channelList.push(Channel.fromJson(event.data));
+      }
+      if (event.subtype === 'allRooms') {
+        this.channelList = Channel.fromJsonArray(event.data);
+        this.viewChannelList = this.channelList.sort();
+      }
+    });
+
+
+    // Channel Search Observable
     const search: any = document.getElementById('channelSearchInput');
     const channelSource$ = Observable.fromEvent(search, 'input')
       .debounceTime(250)

@@ -37,6 +37,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MDL} from './share/directives/mdl.directive';
 import {AuthService} from './auth.service';
 import {RoomService} from './share/services/room.service';
+import {UserService} from './share/services/user.service';
 
 
 @NgModule({
@@ -76,7 +77,7 @@ import {RoomService} from './share/services/room.service';
     MdChipsModule,
     MdMenuModule
   ],
-  providers: [AuthService, RoomService, ChatService, WebsocketService],
+  providers: [UserService, AuthService, RoomService, ChatService, WebsocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

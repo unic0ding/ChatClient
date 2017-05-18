@@ -5,7 +5,7 @@ import {Contact} from './contact.model';
 
 export class Message {
   static fromJson(json) {
-    json = JSON.parse(json);
+    // json = JSON.parse(json);
     return new Message(json.id, new Date(json.sendAt), Contact.fromJson(json.author), json.text);
   }
 
