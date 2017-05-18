@@ -89,9 +89,8 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onSubmitNewChat() {
     console.log(this.newChatForm.value);
-    const channel = new Channel(this.newChatForm.value, [this.authService.user]);
-    // TODO: Create Rooms
-    // this.roomService.createRoom(this.newChatForm.value.name);
+    const channel = new Channel(this.newChatForm.value.name, [this.authService.user]);
+    this.roomService.createRoom(channel);
   }
 
   ngOnDestroy(): void {
