@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Channel} from '../../share/model/channel.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RoomService} from '../../share/services/room.service';
@@ -18,15 +18,27 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   newChatForm: FormGroup;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   addNewChat = false;
+  writing = false;
   selectedTab = 0;
 
   constructor(private roomService: RoomService, private authService: AuthService, private formBuilder: FormBuilder) {
-    // this.openChats = [new Channel('Channel_Name', [])];
     this.openChats = [];
 
     this.newChatForm = this.formBuilder.group({
       name: this.formBuilder.control(null, Validators.compose([Validators.required, Validators.pattern('(\\w{2,})')]))
     });
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (!this.writing) {
+      if (event.keyCode === 37) {
+        this.chatTabGroup.selectedIndex--;
+      }
+      if (event.keyCode === 39) {
+        this.chatTabGroup.selectedIndex++;
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -84,12 +96,10 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   collapseNewChatForm() {
-    // this.animate();
     this.addNewChat = !this.addNewChat;
   }
 
   onSubmitNewChat() {
-    console.log(this.newChatForm.value);
     const channel = new Channel(this.newChatForm.value.name, [this.authService.user]);
     this.roomService.createRoom(channel);
     this.newChatForm.reset();
