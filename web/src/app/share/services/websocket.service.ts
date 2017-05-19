@@ -1,36 +1,37 @@
 import {Injectable} from '@angular/core';
-import {Observable, Observer, Subject} from 'rxjs/Rx';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class WebsocketService {
-  private subject: Subject<MessageEvent>;
+  socket: WebSocket;
 
-  connect(url) {
-    if (!this.subject) {
-      this.subject = this.createWebsocket(url);
-    }
-    return this.subject;
+  constructor() {
   }
 
-  createWebsocket(url): Subject<MessageEvent> {
-    const socket = new WebSocket(url);
+  connect(url: string): Observable<MessageEvent> {
+    this.socket = new WebSocket(url);
+    const openListener$ = Observable.fromEvent(this.socket, 'open');
 
-    const observable = Observable.create((obs: Observer<MessageEvent>) => {
-      socket.onmessage = obs.next.bind(obs);
-      socket.onerror = obs.error.bind(obs);
-      socket.onclose = obs.complete.bind(obs);
-
-      return socket.close.bind(socket);
-    });
-
-    const observer = {
-      next: (data: Object) => {
-        if (socket.readyState === WebSocket.OPEN) {
-          socket.send(data);
-        }
-      }
-    };
-
-    return Subject.create(observer, observable);
+    return openListener$;
   }
+
+  getListener() {
+    const listener$ = Observable.fromEvent(this.socket, 'message')
+      .map((event) => <MessageEvent> event)
+      .map((event) => JSON.parse(event.data))
+      .filter((event) => event.type === 'event' || event.type === 'error');
+    return listener$;
+  }
+
+  getClosedListener(): Observable<MessageEvent> {
+    const closedListener$ = Observable.fromEvent(this.socket, 'close')
+      .map((event) => <MessageEvent> event);
+
+    return closedListener$;
+  }
+
+  emit(command) {
+    this.socket.send(JSON.stringify(command));
+  }
+
 }

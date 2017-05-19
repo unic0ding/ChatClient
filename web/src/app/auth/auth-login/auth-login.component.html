@@ -8,21 +8,35 @@
     <form class="example-form">
       <table class="example-full-width" cellspacing="0">
         <tr>
-          <td><md-input-container class="example-full-width">
-            <input mdInput placeholder="Username">
-          </md-input-container></td>
+          <td>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Username">
+            </md-input-container>
+          </td>
         </tr>
       </table>
       <table class="example-full-width" cellspacing="0">
         <tr>
-          <td><md-input-container class="example-full-width">
-            <input mdInput type="password" placeholder="Password">
-          </md-input-container></td>
+          <td>
+            <md-input-container class="example-full-width">
+              <input mdInput type="password" placeholder="Password">
+            </md-input-container>
+          </td>
         </tr>
       </table>
     </form>
   </md-card-content>
   <md-card-actions>
-    <button md-raised-button>Login</button>
+    <div class="login-container">
+      <div class="login-button-container">
+        <button md-raised-button class="login-buttons">Login</button>
+      </div>
+      <div class="login-button-container">
+        <button md-raised-button id="google" class="login-buttons">Sign in with Google</button>
+      </div>
+      <div class="login-button-container">
+        <button md-raised-button id="github" class="login-buttons">Sign in with GitHub</button>
+      </div>
+    </div>
   </md-card-actions>
 </md-card>

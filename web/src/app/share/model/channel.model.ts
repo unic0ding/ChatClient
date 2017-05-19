@@ -11,6 +11,10 @@ export class Channel {
     return new Channel(json.name, json.members.map(c => new Contact(c.id, c.name, c.email)));
   }
 
+  static fromJsonArray(json): Channel[] {
+    return json.map(Channel.fromJson);
+  }
+
   constructor(public name: string, public members: Array<Contact>) {
   }
 
