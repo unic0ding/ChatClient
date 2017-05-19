@@ -18,7 +18,6 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   newChatForm: FormGroup;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   addNewChat = false;
-  writing = false;
   selectedTab = 0;
 
   constructor(private roomService: RoomService, private authService: AuthService, private formBuilder: FormBuilder) {
@@ -27,18 +26,6 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
     this.newChatForm = this.formBuilder.group({
       name: this.formBuilder.control(null, Validators.compose([Validators.required, Validators.pattern('(\\w{2,})')]))
     });
-  }
-
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if (!this.writing) {
-      if (event.keyCode === 37) {
-        this.chatTabGroup.selectedIndex--;
-      }
-      if (event.keyCode === 39) {
-        this.chatTabGroup.selectedIndex++;
-      }
-    }
   }
 
   ngOnInit(): void {

@@ -37,7 +37,7 @@
           <i class="material-icons">attachment</i>
         </button>
         <md-input-container class="flex-input-field">
-          <input mdInput placeholder="Send a Message..." id="{{name}}-input" spellcheck="false" (focus)="this.writing.emit(true)" (blur)="this.writing.emit(false)"
+          <input mdInput placeholder="Send a Message..." id="{{name}}-input" spellcheck="false"
                  formControlName="message" style="color: #FAFAFA">
         </md-input-container>
         <button md-mini-fab class="flex-send-button" [disabled]="!chatForm.valid" [hidden]="!chatForm.valid"
