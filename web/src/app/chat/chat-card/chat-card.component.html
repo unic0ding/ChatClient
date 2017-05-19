@@ -1,6 +1,14 @@
 <div app-mdl class="card-wide mdl-card mdl-shadow--2dp dark-card">
+  <div class="messageSearchContainer" [hidden]="!showMessageSearch">
+    <md-input-container id="searchMessagesInputContainer">
+      <input mdInput placeholder="Search" #searchMessagesInput id="searchMessagesInput" spellcheck="false">
+    </md-input-container>
+    <button md-icon-button class="icon-btn-primary" (click)="closeMessageSearch()">
+      <i class="material-icons">close</i>
+    </button>
+  </div>
   <div class="mdl-card__menu">
-    <button md-icon-button [matMenuTriggerFor]="menu" style="color: #FAFAFA">
+    <button md-icon-button [matMenuTriggerFor]="menu" class="icon-btn-primary">
       <md-icon>more_vert</md-icon>
     </button>
     <md-menu #menu="mdMenu">
@@ -8,7 +16,7 @@
         <md-icon>info</md-icon>
         <span>View Info</span>
       </button>
-      <button md-menu-item disabled>
+      <button md-menu-item (click)="closeMessageSearch()">
         <md-icon>search</md-icon>
         <span>Search for Messages</span>
       </button>
@@ -27,7 +35,7 @@
     <h2 class="mdl-card__title-text" style="color: #FAFAFA">{{channel.name}}</h2>
   </div>
   <div class="mdl-card__media" style="padding: 0 10px 0 10px;">
-    <app-chat-window [messages]="messages"></app-chat-window>
+    <app-chat-window [messages]="viewMessages"></app-chat-window>
   </div>
   <div class="mdl-card__actions mdl-card--border">
     <form novalidate [formGroup]="chatForm" (ngSubmit)="sendMessage()">
@@ -38,10 +46,10 @@
         </button>
         <md-input-container class="flex-input-field">
           <input mdInput placeholder="Send a Message..." id="{{name}}-input" spellcheck="false"
-                 formControlName="message" style="color: #FAFAFA">
+                 formControlName="message" class="icon-btn-primary">
         </md-input-container>
-        <button md-mini-fab class="flex-send-button" [disabled]="!chatForm.valid" [hidden]="!chatForm.valid"
-                type="submit" style="color: #FAFAFA; background-color: #FD4282">
+        <button md-mini-fab class="flex-send-button btn-primary" [disabled]="!chatForm.valid" [hidden]="!chatForm.valid"
+                type="submit">
           <md-icon>send</md-icon>
         </button>
       </div>

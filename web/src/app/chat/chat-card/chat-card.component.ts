@@ -1,25 +1,30 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Message} from '../../share/model/message.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Channel} from '../../share/model/channel.model';
 import {ChatService} from '../../share/services/chat.service';
 import {Subject} from 'rxjs/Subject';
 import {AuthService} from '../../auth.service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-chat-card',
   templateUrl: './chat-card.component.html',
   styleUrls: ['./chat-card.component.css']
 })
-export class ChatCardComponent implements OnInit, OnDestroy {
+export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() closeWindow = new EventEmitter();
   @Output() writing = new EventEmitter();
   @Input() channel: Channel;
+  @ViewChild('searchMessagesInput') searchInput: ElementRef;
   private messages = [];
+  private viewMessages = [];
   private unsentMessages = [];
   private chatForm: FormGroup;
   private connectionClosed = false;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
+  private showMessageSearch = false;
+  private searchValue;
 
   constructor(private chatService: ChatService, private authService: AuthService, private formBuilder: FormBuilder) {
 
@@ -37,6 +42,7 @@ export class ChatCardComponent implements OnInit, OnDestroy {
       .subscribe(event => {
         if (event.event === 'newMessage' && event.roomName === this.channel.name) {
           this.messages.push({message: Message.fromJson(event.data), incoming: true});
+          this.viewMessages = this.messages;
           this.channel.updateNotification();
         }
         if (event.error === 'chatError') {
@@ -45,11 +51,43 @@ export class ChatCardComponent implements OnInit, OnDestroy {
       });
   }
 
+  ngAfterViewInit(): void {
+    const messageSearch$ = Observable.fromEvent(this.searchInput.nativeElement, 'input')
+      .debounceTime(250)
+      .pluck('target', 'value')
+      .do((val) => {
+        this.viewMessages = [];
+        this.searchValue = val;
+      })
+      .switchMap(() => Observable.from(this.messages))
+      .filter((m) => {
+        if (m.message.text.toLowerCase().includes(this.searchValue.toLowerCase())) {
+          return m;
+        }
+      });
+
+    messageSearch$.subscribe(
+      (message) => {
+        this.viewMessages.push(message);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  closeMessageSearch() {
+    this.showMessageSearch = !this.showMessageSearch;
+    this.searchValue = '';
+    this.viewMessages = this.messages;
+  }
+
   private sendMessage(message?: Message) {
     if (!message) {
       const text = this.chatForm.value.message;
       message = new Message(1, new Date(), this.authService.user, text);
       this.messages.push({message: message, incoming: false});
+      this.viewMessages = this.messages;
       this.chatForm.reset();
     }
     try {
