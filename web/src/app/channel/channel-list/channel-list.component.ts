@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Channel} from '../../share/model/channel.model';
 import {Observable} from 'rxjs/Observable';
-import {ChatFrameComponent} from '../../chat/chat-frame/chat-frame.component';
+import {RoomService} from '../../share/services/room.service';
 
 @Component({
   selector: 'app-channel-list',
@@ -13,16 +13,28 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
   viewChannelList = [];
   channelList = [];
 
-  constructor() {
-    this.channelList.push(new Channel('AngularChannel', []));
-    this.channelList.push(new Channel('PythonChannel', []));
-    this.channelList.push(new Channel('JS_Channel', []));
-    this.channelList.push(new Channel('Android_Channel', []));
-    this.channelList.push(new Channel('JavaChan', []));
+  constructor(private roomService: RoomService) {
     this.viewChannelList = this.channelList;
   }
 
   ngAfterViewInit(): void {
+
+    // get Channel Listener
+    const channelListener$ = this.roomService.getListener();
+
+    channelListener$.subscribe(event => {
+      if (event.event === 'newRoom') {
+        this.channelList.push(Channel.fromJson(event.data));
+        this.viewChannelList = this.channelList.sort(this.compare);
+      }
+      if (event.event === 'allRooms') {
+        this.channelList = Channel.fromJsonArray(event.data);
+        this.viewChannelList = this.channelList.sort(this.compare);
+      }
+    });
+
+
+    // Channel Search Observable
     const search: any = document.getElementById('channelSearchInput');
     const channelSource$ = Observable.fromEvent(search, 'input')
       .debounceTime(250)
@@ -45,6 +57,16 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
 
   onConnectNewChannel(channel: Channel) {
     this.newChannel.emit(channel);
+  }
+
+  compare(a, b) {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
   }
 
   ngOnInit() {
