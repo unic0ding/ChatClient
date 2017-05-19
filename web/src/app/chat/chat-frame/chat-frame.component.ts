@@ -4,11 +4,13 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RoomService} from '../../share/services/room.service';
 import {Subject} from 'rxjs/Subject';
 import {AuthService} from '../../auth.service';
+import {fallIn} from '../../share/animations/animations';
 
 @Component({
   selector: 'app-chat-frame',
   templateUrl: './chat-frame.component.html',
   styleUrls: ['./chat-frame.component.css'],
+  animations: [fallIn]
 })
 export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('chatTabGroup') chatTabGroup;
@@ -21,9 +23,6 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private roomService: RoomService, private authService: AuthService, private formBuilder: FormBuilder) {
     // this.openChats = [new Channel('Channel_Name', [])];
     this.openChats = [];
-    if (this.openChats.length === 0) {
-      this.addNewChat = true;
-    }
 
     this.newChatForm = this.formBuilder.group({
       name: this.formBuilder.control(null, Validators.compose([Validators.required, Validators.pattern('(\\w{2,})')]))
@@ -85,6 +84,7 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   collapseNewChatForm() {
+    // this.animate();
     this.addNewChat = !this.addNewChat;
   }
 
