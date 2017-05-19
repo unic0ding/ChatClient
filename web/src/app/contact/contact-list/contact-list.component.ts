@@ -1,36 +1,33 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Contact} from '../../share/model/contact.model';
 import {Observable} from 'rxjs/Rx';
 import {ContactService} from '../../share/services/contact.service';
+import {compare} from '../../share/utils/sort';
 
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.css']
 })
-export class ContactListComponent implements AfterViewInit {
+export class ContactListComponent implements OnInit, AfterViewInit {
   contactList = [];
   viewContactList = [];
 
   constructor(private contactService: ContactService) {
+  }
+
+  ngOnInit() {
+    this.contactList = this.contactService.contactList;
     this.viewContactList = this.contactList;
+
+    // bind to ContactService contactListSubject
+    this.contactService.contactListSubject.subscribe(contacts => {
+      this.contactList = contacts;
+      this.viewContactList = this.contactList.sort(compare);
+    });
   }
 
   ngAfterViewInit(): void {
-    // Contact Listener
-    const contactListener$ = this.contactService.getListener();
-
-    contactListener$.subscribe((event) => {
-      if (event.event === 'allUsers') {
-        this.contactList = Contact.fromJsonArray(event.data);
-        this.viewContactList = this.contactList.sort(this.compare);
-      }
-      if (event.event === 'newUser') {
-        this.contactList.push(Contact.fromJson(event.data));
-        this.viewContactList = this.contactList.sort(this.compare);
-      }
-    });
-
     // Contact Search
     const search: any = document.getElementById('contactSearchInput');
     const channelSource$ = Observable.fromEvent(search, 'input')
@@ -51,16 +48,6 @@ export class ContactListComponent implements AfterViewInit {
       }
     );
 
-  }
-
-  compare(a, b) {
-    if (a.name < b.name) {
-      return -1;
-    }
-    if (a.name > b.name) {
-      return 1;
-    }
-    return 0;
   }
 
 }
