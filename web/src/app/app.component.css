@@ -23,3 +23,7 @@
 .oc-navbar-icon-margin {
   margin-right: 10px;
 }
+
+.test:hover {
+  background-color: #424242;
+}
