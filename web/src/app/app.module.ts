@@ -3,8 +3,17 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {
-  MdButtonModule, MdCardModule, MdChipsModule, MdIconModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerModule, MdTabsModule,
-  MdToolbarModule, MdTooltipModule
+  MdButtonModule,
+  MdCardModule,
+  MdChipsModule,
+  MdIconModule,
+  MdInputModule,
+  MdMenuModule,
+  MdProgressBarModule,
+  MdProgressSpinnerModule,
+  MdTabsModule,
+  MdToolbarModule,
+  MdTooltipModule
 } from '@angular/material';
 
 import {AppComponent} from './app.component';
@@ -26,6 +35,9 @@ import {ChannelListComponent} from './channel/channel-list/channel-list.componen
 import {ChannelListDetailComponent} from './channel/channel-list-detail/channel-list-detail.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MDL} from './share/directives/mdl.directive';
+import {AuthService} from './auth.service';
+import {RoomService} from './share/services/room.service';
+import {ContactService} from './share/services/contact.service';
 
 
 @NgModule({
@@ -62,9 +74,10 @@ import {MDL} from './share/directives/mdl.directive';
     MdProgressBarModule,
     MdTooltipModule,
     MdIconModule,
-    MdChipsModule
+    MdChipsModule,
+    MdMenuModule
   ],
-  providers: [ChatService, WebsocketService],
+  providers: [ContactService, AuthService, RoomService, ChatService, WebsocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

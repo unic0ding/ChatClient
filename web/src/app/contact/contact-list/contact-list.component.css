@@ -1,0 +1,21 @@
+.contact-list {
+  max-height: 320px;
+  overflow: auto;
+}
+
+.mdl-list div {
+  text-align: center;
+}
+
+.contact-list:hover {
+  border-left: 2px solid #424242;
+  border-right: 2px solid #424242;
+}
+
+.contact-list::-webkit-scrollbar {
+  display: none;
+}
+
+#contactSearchInputContainer {
+  width: 100%;
+}
