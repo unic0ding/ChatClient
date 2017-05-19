@@ -43,12 +43,12 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
         }
       });
     channelSource$.subscribe(
-      (contact) => {
-        this.viewChannelList.push(contact);
+      (channel) => {
+        this.viewChannelList.push(channel);
       },
-      (error) => {
-        console.log(error);
-      }
+      // (error) => {
+      //   console.log(error);
+      // }
     );
   }
 

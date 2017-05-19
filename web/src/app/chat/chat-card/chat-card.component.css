@@ -5,11 +5,17 @@
   max-height: 588px;
 }
 
-.btn-primary {
+.icon-btn-primary {
   color: white;
 }
-.btn-primary:hover {
+
+.icon-btn-primary:hover {
   color: white;
+}
+
+.btn-primary {
+  background-color: #FD4282;
+  color: #FAFAFA;
 }
 
 .card-wide > .mdl-card__media {
@@ -19,6 +25,7 @@
 .flex-form-container {
   display: flex;
 }
+
 .flex-attachment-button {
   order: 1;
   flex-grow: 1;
@@ -35,4 +42,17 @@
 .flex-send-button {
   order: 2;
   flex-grow: 1;
+}
+
+.messageSearchContainer {
+  width: 70%;
+  margin-left: 10px;
+}
+
+#searchMessagesInputContainer {
+  width: 80%;
+}
+
+#searchMessagesInput {
+  color: #FAFAFA;
 }
