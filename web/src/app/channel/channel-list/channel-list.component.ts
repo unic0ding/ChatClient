@@ -23,11 +23,11 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
     const channelListener$ = this.roomService.getListener();
 
     channelListener$.subscribe(event => {
-      if (event.subtype === 'newRoom') {
+      if (event.event === 'newRoom') {
         this.channelList.push(Channel.fromJson(event.data));
         this.viewChannelList = this.channelList.sort(this.compare);
       }
-      if (event.subtype === 'allRooms') {
+      if (event.event === 'allRooms') {
         this.channelList = Channel.fromJsonArray(event.data);
         this.viewChannelList = this.channelList.sort(this.compare);
       }

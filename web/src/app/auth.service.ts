@@ -13,7 +13,7 @@ export class AuthService {
   getListener() {
     const listener$ = this.webSocketService.getListener()
       .filter((data) => {
-        if (data.event === 'auth') {
+        if (data.subtype === 'auth') {
           return data;
         }
       });

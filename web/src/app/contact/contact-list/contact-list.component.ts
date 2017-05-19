@@ -21,11 +21,11 @@ export class ContactListComponent implements AfterViewInit {
     const contactListener$ = this.contactService.getListener();
 
     contactListener$.subscribe((event) => {
-      if (event.subtype === 'allUsers') {
+      if (event.event === 'allUsers') {
         this.contactList = Contact.fromJsonArray(event.data);
         this.viewContactList = this.contactList.sort(this.compare);
       }
-      if (event.subtype === 'newUser') {
+      if (event.event === 'newUser') {
         this.contactList.push(Contact.fromJson(event.data));
         this.viewContactList = this.contactList.sort(this.compare);
       }

@@ -33,6 +33,7 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     const roomListener$ = this.roomService.getListener();
 
+    // TODO: Create Room listener
     roomListener$
       .takeUntil(this.ngUnsubscribe)
       .subscribe();

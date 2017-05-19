@@ -10,7 +10,7 @@ export class ContactService {
 
   getListener() {
     const listener$ = this.webSocketService.getListener()
-      .filter((data) => data.event === 'user');
+      .filter((data) => data.subtype === 'user');
 
     return listener$;
   }
