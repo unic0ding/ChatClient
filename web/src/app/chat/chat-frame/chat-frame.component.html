@@ -26,7 +26,7 @@
           <ng-template md-tab-label>
             <span class="mdl-badge" [attr.data-badge]="channel.notification">{{channel.name}}</span>
           </ng-template>
-          <app-chat-card (closeWindow)="onClose($event)"
+          <app-chat-card (closeWindow)="onClose($event)" (writing)="writing = $event"
                          [ngClass]="{'mdl-cell--12-col': (openChats.length == 1), 'mdl-cell--8-col': (openChats > 1)}"
                          class="mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-phone" [channel]="channel"></app-chat-card>
         </md-tab>

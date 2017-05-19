@@ -13,6 +13,7 @@ import {AuthService} from '../../auth.service';
 })
 export class ChatCardComponent implements OnInit, OnDestroy {
   @Output() closeWindow = new EventEmitter();
+  @Output() writing = new EventEmitter();
   @Input() channel: Channel;
   private messages = [];
   private unsentMessages = [];
