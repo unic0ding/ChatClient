@@ -38,10 +38,8 @@ export class ChatCardComponent implements OnInit, OnDestroy {
           this.messages.push({message: Message.fromJson(event.data), incoming: true});
           this.channel.updateNotification();
         }
-        if (event.event === 'chatError') {
+        if (event.error === 'chatError') {
           console.log(event.data);
-        }else {
-          console.log(event);
         }
       });
   }

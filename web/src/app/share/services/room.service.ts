@@ -22,8 +22,7 @@ export class RoomService {
 
   getListener() {
     const listener$ = this.webSocketService.getListener()
-      .filter((data) => data.subtype === 'room' || data.event === 'roomError');
-
+      .filter((data) => data.subtype === 'room' || data.error === 'roomError');
     return listener$;
   }
 

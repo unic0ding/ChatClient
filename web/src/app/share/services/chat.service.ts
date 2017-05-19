@@ -16,7 +16,8 @@ export class ChatService {
 
   getListener(): Observable<any> {
     const listener$ = this.webSocketService.getListener()
-      .filter((data) => data.subtype === 'chat' || data.event === 'chatError');
+      .do(console.log)
+      .filter((data) => data.subtype === 'chat' || data.error === 'chatError');
     return listener$;
   }
 }
