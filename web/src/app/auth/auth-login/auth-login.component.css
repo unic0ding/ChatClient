@@ -28,8 +28,16 @@
 }
 
 #google {
-  border: 1px solid #95989A;
-  background: #fff url('../../../assets/img/google.svg') no-repeat 25px;
+  background: #ffffff url('../../../assets/img/google.svg') no-repeat 25px;
   background-size: 25px;
   color: black;
+}
+ #google:active {
+   background-color: #b7b7b7;
+ }
+
+#github {
+  background: #24292E url('../../../assets/img/github-box.svg') no-repeat 25px;
+  background-size: 30px;
+  color: #FFFFFF;
 }
