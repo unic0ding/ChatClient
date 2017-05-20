@@ -11,6 +11,7 @@ import {
   MdMenuModule,
   MdProgressBarModule,
   MdProgressSpinnerModule,
+  MdSnackBarModule,
   MdTabsModule,
   MdToolbarModule,
   MdTooltipModule
@@ -76,7 +77,8 @@ import {AuthGuard} from './auth/auth-login/authguard.service';
     MdTooltipModule,
     MdIconModule,
     MdChipsModule,
-    MdMenuModule
+    MdMenuModule,
+    MdSnackBarModule
   ],
   providers: [ContactService, AuthService, RoomService, ChatService, WebsocketService, AuthGuard],
   bootstrap: [AppComponent]

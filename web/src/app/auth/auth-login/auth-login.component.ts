@@ -1,8 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {AuthService} from '../../auth.service';
 import {fallIn} from '../../share/animations/animations';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {MdSnackBar} from '@angular/material';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'app-auth-login',
@@ -11,9 +13,11 @@ import {Router} from '@angular/router';
   animations: [fallIn]
 })
 export class AuthLoginComponent {
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
   authForm: FormGroup;
+  loading = false;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router, private snackbar: MdSnackBar) {
 
     this.authForm = this.formBuilder.group({
       user: this.formBuilder.control(null, Validators.email),
@@ -24,8 +28,12 @@ export class AuthLoginComponent {
   login() {
     if (this.authForm.valid) {
       this.authForm.reset();
-      this.authService.login(this.authForm.value).subscribe(
+      this.loading = true;
+      this.authService.login(this.authForm.value)
+        .takeUntil(this.ngUnsubscribe)
+        .subscribe(
         (event) => {
+          this.loading = false;
           if (event.event === 'authSuccess') {
             this.authService.isLoggedIn = true;
             console.log(this.authService.redirectUrl);
@@ -38,7 +46,10 @@ export class AuthLoginComponent {
           if (event.error === 'authError') {
             console.log(event.data);
             this.authForm.reset();
+            this.snackbar.open(event.data, 'close', {duration: 500});
           }
+          this.ngUnsubscribe.next();
+          this.ngUnsubscribe.complete();
         }
       );
     }
