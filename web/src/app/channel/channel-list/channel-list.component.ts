@@ -56,5 +56,7 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
     this.newChannel.emit(channel);
   }
 
-
+  getAllRooms() {
+    this.roomService.getAllRooms();
+  }
 }

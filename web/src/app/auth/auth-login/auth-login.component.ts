@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from '../../auth.service';
 import {fallIn} from '../../share/animations/animations';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -32,26 +32,23 @@ export class AuthLoginComponent {
       this.authService.login(this.authForm.value)
         .takeUntil(this.ngUnsubscribe)
         .subscribe(
-        (event) => {
-          this.loading = false;
-          if (event.event === 'authSuccess') {
-            this.authService.isLoggedIn = true;
-            console.log(this.authService.redirectUrl);
-            if (this.authService.redirectUrl) {
-              this.router.navigate([this.authService.redirectUrl]);
-            } else {
-              this.router.navigate(['/chat']);
+          (event) => {
+            this.loading = false;
+            if (event.event === 'authSuccess') {
+              if (this.authService.redirectUrl) {
+                this.router.navigate([this.authService.redirectUrl]);
+              } else {
+                this.router.navigate(['/chat']);
+              }
             }
+            if (event.error === 'authError') {
+              this.authForm.reset();
+              this.snackbar.open(event.data, 'close', {duration: 500});
+            }
+            this.ngUnsubscribe.next();
+            this.ngUnsubscribe.complete();
           }
-          if (event.error === 'authError') {
-            console.log(event.data);
-            this.authForm.reset();
-            this.snackbar.open(event.data, 'close', {duration: 500});
-          }
-          this.ngUnsubscribe.next();
-          this.ngUnsubscribe.complete();
-        }
-      );
+        );
     }
   }
 

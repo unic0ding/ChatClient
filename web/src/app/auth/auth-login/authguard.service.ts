@@ -22,7 +22,11 @@ export class AuthGuard implements CanActivate {
 
   checkLogin(url) {
     if (this.authService.isLoggedIn) {
-      console.log('is Logged in');
+      return true;
+    }
+    if (this.authService.getAuthFromLocalStorage() !== null) {
+      this.authService.isLoggedIn = true;
+      this.authService.setUser();
       return true;
     }
 
