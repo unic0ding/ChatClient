@@ -18,6 +18,7 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.roomService.getAllRooms();
     this.channelList = this.roomService.channelList;
     this.viewChannelList = this.channelList;
 

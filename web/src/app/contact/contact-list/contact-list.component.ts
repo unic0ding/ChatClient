@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {Contact} from '../../share/model/contact.model';
 import {Observable} from 'rxjs/Rx';
 import {ContactService} from '../../share/services/contact.service';
 import {compare} from '../../share/utils/sort';
@@ -17,6 +16,7 @@ export class ContactListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.contactService.getAllContacts();
     this.contactList = this.contactService.contactList;
     this.viewContactList = this.contactList;
 
