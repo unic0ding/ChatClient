@@ -38,6 +38,7 @@ import {MDL} from './share/directives/mdl.directive';
 import {AuthService} from './auth.service';
 import {RoomService} from './share/services/room.service';
 import {ContactService} from './share/services/contact.service';
+import {AuthGuard} from './auth/auth-login/authguard.service';
 
 
 @NgModule({
@@ -77,7 +78,7 @@ import {ContactService} from './share/services/contact.service';
     MdChipsModule,
     MdMenuModule
   ],
-  providers: [ContactService, AuthService, RoomService, ChatService, WebsocketService],
+  providers: [ContactService, AuthService, RoomService, ChatService, WebsocketService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
