@@ -14,8 +14,8 @@
           <span class="mdl-chip__text">No Contacts were Found</span>
         </span>
       </div>
-      <app-contact-detail *ngFor="let contact of viewContactList" [contact]="contact">Searching for Contacts
-      </app-contact-detail>
+      <app-contact-list-detail *ngFor="let contact of viewContactList" [contact]="contact">Searching for Contacts
+      </app-contact-list-detail>
     </ul>
   </md-card-content>
 </md-card>

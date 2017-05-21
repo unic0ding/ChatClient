@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Contact} from '../../share/model/contact.model';
+import {Contact} from '../../../share/model/contact.model';
 
 @Component({
-  selector: 'app-contact-detail',
-  templateUrl: './contact-detail.component.html',
-  styleUrls: ['./contact-detail.component.css']
+  selector: 'app-contact-list-detail',
+  templateUrl: './contact-list-detail.component.html',
+  styleUrls: ['./contact-list-detail.component.css']
 })
 export class ContactDetailComponent implements OnInit {
   @Input() contact: Contact;
