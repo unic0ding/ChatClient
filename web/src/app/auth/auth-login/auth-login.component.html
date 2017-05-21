@@ -1,3 +1,4 @@
+<md-progress-bar mode="query" *ngIf="loading"></md-progress-bar>
 <md-card class="example-card" [@fallInAnimation]>
   <md-card-header>
   </md-card-header>
@@ -5,12 +6,12 @@
     <p>
       Welcome to ChatClient.
     </p>
-    <form class="example-form">
+    <form class="example-form" novalidate [formGroup]="authForm" (ngSubmit)="login()">
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td>
             <md-input-container class="example-full-width">
-              <input mdInput placeholder="Username">
+              <input mdInput placeholder="Username" spellcheck="false" formControlName="user">
             </md-input-container>
           </td>
         </tr>
@@ -19,17 +20,20 @@
         <tr>
           <td>
             <md-input-container class="example-full-width">
-              <input mdInput type="password" placeholder="Password">
+              <input mdInput type="password" placeholder="Password" formControlName="password">
             </md-input-container>
           </td>
         </tr>
+        <div class="login-button-container">
+          <button md-raised-button [disabled]="!this.authForm.valid" type="submit" class="login-buttons">Login</button>
+        </div>
       </table>
     </form>
   </md-card-content>
   <md-card-actions>
     <div class="login-container">
       <div class="login-button-container">
-        <button md-raised-button class="login-buttons">Login</button>
+        <button md-raised-button class="login-buttons">Register</button>
       </div>
       <div class="login-button-container">
         <button md-raised-button id="google" class="login-buttons">Sign in with Google</button>

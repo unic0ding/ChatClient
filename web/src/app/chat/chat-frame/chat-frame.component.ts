@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Channel} from '../../share/model/channel.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RoomService} from '../../share/services/room.service';
@@ -63,7 +63,7 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onClose(channel: Channel) {
     if (confirm('Do you really want to close the Chat?')) {
-      // this.roomService.leaveRoom(event);
+      this.roomService.leaveRoom(channel);
       const index = this.openChats.indexOf(channel, 0);
       if (index > -1) {
         this.openChats[index].setNotification(true);

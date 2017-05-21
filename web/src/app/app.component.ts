@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {WebsocketService} from './share/services/websocket.service';
+import {AuthService} from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent {
   loaded = false;
   private url = 'ws://localhost:8080/room';
 
-  constructor(private webSocketService: WebsocketService) {
+  constructor(private webSocketService: WebsocketService, private authService: AuthService) {
     const openListener$ = this.webSocketService.connect(this.url)
       .delay(2000) // Just for tests
       .subscribe(() => {
@@ -22,5 +23,9 @@ export class AppComponent {
       .subscribe((error) => {
         console.log('Connection Closed');
       });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

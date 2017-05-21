@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {Contact} from '../../share/model/contact.model';
 import {Observable} from 'rxjs/Rx';
 import {ContactService} from '../../share/services/contact.service';
 import {compare} from '../../share/utils/sort';
@@ -43,9 +42,6 @@ export class ContactListComponent implements OnInit, AfterViewInit {
       (contact) => {
         this.viewContactList.push(contact);
       },
-      (error) => {
-        console.log(error);
-      }
     );
 
   }

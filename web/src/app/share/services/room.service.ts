@@ -22,6 +22,7 @@ export class RoomService {
           this.channelListSubject.next(this.channelList);
         }
       });
+    this.getAllRooms();
   }
 
   createRoom(channel: Channel) {
@@ -32,7 +33,6 @@ export class RoomService {
 
   leaveRoom(channel: Channel) {
     const command = {type: 'command', subtype: 'room', command: 'leaveRoom', data: channel};
-    console.log(command);
     this.webSocketService.emit(command);
   }
 
@@ -44,7 +44,6 @@ export class RoomService {
 
   getAllRooms() {
     const command = {type: 'command', subtype: 'room', command: 'getAllRooms'};
-    console.log(command);
     this.webSocketService.emit(command);
   }
 

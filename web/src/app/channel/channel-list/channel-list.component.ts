@@ -14,8 +14,7 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
   viewChannelList = [];
   channelList = [];
 
-  constructor(private roomService: RoomService) {
-  }
+  constructor(private roomService: RoomService) {}
 
   ngOnInit() {
     this.channelList = this.roomService.channelList;
@@ -46,15 +45,10 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
       (channel) => {
         this.viewChannelList.push(channel);
       },
-      // (error) => {
-      //   console.log(error);
-      // }
     );
   }
 
   onConnectNewChannel(channel: Channel) {
     this.newChannel.emit(channel);
   }
-
-
 }

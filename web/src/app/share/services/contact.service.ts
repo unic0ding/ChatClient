@@ -21,6 +21,7 @@ export class ContactService {
           this.contactListSubject.next(this.contactList);
         }
       });
+    this.getAllContacts();
   }
 
   getListener() {
@@ -30,8 +31,8 @@ export class ContactService {
     return listener$;
   }
 
-  getUserProfile(contact: Contact) {
-    const command = {type: 'command', subtype: 'user', command: 'getProfile', data: contact};
+  getAllContacts() {
+    const command = {type: 'command', subtype: 'user', command: 'getAllUsers'};
     this.webSocketService.emit(command);
   }
 }
