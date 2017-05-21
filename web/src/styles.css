@@ -12,3 +12,7 @@ body {
   color: #FAFAFA;
   background-color: #FD4282;
 }
+
+.msg-sent-link {
+  color: #84FFFF;
+}

@@ -14,7 +14,6 @@
 .msg-sent-text {
 }
 
-
 .msg-sent-timestamp {
   color: #424242;
 }
@@ -46,6 +45,7 @@
   margin-bottom: 0;
   color: #FAFAFA;
 }
+
 .msg-text-link {
   color: white;
 }
