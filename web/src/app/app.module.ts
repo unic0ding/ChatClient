@@ -43,6 +43,7 @@ import {AuthGuard} from './auth/auth-login/authguard.service';
 import { ChatInfoDialogComponent } from './chat/chat-info-dialog/chat-info-dialog.component';
 import { ContactDetailDialogComponent } from './contact/contact-detail-dialog/contact-detail-dialog.component';
 import { InitialsPipe } from './share/pipes/initials.pipe';
+import { NotFoundComponent } from './share/components/not-found/not-found.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { InitialsPipe } from './share/pipes/initials.pipe';
     MDL,
     ChatInfoDialogComponent,
     ContactDetailDialogComponent,
-    InitialsPipe
+    InitialsPipe,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
