@@ -8,7 +8,7 @@ export class Channel {
   showNotification = true;
 
   static fromJson(json) {
-    return new Channel(json.name, json.members.map(c => new Contact(c.id, c.name, c.email)));
+    return new Channel(json.name, json.members.map(Contact.fromJson));
   }
 
   static fromJsonArray(json): Channel[] {

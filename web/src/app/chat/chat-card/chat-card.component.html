@@ -12,7 +12,7 @@
       <md-icon>more_vert</md-icon>
     </button>
     <md-menu #menu="mdMenu">
-      <button md-menu-item disabled>
+      <button md-menu-item (click)="openInfoDialog()">
         <md-icon>info</md-icon>
         <span>View Info</span>
       </button>

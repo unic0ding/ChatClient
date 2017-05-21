@@ -1,6 +1,5 @@
-<li class="mdl-list__item-list__item--three-line contact-list-item">
-  <span class="mdl-list__item-primary-content">
-    <div class="material-icons mdl-badge mdl-badge--overlap" [attr.data-badge]="data">person</div>
-    <span>{{contact.name}}</span>
-  </span>
-</li>
+<md-list-item>
+  <img *ngIf="contact.avatarUrl" md-list-avatar [src]="contact.avatarUrl">
+  <md-icon *ngIf="!contact.avatarUrl" md-list-icon>account_box_outline</md-icon>
+  <h4 md-line>{{contact.name}}</h4>
+</md-list-item>

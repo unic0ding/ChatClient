@@ -5,9 +5,9 @@ import {HttpModule} from '@angular/http';
 import {
   MdButtonModule,
   MdCardModule,
-  MdChipsModule,
+  MdChipsModule, MdDialogModule,
   MdIconModule,
-  MdInputModule,
+  MdInputModule, MdListModule,
   MdMenuModule,
   MdProgressBarModule,
   MdProgressSpinnerModule,
@@ -40,6 +40,7 @@ import {AuthService} from './auth.service';
 import {RoomService} from './share/services/room.service';
 import {ContactService} from './share/services/contact.service';
 import {AuthGuard} from './auth/auth-login/authguard.service';
+import { ChatInfoDialogComponent } from './chat/chat-info-dialog/chat-info-dialog.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import {AuthGuard} from './auth/auth-login/authguard.service';
     ChannelListComponent,
     ChannelListDetailComponent,
     AuthLoginComponent,
-    MDL
+    MDL,
+    ChatInfoDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -78,9 +80,12 @@ import {AuthGuard} from './auth/auth-login/authguard.service';
     MdIconModule,
     MdChipsModule,
     MdMenuModule,
-    MdSnackBarModule
+    MdSnackBarModule,
+    MdListModule,
+    MdDialogModule
   ],
   providers: [ContactService, AuthService, RoomService, ChatService, WebsocketService, AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ChatInfoDialogComponent]
 })
 export class AppModule {}
