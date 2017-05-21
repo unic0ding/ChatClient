@@ -7,3 +7,8 @@ body {
 .dark-card {
   background-color: #363636;
 }
+
+.colored-buttons {
+  color: #FAFAFA;
+  background-color: #FD4282;
+}

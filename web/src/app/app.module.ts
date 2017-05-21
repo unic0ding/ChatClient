@@ -41,6 +41,8 @@ import {RoomService} from './share/services/room.service';
 import {ContactService} from './share/services/contact.service';
 import {AuthGuard} from './auth/auth-login/authguard.service';
 import { ChatInfoDialogComponent } from './chat/chat-info-dialog/chat-info-dialog.component';
+import { ContactDetailDialogComponent } from './contact/contact-detail-dialog/contact-detail-dialog.component';
+import { InitialsPipe } from './share/pipes/initials.pipe';
 
 
 @NgModule({
@@ -60,7 +62,9 @@ import { ChatInfoDialogComponent } from './chat/chat-info-dialog/chat-info-dialo
     ChannelListDetailComponent,
     AuthLoginComponent,
     MDL,
-    ChatInfoDialogComponent
+    ChatInfoDialogComponent,
+    ContactDetailDialogComponent,
+    InitialsPipe
   ],
   imports: [
     BrowserModule,
@@ -86,6 +90,6 @@ import { ChatInfoDialogComponent } from './chat/chat-info-dialog/chat-info-dialo
   ],
   providers: [ContactService, AuthService, RoomService, ChatService, WebsocketService, AuthGuard],
   bootstrap: [AppComponent],
-  entryComponents: [ChatInfoDialogComponent]
+  entryComponents: [ChatInfoDialogComponent, ContactDetailDialogComponent]
 })
 export class AppModule {}

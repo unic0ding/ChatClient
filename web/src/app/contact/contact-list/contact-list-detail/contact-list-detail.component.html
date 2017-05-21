@@ -1,5 +1,5 @@
-<md-list-item>
-  <img *ngIf="contact.avatarUrl" md-list-avatar [src]="contact.avatarUrl">
-  <md-icon *ngIf="!contact.avatarUrl" md-list-icon>account_box_outline</md-icon>
-  <h4 md-line>{{contact.name}}</h4>
+<md-list-item class="contact-list-item" (click)="openContactDialog()">
+  <img *ngIf="contact.avatarUrl" class="mdl-chip__contact" [src]="contact.avatarUrl">
+  <span *ngIf="!contact.avatarUrl" class="mdl-chip__contact contact-circle">{{contact.name | initials}}</span>
+  <span>{{contact.name}}</span>
 </md-list-item>

@@ -1,4 +1,7 @@
-.contact-list-item {
-  margin-top: 10px;
-  padding-left: 10px;
+.contact-list-item:hover{
+  background-color: #424242;
+  cursor: pointer;
+}
+.contact-circle {
+  background-color: #FD4282;
 }
