@@ -21,6 +21,7 @@ export class ContactService {
           this.contactListSubject.next(this.contactList);
         }
       });
+    this.getAllContacts();
   }
 
   getListener() {

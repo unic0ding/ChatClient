@@ -16,7 +16,6 @@ export class ContactListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.contactService.getAllContacts();
     this.contactList = this.contactService.contactList;
     this.viewContactList = this.contactList;
 
@@ -43,9 +42,6 @@ export class ContactListComponent implements OnInit, AfterViewInit {
       (contact) => {
         this.viewContactList.push(contact);
       },
-      (error) => {
-        console.log(error);
-      }
     );
 
   }

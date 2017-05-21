@@ -27,7 +27,6 @@ export class AuthLoginComponent {
 
   login() {
     if (this.authForm.valid) {
-      this.authForm.reset();
       this.loading = true;
       this.authService.login(this.authForm.value)
         .takeUntil(this.ngUnsubscribe)
@@ -35,6 +34,7 @@ export class AuthLoginComponent {
           (event) => {
             this.loading = false;
             if (event.event === 'authSuccess') {
+              this.authForm.reset();
               if (this.authService.redirectUrl) {
                 this.router.navigate([this.authService.redirectUrl]);
               } else {

@@ -10,7 +10,7 @@
   <button routerLink="settings" class="mdl-button mdl-js-button mdl-button--icon oc-navbar-icon-margin" mdTooltip="Settings">
     <i class="material-icons">settings</i>
   </button>
-  <button (click)="logout()" mdTooltip="Logout" class="mdl-button mdl-js-button mdl-button--icon oc-navbar-icon-margin">
+  <button *ngIf="authService.isLoggedIn" (click)="logout()" mdTooltip="Logout" class="mdl-button mdl-js-button mdl-button--icon oc-navbar-icon-margin">
     <i class="material-icons">exit_to_app</i>
   </button>
   <a href="https://github.com/unic0ding/openchat" target="_blank" mdTooltip="GitHub" class="mdl-button mdl-js-button mdl-button--icon oc-navbar-icon-margin">
