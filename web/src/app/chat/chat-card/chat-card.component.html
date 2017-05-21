@@ -40,10 +40,6 @@
   <div class="mdl-card__actions mdl-card--border">
     <form novalidate [formGroup]="chatForm" (ngSubmit)="sendMessage()">
       <div class="flex-form-container">
-        <button type="button" style="color: #FAFAFA; background-color: #424242"
-                class=" mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab flex-attachment-button">
-          <i class="material-icons">attachment</i>
-        </button>
         <md-input-container class="flex-input-field">
           <input mdInput placeholder="Send a Message..." id="{{name}}-input" spellcheck="false"
                  formControlName="message" class="icon-btn-primary">
