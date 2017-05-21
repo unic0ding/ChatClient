@@ -10,7 +10,7 @@ export class ContactService {
 
   constructor(private webSocketService: WebsocketService) {
     this.getListener()
-      .filter((event) => event.event === 'allUsers' || event.event === 'newUser')
+      .filter((event) => event.subtype === 'user')
       .subscribe(event => {
         if (event.event === 'newUser') {
           this.contactList.push(Contact.fromJson(event.data));
@@ -18,6 +18,11 @@ export class ContactService {
         }
         if (event.event === 'allUsers') {
           this.contactList = Contact.fromJsonArray(event.data);
+          this.contactListSubject.next(this.contactList);
+        }
+        if (event.event === 'userLeaves') {
+          const leavingUser = Contact.fromJson(event.data);
+          this.contactList = this.contactList.filter(contact => contact.id !== leavingUser.id);
           this.contactListSubject.next(this.contactList);
         }
       });
