@@ -46,6 +46,7 @@ import { InitialsPipe } from './share/pipes/initials.pipe';
 import { NotFoundComponent } from './share/components/not-found/not-found.component';
 import { UserSettingsComponent } from './settings/user-settings/user-settings.component';
 import {LoggedInGuard} from './auth/auth-login/logged-in-guard.service';
+import { RegisterComponent } from './auth/register/register.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import {LoggedInGuard} from './auth/auth-login/logged-in-guard.service';
     ContactDetailDialogComponent,
     InitialsPipe,
     NotFoundComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

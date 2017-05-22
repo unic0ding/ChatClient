@@ -6,11 +6,13 @@ import {SettingsMainComponent} from './settings/settings-main/settings-main.comp
 import {AuthGuard} from './auth/auth-login/authguard.service';
 import {NotFoundComponent} from './share/components/not-found/not-found.component';
 import {LoggedInGuard} from './auth/auth-login/logged-in-guard.service';
+import {RegisterComponent} from './auth/register/register.component';
 
 export const router: Routes = [
   {path: '', redirectTo: 'chat', pathMatch: 'full'},
   {path: 'chat', component: ChatFrameComponent, canActivate: [AuthGuard]},
   {path: 'auth-login', component: AuthLoginComponent, canActivate: [LoggedInGuard]},
+  {path: 'register', component: RegisterComponent, canActivate: [LoggedInGuard]},
   {path: 'settings', component: SettingsMainComponent, canActivate: [AuthGuard]},
   {path: '**', component: NotFoundComponent}
 ];

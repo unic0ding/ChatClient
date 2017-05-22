@@ -43,7 +43,7 @@ export class AuthService {
   }
 
   logout() {
-    const command = {type: 'command', subtype: 'auth', command: 'logout'};
+    const command = {type: 'command', subtype: 'auth', command: 'logout', data: this.user};
     this.webSocketService.emit(command);
     this.isLoggedIn = false;
     window.localStorage.removeItem(this.storageKey);
@@ -52,5 +52,20 @@ export class AuthService {
 
   setUser() {
     this.user = Contact.fromJson(this.getAuthFromLocalStorage());
+  }
+
+  sendRegistration(user) {
+    const command = {type: 'command', subtype: 'auth', command: 'newRegistration', data: user};
+    this.webSocketService.emit(command);
+
+    return this.getListener()
+      .filter((event) => event.event === 'registrationSuccess' || event.error === 'registrationError')
+      .do((event) => {
+        if (event.event === 'registrationSuccess') {
+          this.isLoggedIn = true;
+          this.setAuthToLocalStorage(event.data.user);
+          this.user = Contact.fromJson(event.data.user);
+        }
+      });
   }
 }
