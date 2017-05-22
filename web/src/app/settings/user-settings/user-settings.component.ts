@@ -26,6 +26,9 @@ export class UserSettingsComponent implements OnInit {
     this.user.name = this.userForm.value.name;
     this.user.avatarUrl = this.userForm.value.avatarUrl;
     this.authService.user = this.user;
+
+    this.authService.setAuthToLocalStorage(this.user);
+    // TODO: send command to Server
   }
 
   reset() {
