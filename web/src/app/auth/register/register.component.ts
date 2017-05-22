@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {MdSnackBar} from '@angular/material';
 import {fallIn} from '../../share/animations/animations';
 import {Subject} from 'rxjs/Subject';
+import {emailRegEx} from '../../share/utils/email-pattern';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,6 @@ export class RegisterComponent implements OnInit {
   confirmPasswordControl;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackbar: MdSnackBar) {
-    const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     this.registerForm = formBuilder.group({
       name: formBuilder.control(null, Validators.required),

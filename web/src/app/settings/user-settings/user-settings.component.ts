@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../auth.service';
 import {Contact} from '../../share/model/contact.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {emailRegEx} from '../../share/utils/email-pattern';
 
 @Component({
   selector: 'app-user-settings',
@@ -18,7 +19,7 @@ export class UserSettingsComponent implements OnInit {
     this.userForm = formBuilder.group({
       avatarUrl: formBuilder.control(this.user.avatarUrl),
       name: formBuilder.control(this.user.name, Validators.required),
-      email: formBuilder.control(this.user.email, Validators.compose([Validators.required, Validators.email]))
+      email: formBuilder.control(this.user.email, Validators.compose([Validators.required, Validators.pattern(emailRegEx)]))
     });
   }
 

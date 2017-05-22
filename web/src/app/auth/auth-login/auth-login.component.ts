@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MdSnackBar} from '@angular/material';
 import {Subject} from 'rxjs/Subject';
+import {emailRegEx} from '../../share/utils/email-pattern';
 
 @Component({
   selector: 'app-auth-login',
@@ -20,7 +21,7 @@ export class AuthLoginComponent {
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router, private snackbar: MdSnackBar) {
 
     this.authForm = this.formBuilder.group({
-      user: this.formBuilder.control(null, Validators.email),
+      user: this.formBuilder.control(null, Validators.pattern(emailRegEx)),
       password: this.formBuilder.control(null, Validators.required)
     });
   }
