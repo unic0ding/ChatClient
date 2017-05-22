@@ -44,6 +44,7 @@ import { ChatInfoDialogComponent } from './chat/chat-info-dialog/chat-info-dialo
 import { ContactDetailDialogComponent } from './contact/contact-detail-dialog/contact-detail-dialog.component';
 import { InitialsPipe } from './share/pipes/initials.pipe';
 import { NotFoundComponent } from './share/components/not-found/not-found.component';
+import { UserSettingsComponent } from './settings/user-settings/user-settings.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { NotFoundComponent } from './share/components/not-found/not-found.compon
     ChatInfoDialogComponent,
     ContactDetailDialogComponent,
     InitialsPipe,
-    NotFoundComponent
+    NotFoundComponent,
+    UserSettingsComponent
   ],
   imports: [
     BrowserModule,

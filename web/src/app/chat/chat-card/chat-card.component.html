@@ -2,7 +2,7 @@
   <div class="messageSearchContainer" [hidden]="!showMessageSearch">
     <md-input-container id="searchMessagesInputContainer">
       <input mdInput placeholder="Search" #searchMessagesInput id="searchMessagesInput" spellcheck="false"
-             autocomplete="false" (keydown.esc)="closeMessageSearch()">
+             autocomplete="off" (keydown.esc)="closeMessageSearch()">
     </md-input-container>
     <button md-icon-button class="icon-btn-primary" (click)="closeMessageSearch()">
       <i class="material-icons">close</i>

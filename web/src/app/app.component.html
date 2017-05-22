@@ -4,10 +4,10 @@
   <!-- Add spacer, to align navigation to the right -->
   <div class="mdl-layout-spacer"></div>
   <!-- Navigation -->
-  <button routerLink="chat" class="mdl-button mdl-js-button mdl-button--icon oc-navbar-icon-margin" mdTooltip="Chat">
+  <button *ngIf="authService.isLoggedIn" routerLink="chat" class="mdl-button mdl-js-button mdl-button--icon oc-navbar-icon-margin" mdTooltip="Chat">
     <i class="material-icons">forum</i>
   </button>
-  <button routerLink="settings" class="mdl-button mdl-js-button mdl-button--icon oc-navbar-icon-margin" mdTooltip="Settings">
+  <button *ngIf="authService.isLoggedIn" routerLink="settings" class="mdl-button mdl-js-button mdl-button--icon oc-navbar-icon-margin" mdTooltip="Settings">
     <i class="material-icons">settings</i>
   </button>
   <button *ngIf="authService.isLoggedIn" (click)="logout()" mdTooltip="Logout" class="mdl-button mdl-js-button mdl-button--icon oc-navbar-icon-margin">

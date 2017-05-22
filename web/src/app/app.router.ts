@@ -7,7 +7,7 @@ import {AuthGuard} from './auth/auth-login/authguard.service';
 import {NotFoundComponent} from './share/components/not-found/not-found.component';
 
 export const router: Routes = [
-  {path: '', redirectTo: 'auth-login', pathMatch: 'full'},
+  {path: '', redirectTo: 'chat', pathMatch: 'full'},
   {path: 'chat', component: ChatFrameComponent, canActivate: [AuthGuard]},
   {path: 'auth-login', component: AuthLoginComponent},
   {path: 'settings', component: SettingsMainComponent, canActivate: [AuthGuard]},
