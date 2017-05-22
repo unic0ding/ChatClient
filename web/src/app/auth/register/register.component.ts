@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {passwordValidator} from '../../share/utils/password-validator';
-import {AuthService} from '../../auth.service';
+import {AuthService} from '../../share/services/auth.service';
 import {Router} from '@angular/router';
 import {MdSnackBar} from '@angular/material';
 import {fallIn} from '../../share/animations/animations';

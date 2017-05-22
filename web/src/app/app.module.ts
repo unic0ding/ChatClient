@@ -36,7 +36,7 @@ import {ChannelListComponent} from './channel/channel-list/channel-list.componen
 import {ChannelListDetailComponent} from './channel/channel-list-detail/channel-list-detail.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MDL} from './share/directives/mdl.directive';
-import {AuthService} from './auth.service';
+import {AuthService} from './share/services/auth.service';
 import {RoomService} from './share/services/room.service';
 import {ContactService} from './share/services/contact.service';
 import {AuthGuard} from './auth/auth-login/authguard.service';

@@ -14,7 +14,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Channel} from '../../share/model/channel.model';
 import {ChatService} from '../../share/services/chat.service';
 import {Subject} from 'rxjs/Subject';
-import {AuthService} from '../../auth.service';
+import {AuthService} from '../../share/services/auth.service';
 import {Observable} from 'rxjs/Observable';
 import {MdDialog, MdDialogConfig} from '@angular/material';
 import {ChatInfoDialogComponent} from '../chat-info-dialog/chat-info-dialog.component';

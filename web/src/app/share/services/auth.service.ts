@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {WebsocketService} from './share/services/websocket.service';
-import {Contact} from './share/model/contact.model';
+import {WebsocketService} from './websocket.service';
+import {Contact} from '../model/contact.model';
 import {Router} from '@angular/router';
 
 @Injectable()

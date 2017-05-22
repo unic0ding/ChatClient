@@ -3,7 +3,7 @@ import {Channel} from '../../share/model/channel.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RoomService} from '../../share/services/room.service';
 import {Subject} from 'rxjs/Subject';
-import {AuthService} from '../../auth.service';
+import {AuthService} from '../../share/services/auth.service';
 import {fallIn} from '../../share/animations/animations';
 
 @Component({
