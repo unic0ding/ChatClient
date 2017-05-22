@@ -1,7 +1,8 @@
 <div app-mdl class="card-wide mdl-card mdl-shadow--2dp dark-card">
   <div class="messageSearchContainer" [hidden]="!showMessageSearch">
     <md-input-container id="searchMessagesInputContainer">
-      <input mdInput placeholder="Search" #searchMessagesInput id="searchMessagesInput" spellcheck="false">
+      <input mdInput placeholder="Search" #searchMessagesInput id="searchMessagesInput" spellcheck="false"
+             autocomplete="false" (keydown.esc)="closeMessageSearch()">
     </md-input-container>
     <button md-icon-button class="icon-btn-primary" (click)="closeMessageSearch()">
       <i class="material-icons">close</i>
