@@ -5,7 +5,7 @@ import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class RoomService {
-  public channelList;
+  public channelList = [];
   public channelListSubject: Subject<Array<Channel>> = new Subject<Array<Channel>>();
 
   constructor(private webSocketService: WebsocketService) {
