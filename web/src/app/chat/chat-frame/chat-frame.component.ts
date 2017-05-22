@@ -22,6 +22,7 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private roomService: RoomService, private authService: AuthService, private formBuilder: FormBuilder) {
     this.openChats = [];
+    this.openChats = [new Channel('PythonChannel', [])];
 
     this.newChatForm = this.formBuilder.group({
       name: this.formBuilder.control(null, Validators.compose([Validators.required, Validators.pattern('(\\w{2,})')]))
