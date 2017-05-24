@@ -8,15 +8,15 @@
     </md-input-container>
   </form>
   <md-card-content class="contact-list">
-    <ul class="mdl-list">
+    <md-list class="mdl-list">
       <div>
-        <span *ngIf="!contactList.length" class="mdl-chip">
+      <span *ngIf="!viewContactList?.length" class="mdl-chip">
           <span class="mdl-chip__text">No Contacts were Found</span>
         </span>
       </div>
-      <app-contact-detail *ngFor="let contact of viewContactList" [contact]="contact">Searching for Contacts
-      </app-contact-detail>
-    </ul>
+      <app-contact-list-detail *ngFor="let contact of viewContactList" [contact]="contact">Searching for Contacts
+      </app-contact-list-detail>
+    </md-list>
   </md-card-content>
 </md-card>
 

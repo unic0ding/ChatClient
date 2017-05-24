@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {WebsocketService} from './share/services/websocket.service';
-import {Contact} from './share/model/contact.model';
+import {WebsocketService} from './websocket.service';
+import {Contact} from '../model/contact.model';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +14,7 @@ export class AuthService {
   constructor(private webSocketService: WebsocketService, private router: Router) {
   }
 
-  getListener() {
+  getListener(): Observable<any> {
     const listener$ = this.webSocketService.getListener()
       .filter((event) => event.subtype === 'auth');
 
@@ -43,7 +44,7 @@ export class AuthService {
   }
 
   logout() {
-    const command = {type: 'command', subtype: 'auth', command: 'logout'};
+    const command = {type: 'command', subtype: 'auth', command: 'logout', data: this.user};
     this.webSocketService.emit(command);
     this.isLoggedIn = false;
     window.localStorage.removeItem(this.storageKey);
@@ -52,5 +53,20 @@ export class AuthService {
 
   setUser() {
     this.user = Contact.fromJson(this.getAuthFromLocalStorage());
+  }
+
+  sendRegistration(user) {
+    const command = {type: 'command', subtype: 'auth', command: 'newRegistration', data: user};
+    this.webSocketService.emit(command);
+
+    return this.getListener()
+      .filter((event) => event.event === 'registrationSuccess' || event.error === 'registrationError')
+      .do((event) => {
+        if (event.event === 'registrationSuccess') {
+          this.isLoggedIn = true;
+          this.setAuthToLocalStorage(event.data.user);
+          this.user = Contact.fromJson(event.data.user);
+        }
+      });
   }
 }

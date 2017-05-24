@@ -14,7 +14,6 @@
 .msg-sent-text {
 }
 
-
 .msg-sent-timestamp {
   color: #424242;
 }
@@ -27,6 +26,7 @@
 }
 
 .msg-author {
+  cursor: pointer;
   font-size: 80%;
   margin: 0;
   top: 0;
@@ -46,6 +46,7 @@
   margin-bottom: 0;
   color: #FAFAFA;
 }
+
 .msg-text-link {
   color: white;
 }

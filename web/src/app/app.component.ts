@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {WebsocketService} from './share/services/websocket.service';
-import {AuthService} from './auth.service';
+import {AuthService} from './share/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -20,8 +20,8 @@ export class AppComponent {
       });
 
     const closeListener$ = this.webSocketService.getClosedListener()
-      .subscribe((error) => {
-        console.log('Connection Closed');
+      .subscribe((event) => {
+        console.log('Connection Closed: ', event);
       });
   }
 

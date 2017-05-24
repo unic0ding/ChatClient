@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
-import {ContactService} from '../../share/services/contact.service';
-import {compare} from '../../share/utils/sort';
+import {ContactService} from '../../../share/services/contact.service';
+import {compare} from '../../../share/utils/sort';
 
 @Component({
   selector: 'app-contact-list',

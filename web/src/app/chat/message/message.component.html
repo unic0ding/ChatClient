@@ -1,6 +1,6 @@
   <div class="msg-container flex-msg-container" [ngClass]="{'msg-sent-container': !incoming, 'msg-receive-container': incoming}">
     <div>
-      <a *ngIf="incoming" style="margin: 0;" class="msg-author">{{message.author.name}}</a>
+      <a *ngIf="incoming" class="msg-author" (click)="openContactInfo(message.author)">{{message.author.name}}</a>
     </div>
     <p class="msg-text flex-text" [ngClass]="{'msg-sent-text': !incoming, 'msg-receive-text': incoming}"
       [innerHTML]="(message.text | urlString | hashString)">

@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {fallIn} from '../../share/animations/animations';
+import {AuthService} from '../../share/services/auth.service';
+import {Contact} from '../../share/model/contact.model';
 
 
 @Component({
@@ -9,5 +11,6 @@ import {fallIn} from '../../share/animations/animations';
   animations: [fallIn]
 })
 export class SettingsMainComponent {
-
+  constructor() {
+  }
 }

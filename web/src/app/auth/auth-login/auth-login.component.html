@@ -11,7 +11,7 @@
         <tr>
           <td>
             <md-input-container class="example-full-width">
-              <input mdInput placeholder="Username" spellcheck="false" formControlName="user">
+              <input mdInput placeholder="E-Mail" spellcheck="false" autocomplete="off" formControlName="user">
             </md-input-container>
           </td>
         </tr>
@@ -33,13 +33,16 @@
   <md-card-actions>
     <div class="login-container">
       <div class="login-button-container">
-        <button md-raised-button class="login-buttons">Register</button>
+        <button md-raised-button class="login-buttons" routerLink="/register">Register</button>
       </div>
       <div class="login-button-container">
-        <button md-raised-button id="google" class="login-buttons">Sign in with Google</button>
+        <span>Coming Soon:</span>
       </div>
       <div class="login-button-container">
-        <button md-raised-button id="github" class="login-buttons">Sign in with GitHub</button>
+        <button md-raised-button id="google" class="login-buttons" disabled (click)="loginGoogle()">Sign in with Google</button>
+      </div>
+      <div class="login-button-container">
+        <button md-raised-button id="github" class="login-buttons" disabled (click)="loginGithub()">Sign in with GitHub</button>
       </div>
     </div>
   </md-card-actions>

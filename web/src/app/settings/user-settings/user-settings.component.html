@@ -1,0 +1,43 @@
+<md-card style="width: 1000px">
+  <md-card-title style="text-align: center">User Settings</md-card-title>
+  <form [formGroup]="userForm" (ngSubmit)="updateUser()">
+  <md-card-content>
+      <table class="" style="background-color: #424242; width: 80%">
+        <tbody>
+        <tr>
+          <td><span>Avatar URL:</span></td>
+          <td>
+            <md-input-container style="width: 80%;">
+              <input mdInput formControlName="avatarUrl" spellcheck="false" autocomplete="off">
+            </md-input-container>
+          </td>
+          <td>
+            <div md-card-avatar *ngIf="user.avatarUrl" class="user-image" [ngStyle]="{'background-image': 'url(' + user.avatarUrl + ')'}"></div>
+            <span *ngIf="!user.avatarUrl" class="mdl-chip__contact contact-circle" style="background-color: #FD4282">{{user.name | initials}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Name:</td>
+          <td>
+            <md-input-container style="width: 80%">
+              <input mdInput spellcheck="false" autocomplete="off" formControlName="name">
+            </md-input-container>
+          </td>
+        </tr>
+        <tr>
+          <td>E-Mail:</td>
+          <td>
+            <md-input-container style="width: 80%">
+              <input mdInput spellcheck="false" autocomplete="off" formControlName="email">
+            </md-input-container>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+  </md-card-content>
+  <md-card-actions>
+    <button md-raised-button id="cancel-btn" (click)="reset()">Reset</button>
+    <button md-raised-button id="submit-btn" type="submit" [disabled]="!userForm.valid">Save Changes</button>
+  </md-card-actions>
+  </form>
+</md-card>

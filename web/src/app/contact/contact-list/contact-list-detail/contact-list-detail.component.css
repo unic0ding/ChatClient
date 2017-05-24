@@ -1,0 +1,7 @@
+.contact-list-item:hover{
+  background-color: #424242;
+  cursor: pointer;
+}
+.contact-circle {
+  background-color: #FD4282;
+}

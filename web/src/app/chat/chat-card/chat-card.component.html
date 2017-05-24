@@ -1,7 +1,8 @@
 <div app-mdl class="card-wide mdl-card mdl-shadow--2dp dark-card">
   <div class="messageSearchContainer" [hidden]="!showMessageSearch">
     <md-input-container id="searchMessagesInputContainer">
-      <input mdInput placeholder="Search" #searchMessagesInput id="searchMessagesInput" spellcheck="false">
+      <input mdInput placeholder="Search" #searchMessagesInput id="searchMessagesInput" spellcheck="false"
+             autocomplete="off" (keydown.esc)="closeMessageSearch()">
     </md-input-container>
     <button md-icon-button class="icon-btn-primary" (click)="closeMessageSearch()">
       <i class="material-icons">close</i>
@@ -12,7 +13,7 @@
       <md-icon>more_vert</md-icon>
     </button>
     <md-menu #menu="mdMenu">
-      <button md-menu-item disabled>
+      <button md-menu-item (click)="openInfoDialog()">
         <md-icon>info</md-icon>
         <span>View Info</span>
       </button>
@@ -31,7 +32,7 @@
   </div>
   <div class="mdl-card__title">
     <i *ngIf="connectionClosed" class="material-icons">cloud_off</i>
-    <span class="mdl-chip__contact mdl-color-text--white" style="background-color: #FD4282">{{channel.name.charAt(0).toUpperCase()}}</span>
+    <span class="mdl-chip__contact mdl-color-text--white colored-buttons">{{channel.name | initials}}</span>
     <h2 class="mdl-card__title-text" style="color: #FAFAFA">{{channel.name}}</h2>
   </div>
   <div class="mdl-card__media" style="padding: 0 10px 0 10px;">
@@ -40,13 +41,9 @@
   <div class="mdl-card__actions mdl-card--border">
     <form novalidate [formGroup]="chatForm" (ngSubmit)="sendMessage()">
       <div class="flex-form-container">
-        <button type="button" style="color: #FAFAFA; background-color: #424242"
-                class=" mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab flex-attachment-button">
-          <i class="material-icons">attachment</i>
-        </button>
         <md-input-container class="flex-input-field">
           <input mdInput placeholder="Send a Message..." id="{{name}}-input" spellcheck="false"
-                 formControlName="message" class="icon-btn-primary">
+                 formControlName="message" class="icon-btn-primary" autocomplete="off">
         </md-input-container>
         <button md-mini-fab class="flex-send-button btn-primary" [disabled]="!chatForm.valid" [hidden]="!chatForm.valid"
                 type="submit">

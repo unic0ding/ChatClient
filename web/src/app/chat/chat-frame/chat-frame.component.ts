@@ -3,7 +3,7 @@ import {Channel} from '../../share/model/channel.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RoomService} from '../../share/services/room.service';
 import {Subject} from 'rxjs/Subject';
-import {AuthService} from '../../auth.service';
+import {AuthService} from '../../share/services/auth.service';
 import {fallIn} from '../../share/animations/animations';
 
 @Component({
@@ -22,6 +22,7 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private roomService: RoomService, private authService: AuthService, private formBuilder: FormBuilder) {
     this.openChats = [];
+    this.openChats = [new Channel('PythonChannel', [this.authService.user])];
 
     this.newChatForm = this.formBuilder.group({
       name: this.formBuilder.control(null, Validators.compose([Validators.required, Validators.pattern('(\\w{2,})')]))

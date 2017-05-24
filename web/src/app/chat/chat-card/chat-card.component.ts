@@ -14,8 +14,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Channel} from '../../share/model/channel.model';
 import {ChatService} from '../../share/services/chat.service';
 import {Subject} from 'rxjs/Subject';
-import {AuthService} from '../../auth.service';
+import {AuthService} from '../../share/services/auth.service';
 import {Observable} from 'rxjs/Observable';
+import {MdDialog, MdDialogConfig} from '@angular/material';
+import {ChatInfoDialogComponent} from '../chat-info-dialog/chat-info-dialog.component';
 
 @Component({
   selector: 'app-chat-card',
@@ -36,7 +38,7 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   private showMessageSearch = false;
   private searchValue;
 
-  constructor(private chatService: ChatService, private authService: AuthService, private formBuilder: FormBuilder) {
+  constructor(private chatService: ChatService, private authService: AuthService, private formBuilder: FormBuilder, private infoDialog: MdDialog) {
 
     this.chatForm = this.formBuilder.group({
       message: this.formBuilder.control(null, Validators.required)
@@ -111,6 +113,14 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   clearHistory() {
     this.messages = [];
+  }
+
+  openInfoDialog() {
+    const config = new MdDialogConfig();
+    config.width = '50%';
+    const dialogRef = this.infoDialog.open(ChatInfoDialogComponent, config);
+    dialogRef.componentInstance.channel = this.channel;
+
   }
 
   ngOnDestroy(): void {
