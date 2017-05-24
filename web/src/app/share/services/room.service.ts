@@ -8,6 +8,8 @@ import {Observable} from 'rxjs/Observable';
 export class RoomService {
   public channelList = [];
   public channelListSubject: Subject<Array<Channel>> = new Subject<Array<Channel>>();
+  public openChats = [];
+  public selectedChat = 0;
 
   constructor(private webSocketService: WebsocketService) {
 

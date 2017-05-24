@@ -22,7 +22,7 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private roomService: RoomService, private authService: AuthService, private formBuilder: FormBuilder) {
     this.openChats = [];
-    this.openChats = [new Channel('PythonChannel', [this.authService.user])];
+    this.openChats = roomService.openChats;
 
     this.newChatForm = this.formBuilder.group({
       name: this.formBuilder.control(null, Validators.compose([Validators.required, Validators.pattern('(\\w{2,})')]))
@@ -30,8 +30,10 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const roomListener$ = this.roomService.getListener();
+    // get selected tab
+    this.chatTabGroup.selectedIndex = this.roomService.selectedChat;
 
+    const roomListener$ = this.roomService.getListener();
     // TODO: Create Room listener
     roomListener$
       .takeUntil(this.ngUnsubscribe)
@@ -95,6 +97,11 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    // save selected tab
+    this.roomService.selectedChat = this.selectedTab;
+    // save openChats
+    this.roomService.openChats = this.openChats;
+
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
