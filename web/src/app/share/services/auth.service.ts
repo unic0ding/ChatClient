@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {WebsocketService} from './websocket.service';
 import {Contact} from '../model/contact.model';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +14,7 @@ export class AuthService {
   constructor(private webSocketService: WebsocketService, private router: Router) {
   }
 
-  getListener() {
+  getListener(): Observable<any> {
     const listener$ = this.webSocketService.getListener()
       .filter((event) => event.subtype === 'auth');
 

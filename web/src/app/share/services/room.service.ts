@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {WebsocketService} from './websocket.service';
 import {Channel} from '../model/channel.model';
 import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class RoomService {
@@ -36,7 +37,7 @@ export class RoomService {
     this.webSocketService.emit(command);
   }
 
-  getListener() {
+  getListener(): Observable<any> {
     const listener$ = this.webSocketService.getListener()
       .filter((data) => data.subtype === 'room' || data.error === 'roomError');
     return listener$;
