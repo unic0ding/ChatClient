@@ -32,16 +32,14 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   private messages = [];
   private viewMessages = [];
   private chatForm: FormGroup;
-  private connectionClosed = false;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private showMessageSearch = false;
   private searchValue;
 
-  constructor(private chatService: ChatService, private authService: AuthService, private formBuilder: FormBuilder, private infoDialog: MdDialog) {
+  constructor(private chatService: ChatService, private authService: AuthService, private formBuilder: FormBuilder,
+              private infoDialog: MdDialog) {
 
-    this.chatForm = this.formBuilder.group({
-      message: this.formBuilder.control(null, Validators.required)
-    });
+    this.buildChatForm();
   }
 
   ngOnInit() {
@@ -63,7 +61,16 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    // Message Search
+    this.buildMessageSearch();
+  }
+
+  buildChatForm() {
+    this.chatForm = this.formBuilder.group({
+      message: this.formBuilder.control(null, Validators.required)
+    });
+  }
+
+  buildMessageSearch() {
     const messageSearch$ = Observable.fromEvent(this.searchInput.nativeElement, 'input')
       .debounceTime(250)
       .pluck('target', 'value')
@@ -95,11 +102,11 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private sendMessage(message?: Message) {
-      const text = this.chatForm.value.message;
-      message = new Message(1, new Date(), this.authService.user, text);
-      this.messages.push({message: message, incoming: false});
-      this.viewMessages = this.messages;
-      this.chatForm.reset();
+    const text = this.chatForm.value.message;
+    message = new Message(1, new Date(), this.authService.user, text);
+    this.messages.push({message: message, incoming: false});
+    this.viewMessages = this.messages;
+    this.chatForm.reset();
   }
 
   clearHistory() {
