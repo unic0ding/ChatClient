@@ -31,7 +31,6 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('searchMessagesInput') searchInput: ElementRef;
   private messages = [];
   private viewMessages = [];
-  private unsentMessages = [];
   private chatForm: FormGroup;
   private connectionClosed = false;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -96,19 +95,11 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private sendMessage(message?: Message) {
-    if (!message) {
       const text = this.chatForm.value.message;
       message = new Message(1, new Date(), this.authService.user, text);
       this.messages.push({message: message, incoming: false});
       this.viewMessages = this.messages;
       this.chatForm.reset();
-    }
-    try {
-      this.chatService.sendMessage(message);
-    } catch (e) {
-      this.unsentMessages.push(message);
-      console.log('No Connection');
-    }
   }
 
   clearHistory() {
