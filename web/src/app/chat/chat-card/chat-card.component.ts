@@ -104,6 +104,7 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   clearHistory() {
     this.messages = [];
+    this.viewMessages = this.messages;
   }
 
   openInfoDialog() {
