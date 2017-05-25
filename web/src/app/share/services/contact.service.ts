@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {WebsocketService} from './websocket.service';
 import {Contact} from '../model/contact.model';
 import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class ContactService {
@@ -29,7 +30,7 @@ export class ContactService {
     this.getAllContacts();
   }
 
-  getListener() {
+  getListener(): Observable<any> {
     const listener$ = this.webSocketService.getListener()
       .filter((data) => data.subtype === 'user');
 

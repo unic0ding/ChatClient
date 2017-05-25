@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AuthService} from '../../auth.service';
+import {AuthService} from '../../share/services/auth.service';
 import {fallIn} from '../../share/animations/animations';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';

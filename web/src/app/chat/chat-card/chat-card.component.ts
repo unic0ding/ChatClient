@@ -14,7 +14,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Channel} from '../../share/model/channel.model';
 import {ChatService} from '../../share/services/chat.service';
 import {Subject} from 'rxjs/Subject';
-import {AuthService} from '../../auth.service';
+import {AuthService} from '../../share/services/auth.service';
 import {Observable} from 'rxjs/Observable';
 import {MdDialog, MdDialogConfig} from '@angular/material';
 import {ChatInfoDialogComponent} from '../chat-info-dialog/chat-info-dialog.component';
@@ -31,18 +31,15 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('searchMessagesInput') searchInput: ElementRef;
   private messages = [];
   private viewMessages = [];
-  private unsentMessages = [];
   private chatForm: FormGroup;
-  private connectionClosed = false;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private showMessageSearch = false;
   private searchValue;
 
-  constructor(private chatService: ChatService, private authService: AuthService, private formBuilder: FormBuilder, private infoDialog: MdDialog) {
+  constructor(private chatService: ChatService, private authService: AuthService, private formBuilder: FormBuilder,
+              private infoDialog: MdDialog) {
 
-    this.chatForm = this.formBuilder.group({
-      message: this.formBuilder.control(null, Validators.required)
-    });
+    this.buildChatForm();
   }
 
   ngOnInit() {
@@ -64,7 +61,16 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    // Message Search
+    this.buildMessageSearch();
+  }
+
+  buildChatForm() {
+    this.chatForm = this.formBuilder.group({
+      message: this.formBuilder.control(null, Validators.required)
+    });
+  }
+
+  buildMessageSearch() {
     const messageSearch$ = Observable.fromEvent(this.searchInput.nativeElement, 'input')
       .debounceTime(250)
       .pluck('target', 'value')
@@ -96,19 +102,11 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private sendMessage(message?: Message) {
-    if (!message) {
-      const text = this.chatForm.value.message;
-      message = new Message(1, new Date(), this.authService.user, text);
-      this.messages.push({message: message, incoming: false});
-      this.viewMessages = this.messages;
-      this.chatForm.reset();
-    }
-    try {
-      this.chatService.sendMessage(message);
-    } catch (e) {
-      this.unsentMessages.push(message);
-      console.log('No Connection');
-    }
+    const text = this.chatForm.value.message;
+    message = new Message(1, new Date(), this.authService.user, text);
+    this.messages.push({message: message, incoming: false});
+    this.viewMessages = this.messages;
+    this.chatForm.reset();
   }
 
   clearHistory() {
