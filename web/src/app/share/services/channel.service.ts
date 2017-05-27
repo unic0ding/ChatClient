@@ -3,6 +3,7 @@ import {WebsocketService} from './websocket.service';
 import {Channel} from '../model/channel.model';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
+import {Contact} from '../model/contact.model';
 
 @Injectable()
 export class ChannelService {
@@ -36,6 +37,13 @@ export class ChannelService {
     this.webSocketService.emit(command);
     return this.getListener()
       .filter((event) => event.event === 'newChannelSuccess' || event.error === 'newChannelError');
+  }
+
+  joinRoom(channel: Channel, user: Contact) {
+    const command = {type: 'command', subtype: 'room', command: 'joinRoom', data: {user: user, channel: channel}};
+    this.webSocketService.emit(command);
+    return this.getListener()
+      .filter((event) => event.event === 'joinRoomSuccess' || event.error === 'joinRoomError');
   }
 
   leaveRoom(channel: Channel) {

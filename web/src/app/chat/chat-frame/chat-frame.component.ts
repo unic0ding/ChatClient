@@ -53,8 +53,22 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onConnectNewChannel(channel: Channel) {
+    const ngUnsubscribeJoinRoom = new Subject<void>();
     if (this.openChats.indexOf(channel) === -1) {
-      this.openChats.push(channel);
+      this.channelService.joinRoom(channel, this.authService.user)
+        .takeUntil(ngUnsubscribeJoinRoom)
+        .subscribe(event => {
+            if (event.event === 'joinRoomSuccess') {
+              channel.members.push(this.authService.user);
+              this.openChats.push(channel);
+            }
+            if (event.error === 'joinRoomError') {
+              console.log(event.error);
+            }
+            ngUnsubscribeJoinRoom.next();
+            ngUnsubscribeJoinRoom.complete();
+          }
+        );
     }
   }
 
@@ -117,7 +131,6 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
           ngUnsubscribeNewChannel.next();
           ngUnsubscribeNewChannel.complete();
         }
-
       );
   }
 
