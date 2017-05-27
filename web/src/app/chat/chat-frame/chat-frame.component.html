@@ -16,7 +16,7 @@
           <form novalidate [formGroup]="newChatForm" (ngSubmit)="onSubmitNewChat()">
             <md-input-container style="width: 70%">
               <input mdInput type="text" id="newChatNameInput" formControlName="name" placeholder="Name"
-                     style="width: 70%">
+                     autocomplete="off" spellcheck="false" style="width: 70%">
             </md-input-container>
             <button md-raised-button [disabled]="!newChatForm.valid" type="submit">Start Chat</button>
           </form>
