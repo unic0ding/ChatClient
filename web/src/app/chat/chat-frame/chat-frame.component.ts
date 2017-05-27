@@ -16,8 +16,11 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('chatTabGroup') chatTabGroup;
   openChats: Array<Channel>;
   newChatForm: FormGroup;
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
+  private ngUnsubscribeChannel: Subject<void> = new Subject<void>();
+  private ngUnsubscribeNewChannel: Subject<void> = new Subject<void>();
+  newChatError: string;
   addNewChat = false;
+  showSpinner = false;
   selectedTab = 0;
 
   constructor(private channelService: ChannelService, private authService: AuthService, private formBuilder: FormBuilder) {
@@ -34,7 +37,7 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
     const roomListener$ = this.channelService.getListener();
     // TODO: Create Room listener
     roomListener$
-      .takeUntil(this.ngUnsubscribe)
+      .takeUntil(this.ngUnsubscribeChannel)
       .subscribe();
   }
 
@@ -90,14 +93,32 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   collapseNewChatForm() {
+    this.newChatError = '';
+    this.newChatForm.reset();
     this.addNewChat = !this.addNewChat;
   }
 
   onSubmitNewChat() {
     const channel = new Channel(this.newChatForm.value.name, [this.authService.user]);
-    this.channelService.createRoom(channel);
-    this.newChatForm.reset();
-    this.addNewChat = false;
+    this.showSpinner = true;
+    this.channelService.createRoom(channel)
+      .takeUntil(this.ngUnsubscribeNewChannel)
+      .subscribe(
+        (event) => {
+          this.showSpinner = false;
+          if (event.event === 'newChannelSuccess') {
+            this.openChats.push(channel);
+            this.newChatForm.reset();
+            this.addNewChat = false;
+          }
+          if (event.error === 'newChannelError') {
+            this.newChatError = event.data;
+          }
+          this.ngUnsubscribeNewChannel.next();
+          this.ngUnsubscribeNewChannel.complete();
+        }
+
+      );
   }
 
   saveMessages(channel) {
@@ -111,7 +132,7 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
     // save openChats
     this.channelService.openChats = this.openChats;
 
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribeChannel.next();
+    this.ngUnsubscribeChannel.complete();
   }
 }

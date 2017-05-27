@@ -32,6 +32,8 @@ export class ChannelService {
     const command = {type: 'command', subtype: 'room', command: 'createRoom', data: channel};
     console.log(command);
     this.webSocketService.emit(command);
+    return this.getListener()
+      .filter((event) => event.event === 'newChannelSuccess' || event.error === 'newChannelError');
   }
 
   leaveRoom(channel: Channel) {
@@ -41,7 +43,7 @@ export class ChannelService {
 
   getListener(): Observable<any> {
     const listener$ = this.webSocketService.getListener()
-      .filter((data) => data.subtype === 'room' || data.error === 'roomError');
+      .filter((data) => data.subtype === 'room');
     return listener$;
   }
 

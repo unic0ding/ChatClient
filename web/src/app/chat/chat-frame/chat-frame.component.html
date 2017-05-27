@@ -6,20 +6,26 @@
   </div>
   <div class="mdl-cell mdl-cell--8-col">
     <!--new Chat Form-->
-    <md-card *ngIf="addNewChat" style="margin-bottom: 30px">
-      <md-card-header>
-        <md-card-title>Create new Chat Room</md-card-title>
-      </md-card-header>
-      <md-card-content>
-        <form novalidate [formGroup]="newChatForm" (ngSubmit)="onSubmitNewChat()">
-          <md-input-container style="width: 70%">
-            <input mdInput type="text" id="newChatNameInput" formControlName="name" placeholder="Name"
-                   style="width: 70%">
-          </md-input-container>
-          <button md-raised-button [disabled]="!newChatForm.valid" type="submit">Start Chat</button>
-        </form>
-      </md-card-content>
-    </md-card>
+    <div *ngIf="addNewChat">
+      <md-progress-bar mode="query" *ngIf="showSpinner"></md-progress-bar>
+      <md-card style="margin-bottom: 30px">
+        <md-card-header>
+          <md-card-title>Create new Chat Room</md-card-title>
+        </md-card-header>
+        <md-card-content>
+          <form novalidate [formGroup]="newChatForm" (ngSubmit)="onSubmitNewChat()">
+            <md-input-container style="width: 70%">
+              <input mdInput type="text" id="newChatNameInput" formControlName="name" placeholder="Name"
+                     style="width: 70%">
+            </md-input-container>
+            <button md-raised-button [disabled]="!newChatForm.valid" type="submit">Start Chat</button>
+          </form>
+        </md-card-content>
+        <md-card-footer style="width: 70%;">
+          <p style="color: #DD2C00;">{{newChatError}}</p>
+        </md-card-footer>
+      </md-card>
+    </div>
 
     <!--Chat Tabs-->
     <md-tab-group (selectedIndexChange)="unsetNotification($event)" #chatTabGroup>
