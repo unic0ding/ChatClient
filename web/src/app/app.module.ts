@@ -35,7 +35,6 @@ import {TimePipe} from './share/pipes/time.pipe';
 import {ChannelListComponent} from './channel/channel-list/channel-list.component';
 import {ChannelListDetailComponent} from './channel/channel-list-detail/channel-list-detail.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MDL} from './share/directives/mdl.directive';
 import {AuthService} from './share/services/auth.service';
 import {RoomService} from './share/services/room.service';
 import {ContactService} from './share/services/contact.service';
@@ -65,7 +64,6 @@ import { RegisterComponent } from './auth/register/register.component';
     ChannelListComponent,
     ChannelListDetailComponent,
     AuthLoginComponent,
-    MDL,
     ChatInfoDialogComponent,
     ContactDetailDialogComponent,
     InitialsPipe,
