@@ -17,7 +17,6 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   openChats: Array<Channel>;
   newChatForm: FormGroup;
   private ngUnsubscribeChannel: Subject<void> = new Subject<void>();
-  private ngUnsubscribeNewChannel: Subject<void> = new Subject<void>();
   newChatError: string;
   addNewChat = false;
   showSpinner = false;
@@ -99,15 +98,15 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSubmitNewChat() {
+    const ngUnsubscribeNewChannel = new Subject<void>();
     const channel = new Channel(this.newChatForm.value.name, [this.authService.user]);
     this.showSpinner = true;
     this.channelService.createRoom(channel)
-      .takeUntil(this.ngUnsubscribeNewChannel)
+      .takeUntil(ngUnsubscribeNewChannel)
       .subscribe(
         (event) => {
           this.showSpinner = false;
           if (event.event === 'newChannelSuccess') {
-            console.log(channel);
             this.openChats.push(channel);
             this.newChatForm.reset();
             this.addNewChat = false;
@@ -115,8 +114,8 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
           if (event.error === 'newChannelError') {
             this.newChatError = event.data;
           }
-          this.ngUnsubscribeNewChannel.next();
-          this.ngUnsubscribeNewChannel.complete();
+          ngUnsubscribeNewChannel.next();
+          ngUnsubscribeNewChannel.complete();
         }
 
       );
