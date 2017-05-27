@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Channel} from '../../share/model/channel.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RoomService} from '../../share/services/room.service';
@@ -24,9 +24,7 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
     this.openChats = [];
     this.openChats = roomService.openChats;
 
-    this.newChatForm = this.formBuilder.group({
-      name: this.formBuilder.control(null, Validators.compose([Validators.required, Validators.pattern('(\\w{2,})')]))
-    });
+    this.buildChatForm();
   }
 
   ngOnInit(): void {
@@ -44,6 +42,12 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.openChats.length > 0) {
       this.openChats[this.chatTabGroup.selectedIndex].setNotification(false);
     }
+  }
+
+  buildChatForm(): void {
+    this.newChatForm = this.formBuilder.group({
+      name: this.formBuilder.control(null, Validators.compose([Validators.required, Validators.pattern('(\\w{2,})')]))
+    });
   }
 
   onConnectNewChannel(channel: Channel) {
