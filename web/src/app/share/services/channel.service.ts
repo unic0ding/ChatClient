@@ -17,8 +17,11 @@ export class ChannelService {
       .filter((event) => event.event === 'allRooms' || event.event === 'newRoom')
       .subscribe(event => {
         if (event.event === 'newRoom') {
-          this.channelList.push(Channel.fromJson(event.data));
-          this.channelListSubject.next(this.channelList);
+          const channel = Channel.fromJson(event.data);
+          if (this.channelList.filter(c => c.name === channel.name).length === 0) {
+            this.channelList.push(channel);
+            this.channelListSubject.next(this.channelList);
+          }
         }
         if (event.event === 'allRooms') {
           this.channelList = Channel.fromJsonArray(event.data);
