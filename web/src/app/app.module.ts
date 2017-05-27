@@ -36,7 +36,7 @@ import {ChannelListComponent} from './channel/channel-list/channel-list.componen
 import {ChannelListDetailComponent} from './channel/channel-list-detail/channel-list-detail.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthService} from './share/services/auth.service';
-import {RoomService} from './share/services/room.service';
+import {ChannelService} from './share/services/channel.service';
 import {ContactService} from './share/services/contact.service';
 import {AuthGuard} from './auth/auth-login/authguard.service';
 import { ChatInfoDialogComponent } from './chat/chat-info-dialog/chat-info-dialog.component';
@@ -93,7 +93,7 @@ import { RegisterComponent } from './auth/register/register.component';
     MdListModule,
     MdDialogModule
   ],
-  providers: [ContactService, AuthService, RoomService, ChatService, WebsocketService, AuthGuard, LoggedInGuard],
+  providers: [ContactService, AuthService, ChannelService, ChatService, WebsocketService, AuthGuard, LoggedInGuard],
   bootstrap: [AppComponent],
   entryComponents: [ChatInfoDialogComponent, ContactDetailDialogComponent]
 })

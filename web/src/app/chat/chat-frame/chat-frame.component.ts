@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Channel} from '../../share/model/channel.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {RoomService} from '../../share/services/room.service';
+import {ChannelService} from '../../share/services/channel.service';
 import {Subject} from 'rxjs/Subject';
 import {AuthService} from '../../share/services/auth.service';
 import {fallIn} from '../../share/animations/animations';
@@ -20,18 +20,18 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   addNewChat = false;
   selectedTab = 0;
 
-  constructor(private roomService: RoomService, private authService: AuthService, private formBuilder: FormBuilder) {
+  constructor(private channelService: ChannelService, private authService: AuthService, private formBuilder: FormBuilder) {
     this.openChats = [];
-    this.openChats = roomService.openChats;
+    this.openChats = channelService.openChats;
 
     this.buildChatForm();
   }
 
   ngOnInit(): void {
     // get selected tab
-    this.chatTabGroup.selectedIndex = this.roomService.selectedChat;
+    this.chatTabGroup.selectedIndex = this.channelService.selectedChat;
 
-    const roomListener$ = this.roomService.getListener();
+    const roomListener$ = this.channelService.getListener();
     // TODO: Create Room listener
     roomListener$
       .takeUntil(this.ngUnsubscribe)
@@ -70,7 +70,7 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onClose(channel: Channel) {
     if (confirm('Do you really want to close the Chat?')) {
-      this.roomService.leaveRoom(channel);
+      this.channelService.leaveRoom(channel);
       const index = this.openChats.indexOf(channel, 0);
       if (index > -1) {
         this.openChats[index].setNotification(true);
@@ -95,7 +95,7 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onSubmitNewChat() {
     const channel = new Channel(this.newChatForm.value.name, [this.authService.user]);
-    this.roomService.createRoom(channel);
+    this.channelService.createRoom(channel);
     this.newChatForm.reset();
     this.addNewChat = false;
   }
@@ -107,9 +107,9 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     // save selected tab
-    this.roomService.selectedChat = this.selectedTab;
+    this.channelService.selectedChat = this.selectedTab;
     // save openChats
-    this.roomService.openChats = this.openChats;
+    this.channelService.openChats = this.openChats;
 
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();

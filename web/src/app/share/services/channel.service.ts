@@ -5,7 +5,7 @@ import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class RoomService {
+export class ChannelService {
   public channelList = [];
   public channelListSubject: Subject<Array<Channel>> = new Subject<Array<Channel>>();
   public openChats = [];
