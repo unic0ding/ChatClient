@@ -100,6 +100,11 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
     this.addNewChat = false;
   }
 
+  saveMessages(channel) {
+    const index = this.openChats.indexOf(this.openChats.filter(c => c.name === channel.name)[0], 0);
+    this.openChats[index] = channel;
+  }
+
   ngOnDestroy(): void {
     // save selected tab
     this.roomService.selectedChat = this.selectedTab;

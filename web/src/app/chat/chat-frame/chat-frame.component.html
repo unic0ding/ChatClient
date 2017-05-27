@@ -13,27 +13,35 @@
       <md-card-content>
         <form novalidate [formGroup]="newChatForm" (ngSubmit)="onSubmitNewChat()">
           <md-input-container style="width: 70%">
-            <input mdInput type="text" id="newChatNameInput" formControlName="name" placeholder="Name" style="width: 70%">
+            <input mdInput type="text" id="newChatNameInput" formControlName="name" placeholder="Name"
+                   style="width: 70%">
           </md-input-container>
-        <button md-raised-button [disabled]="!newChatForm.valid" type="submit">Start Chat</button>
+          <button md-raised-button [disabled]="!newChatForm.valid" type="submit">Start Chat</button>
         </form>
       </md-card-content>
     </md-card>
 
     <!--Chat Tabs-->
     <md-tab-group (selectedIndexChange)="unsetNotification($event)" #chatTabGroup>
-        <md-tab *ngFor="let channel of openChats">
-          <ng-template md-tab-label>
-            <span class="mdl-badge" [attr.data-badge]="channel.notification">{{channel.name}}</span>
-          </ng-template>
-          <app-chat-card (closeWindow)="onClose($event)" (writing)="writing = $event"
-                         [ngClass]="{'mdl-cell--12-col': (openChats.length == 1), 'mdl-cell--8-col': (openChats > 1)}"
-                         class="mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-phone" [channel]="channel"></app-chat-card>
-        </md-tab>
-      </md-tab-group>
+      <md-tab *ngFor="let channel of openChats">
+        <ng-template md-tab-label>
+          <span class="mdl-badge" [attr.data-badge]="channel.notification">{{channel.name}}</span>
+        </ng-template>
+        <app-chat-card (closeWindow)="onClose($event)"
+                       (saveMessages)="saveMessages($event)"
+                       [ngClass]="{'mdl-cell--12-col': (openChats.length == 1), 'mdl-cell--8-col': (openChats > 1)}"
+                       class="mdl-cell mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                       [channel]="channel"></app-chat-card>
+      </md-tab>
+    </md-tab-group>
   </div>
   <div class="mdl-cell mdl-cell--1-col" style="margin-left: 5px">
-    <button *ngIf="!addNewChat" md-fab style="background-color: #FD4282; color: #FAFAFA" (click)="collapseNewChatForm()"><md-icon>create</md-icon></button>
-    <button *ngIf="addNewChat" md-fab style="background-color: #FD4282; color: #FAFAFA" (click)="collapseNewChatForm()"><md-icon>close</md-icon></button>
+    <button *ngIf="!addNewChat" md-fab style="background-color: #FD4282; color: #FAFAFA"
+            (click)="collapseNewChatForm()">
+      <md-icon>create</md-icon>
+    </button>
+    <button *ngIf="addNewChat" md-fab style="background-color: #FD4282; color: #FAFAFA" (click)="collapseNewChatForm()">
+      <md-icon>close</md-icon>
+    </button>
   </div>
 </div>
