@@ -126,6 +126,7 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    // save messages
     this.channel.messages = this.messages;
     this.saveMessages.emit(this.channel);
     this.ngUnsubscribe.next();
