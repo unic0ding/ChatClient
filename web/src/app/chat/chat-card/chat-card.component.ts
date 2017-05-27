@@ -26,7 +26,7 @@ import {ChatInfoDialogComponent} from '../chat-info-dialog/chat-info-dialog.comp
 })
 export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() closeWindow = new EventEmitter();
-  @Output() writing = new EventEmitter();
+  @Output() saveMessages = new EventEmitter();
   @Input() channel: Channel;
   @ViewChild('searchMessagesInput') searchInput: ElementRef;
   private messages = [];
@@ -43,6 +43,9 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.messages = this.channel.messages;
+    this.viewMessages = this.messages;
+
     const messageListener$ = this.chatService.getListener()
       .filter(event => event.subtype === 'chat' || event.event === 'chatError');
 
@@ -104,6 +107,7 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   private sendMessage(message?: Message) {
     const text = this.chatForm.value.message;
     message = new Message(1, new Date(), this.authService.user, text);
+    this.chatService.sendMessage(message);
     this.messages.push({message: message, incoming: false});
     this.viewMessages = this.messages;
     this.chatForm.reset();
@@ -123,6 +127,9 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    // save messages
+    this.channel.messages = this.messages;
+    this.saveMessages.emit(this.channel);
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }

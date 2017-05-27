@@ -2,10 +2,12 @@
  * Created by basti on 13.05.17.
  */
 import {Contact} from './contact.model';
+import {Message} from './message.model';
 
 export class Channel {
   notification: number;
   showNotification = true;
+  messages: Array<Message>;
 
   static fromJson(json) {
     return new Channel(json.name, json.members.map(Contact.fromJson));
@@ -16,6 +18,7 @@ export class Channel {
   }
 
   constructor(public name: string, public members: Array<Contact>) {
+    this.messages = [];
   }
 
   public updateNotification(): void {
