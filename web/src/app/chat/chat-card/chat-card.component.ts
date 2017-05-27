@@ -107,7 +107,7 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   private sendMessage(message?: Message) {
     const text = this.chatForm.value.message;
     message = new Message(1, new Date(), this.authService.user, text);
-    this.chatService.sendMessage(message);
+    this.chatService.sendMessage(message, this.channel);
     this.messages.push({message: message, incoming: false});
     this.viewMessages = this.messages;
     this.chatForm.reset();
