@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Channel} from '../../share/model/channel.model';
 import {Observable} from 'rxjs/Observable';
-import {RoomService} from '../../share/services/room.service';
+import {ChannelService} from '../../share/services/channel.service';
 import {compare} from '../../share/utils/sort';
 
 @Component({
@@ -14,14 +14,14 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
   viewChannelList = [];
   channelList = [];
 
-  constructor(private roomService: RoomService) {}
+  constructor(private channelService: ChannelService) {}
 
   ngOnInit() {
-    this.channelList = this.roomService.channelList;
+    this.channelList = this.channelService.channelList;
     this.viewChannelList = this.channelList;
 
-    // bind to RoomService ChannelListSubject
-    this.roomService.channelListSubject.subscribe(rooms => {
+    // bind to ChannelService ChannelListSubject
+    this.channelService.channelListSubject.subscribe(rooms => {
         this.channelList = rooms;
         this.viewChannelList = this.channelList.sort(compare);
       }

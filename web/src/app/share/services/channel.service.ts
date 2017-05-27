@@ -5,9 +5,11 @@ import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class RoomService {
+export class ChannelService {
   public channelList = [];
   public channelListSubject: Subject<Array<Channel>> = new Subject<Array<Channel>>();
+  public openChats = [];
+  public selectedChat = 0;
 
   constructor(private webSocketService: WebsocketService) {
 
@@ -28,8 +30,9 @@ export class RoomService {
 
   createRoom(channel: Channel) {
     const command = {type: 'command', subtype: 'room', command: 'createRoom', data: channel};
-    console.log(command);
     this.webSocketService.emit(command);
+    return this.getListener()
+      .filter((event) => event.event === 'newChannelSuccess' || event.error === 'newChannelError');
   }
 
   leaveRoom(channel: Channel) {
@@ -39,7 +42,7 @@ export class RoomService {
 
   getListener(): Observable<any> {
     const listener$ = this.webSocketService.getListener()
-      .filter((data) => data.subtype === 'room' || data.error === 'roomError');
+      .filter((data) => data.subtype === 'room');
     return listener$;
   }
 

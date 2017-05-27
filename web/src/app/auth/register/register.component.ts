@@ -23,12 +23,15 @@ export class RegisterComponent implements OnInit {
   confirmPasswordControl;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackbar: MdSnackBar) {
+    this.buildRegisterForm();
+  }
 
-    this.registerForm = formBuilder.group({
-      name: formBuilder.control(null, Validators.required),
-      email: formBuilder.control(null, [Validators.required, Validators.pattern(emailRegEx)]),
-      password: formBuilder.control(null, [Validators.required, Validators.minLength(8)]),
-      confirm_password: formBuilder.control(null, [Validators.minLength(8)])
+  buildRegisterForm(): void {
+    this.registerForm = this.formBuilder.group({
+      name: this.formBuilder.control(null, Validators.required),
+      email: this.formBuilder.control(null, [Validators.required, Validators.pattern(emailRegEx)]),
+      password: this.formBuilder.control(null, [Validators.required, Validators.minLength(8)]),
+      confirm_password: this.formBuilder.control(null, [Validators.minLength(8)])
     }, {validator: passwordValidator('password', 'confirm_password')});
 
     this.passwordControl = this.registerForm.get('password');
