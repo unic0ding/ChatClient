@@ -28,7 +28,7 @@
 }
 
 #google {
-  background: #ffffff url('../../../assets/img/google.svg') no-repeat 25px;
+  background: #ffffff url('../../../assets/img/icons/google.svg') no-repeat 25px;
   background-size: 25px;
   color: black;
 }
@@ -37,7 +37,7 @@
  }
 
 #github {
-  background: #24292E url('../../../assets/img/github-box.svg') no-repeat 25px;
+  background: #24292E url('../../../assets/img/icons/github-box.svg') no-repeat 25px;
   background-size: 30px;
   color: #FFFFFF;
 }

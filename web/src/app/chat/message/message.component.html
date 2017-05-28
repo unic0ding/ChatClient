@@ -1,11 +1,13 @@
-  <div class="msg-container flex-msg-container" [ngClass]="{'msg-sent-container': !incoming, 'msg-receive-container': incoming}">
-    <div>
-      <a *ngIf="incoming" class="msg-author" (click)="openContactInfo(message.author)">{{message.author.name}}</a>
-    </div>
-    <p class="msg-text flex-text" [ngClass]="{'msg-sent-text': !incoming, 'msg-receive-text': incoming}"
-      [innerHTML]="(message.text | urlString | hashString)">
-    </p>
-    <p class="msg-timestamp flex-timestamp" [ngClass]="{'msg-sent-timestamp': !incoming, 'msg-receive-timestamp': incoming}">
-        {{message.sendAt | time}}</p>
-    <div class="arrow bottom right"></div>
+<div class="msg-container flex-msg-container"
+     [ngClass]="{'msg-sent-container': !incoming, 'msg-receive-container': incoming}">
+  <div>
+    <a *ngIf="incoming" class="msg-author" (click)="openContactInfo(message.author)">{{message.author.name}}</a>
   </div>
+  <p class="msg-text flex-text" [ngClass]="{'msg-sent-text': !incoming, 'msg-receive-text': incoming}"
+     [innerHTML]="(message.text | urlString | hashString)">
+  </p>
+  <p class="msg-timestamp flex-timestamp"
+     [ngClass]="{'msg-sent-timestamp': !incoming, 'msg-receive-timestamp': incoming}">
+    {{message.sendAt | time}}</p>
+  <div class="arrow bottom right"></div>
+</div>
