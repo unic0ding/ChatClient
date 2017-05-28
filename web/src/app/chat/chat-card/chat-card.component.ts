@@ -47,12 +47,12 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.viewMessages = this.messages;
 
     const messageListener$ = this.chatService.getListener()
-      .filter(event => event.subtype === 'chat' || event.event === 'chatError');
+      .filter(event => event.event === 'newMessage' || event.type === 'error');
 
     messageListener$
       .takeUntil(this.ngUnsubscribe)
       .subscribe(event => {
-        if (event.event === 'newMessage' && event.roomName === this.channel.name) {
+        if (event.data.roomName === this.channel.name) {
           this.messages.push({message: Message.fromJson(event.data), incoming: true});
           this.viewMessages = this.messages;
           this.channel.updateNotification();
