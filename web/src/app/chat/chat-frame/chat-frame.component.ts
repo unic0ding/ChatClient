@@ -25,7 +25,6 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private channelService: ChannelService, private authService: AuthService, private formBuilder: FormBuilder) {
     this.openChats = [];
     this.openChats = channelService.openChats;
-    this.openChats = [new Channel('Test', [this.authService.user])];
 
     this.buildChatForm();
   }

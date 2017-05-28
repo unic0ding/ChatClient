@@ -7,7 +7,7 @@
         <tr>
           <td><span>Avatar URL:</span></td>
           <td>
-            <md-input-container style="width: 80%;">
+            <md-input-container>
               <input mdInput formControlName="avatarUrl" spellcheck="false" autocomplete="off">
             </md-input-container>
           </td>
@@ -19,7 +19,7 @@
         <tr>
           <td>Name:</td>
           <td>
-            <md-input-container style="width: 80%">
+            <md-input-container>
               <input mdInput spellcheck="false" autocomplete="off" formControlName="name">
             </md-input-container>
           </td>
@@ -27,7 +27,7 @@
         <tr>
           <td>E-Mail:</td>
           <td>
-            <md-input-container style="width: 80%">
+            <md-input-container>
               <input mdInput spellcheck="false" autocomplete="off" formControlName="email">
             </md-input-container>
           </td>
@@ -36,7 +36,7 @@
       </table>
   </md-card-content>
   <md-card-actions>
-    <button md-raised-button id="cancel-btn" (click)="reset()">Reset</button>
+    <button md-raised-button id="cancel-btn" type="button" (click)="reset()">Reset</button>
     <button md-raised-button id="submit-btn" type="submit" [disabled]="!userForm.valid">Save Changes</button>
   </md-card-actions>
   </form>

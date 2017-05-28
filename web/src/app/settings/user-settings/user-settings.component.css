@@ -1,3 +1,7 @@
 .user-image {
   background-size: cover;
 }
+
+md-input-container{
+  width: 80%;
+}

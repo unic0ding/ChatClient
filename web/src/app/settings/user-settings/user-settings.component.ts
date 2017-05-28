@@ -16,10 +16,14 @@ export class UserSettingsComponent implements OnInit {
   constructor(private authService: AuthService, private formBuilder: FormBuilder) {
     this.user = authService.user;
 
-    this.userForm = formBuilder.group({
-      avatarUrl: formBuilder.control(this.user.avatarUrl),
-      name: formBuilder.control(this.user.name, Validators.required),
-      email: formBuilder.control(this.user.email, Validators.compose([Validators.required, Validators.pattern(emailRegEx)]))
+    this.buildForm();
+  }
+
+  buildForm(): void {
+    this.userForm = this.formBuilder.group({
+      avatarUrl: this.formBuilder.control(this.user.avatarUrl),
+      name: this.formBuilder.control(this.user.name, Validators.required),
+      email: this.formBuilder.control(this.user.email, Validators.compose([Validators.required, Validators.pattern(emailRegEx)]))
     });
   }
 
@@ -33,11 +37,7 @@ export class UserSettingsComponent implements OnInit {
   }
 
   reset() {
-    this.userForm = this.formBuilder.group({
-      avatarUrl: this.formBuilder.control(this.user.avatarUrl),
-      name: this.formBuilder.control(this.user.name, Validators.required),
-      email: this.formBuilder.control(this.user.email, Validators.compose([Validators.required, Validators.email]))
-    });
+   this.buildForm();
   }
 
   ngOnInit() {
