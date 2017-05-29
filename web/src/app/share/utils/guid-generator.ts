@@ -7,10 +7,3 @@ export function newGuid() {
     return v.toString(16);
   });
 }
-
-
-// Example of a bunch of GUIDs
-// for (let i = 0; i < 100; i++) {
-//   const id = Guid.newGuid();
-//   console.log(id);
-// }
