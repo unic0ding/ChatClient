@@ -16,6 +16,7 @@
 
 .msg-sent-timestamp {
   color: #424242;
+  position: relative; width: 45px
 }
 
 .msg-receive-text {

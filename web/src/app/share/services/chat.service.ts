@@ -13,6 +13,9 @@ export class ChatService {
   sendMessage(message: Message, channel: Channel) {
     const command = {type: 'command', subtype: 'message', command: 'newMessage', data: {message: message, channel: channel}};
     this.webSocketService.emit(command);
+    console.log(message.id); // just for tests
+    return this.getListener()
+      .filter(event => event.data.roomName === channel.name && event.data.id === message.id);
   }
 
   getListener(): Observable<any> {

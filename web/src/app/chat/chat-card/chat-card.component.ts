@@ -18,6 +18,7 @@ import {AuthService} from '../../share/services/auth.service';
 import {Observable} from 'rxjs/Observable';
 import {MdDialog, MdDialogConfig} from '@angular/material';
 import {ChatInfoDialogComponent} from '../chat-info-dialog/chat-info-dialog.component';
+import {newGuid} from '../../share/utils/guid-generator';
 
 @Component({
   selector: 'app-chat-card',
@@ -53,7 +54,7 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe)
       .subscribe(event => {
         if (event.data.roomName === this.channel.name) {
-          this.messages.push({message: Message.fromJson(event.data), incoming: true});
+          this.messages.push({message: Message.fromJson(event.data.message), flags: {incoming: true}});
           this.viewMessages = this.messages;
           this.channel.updateNotification();
         }
@@ -104,13 +105,31 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.viewMessages = this.messages;
   }
 
-  private sendMessage(message?: Message) {
+  private sendMessage(message?) {
+    const ngUnsubscribe: Subject<void> = new Subject<void>();
+
     const text = this.chatForm.value.message;
-    message = new Message(1, new Date(), this.authService.user, text);
-    this.chatService.sendMessage(message, this.channel);
-    this.messages.push({message: message, incoming: false});
+    message = {
+      message: new Message(newGuid(), new Date(), this.authService.user, text),
+      flags: {incoming: false, arrived: false, error: false}
+    };
+    this.messages.push(message);
     this.viewMessages = this.messages;
     this.chatForm.reset();
+
+    this.chatService.sendMessage(message.message, this.channel)
+      .takeUntil(ngUnsubscribe)
+      .do(console.log)
+      .subscribe(event => {
+        if (event.event === 'messageSuccess') {
+          message.flags.arrived = true;
+        }
+        if (event.error === 'messageError') {
+          message.flags.error = true;
+        }
+        ngUnsubscribe.next();
+        ngUnsubscribe.complete();
+      });
   }
 
   clearHistory() {

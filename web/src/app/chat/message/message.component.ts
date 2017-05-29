@@ -11,7 +11,7 @@ import {MdDialog, MdDialogConfig} from '@angular/material';
 })
 export class MessageComponent implements OnInit {
   @Input() message: Message;
-  @Input() incoming: boolean;
+  @Input() flags;
 
   constructor(private contactInfoDialog: MdDialog) {
   }
