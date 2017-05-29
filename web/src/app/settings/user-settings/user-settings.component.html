@@ -1,3 +1,4 @@
+<md-progress-bar mode="query" *ngIf="showProgress"></md-progress-bar>
 <md-card style="width: 1000px">
   <md-card-title style="text-align: center">User Settings</md-card-title>
   <form [formGroup]="userForm" (ngSubmit)="updateUser()">
