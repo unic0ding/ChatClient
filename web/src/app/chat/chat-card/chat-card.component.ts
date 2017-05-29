@@ -126,7 +126,7 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
           }
           if (event.error === 'messageError') {
             message.flags.error.error = true;
-            message.flags.error.message = event.data.errorMessage;
+            message.flags.error.errorMessage = event.data.errorMessage;
           }
           ngUnsubscribe.next();
           ngUnsubscribe.complete();
