@@ -15,6 +15,7 @@ export class ChatService {
     this.webSocketService.emit(command);
     console.log(message.id); // just for tests
     return this.getListener()
+      .filter(event => event.event === 'messageSuccess' || event.error === 'messageError')
       .filter(event => event.data.roomName === channel.name && event.data.id === message.id);
   }
 

@@ -111,25 +111,34 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
     const text = this.chatForm.value.message;
     message = {
       message: new Message(newGuid(), new Date(), this.authService.user, text),
-      flags: {incoming: false, arrived: false, error: false}
+      flags: {incoming: false, arrived: false, error: {error: false, message: ''}}
     };
     this.messages.push(message);
     this.viewMessages = this.messages;
     this.chatForm.reset();
 
     this.chatService.sendMessage(message.message, this.channel)
+      .timeout(10000)
       .takeUntil(ngUnsubscribe)
-      .do(console.log)
       .subscribe(event => {
-        if (event.event === 'messageSuccess') {
-          message.flags.arrived = true;
+          if (event.event === 'messageSuccess') {
+            message.flags.arrived = true;
+          }
+          if (event.error === 'messageError') {
+            message.flags.error.error = true;
+            message.flags.error.message = event.data.errorMessage;
+          }
+          ngUnsubscribe.next();
+          ngUnsubscribe.complete();
+        },
+        (error) => {
+          message.flags.error.error = true;
+          message.flags.error.errorMessage = 'A Timeout has occured!';
+          console.log(error);
+          ngUnsubscribe.next();
+          ngUnsubscribe.complete();
         }
-        if (event.error === 'messageError') {
-          message.flags.error = true;
-        }
-        ngUnsubscribe.next();
-        ngUnsubscribe.complete();
-      });
+      );
   }
 
   clearHistory() {

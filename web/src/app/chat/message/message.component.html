@@ -11,8 +11,8 @@
        [ngClass]="{'msg-sent-timestamp': !flags.incoming, 'msg-receive-timestamp': flags.incoming}">
       {{message.sendAt | time}}
     </p>
-    <img *ngIf="!flags.incoming && !flags.arrived && !flags.error" src="../../../assets/img/icons/clock-fast.svg" class="msg-flag">
-    <img *ngIf="!flags.incoming && flags.arrived && !flags.error" src="../../../assets/img/icons/check.svg" class="msg-flag">
-    <img *ngIf="!flags.incoming && flags.error" src="../../../assets/img/icons/close-octagon-outline.svg" class="msg-flag">
+    <img *ngIf="!flags.incoming && !flags.arrived && !flags.error.error" src="../../../assets/img/icons/clock-fast.svg" class="msg-flag">
+    <img *ngIf="!flags.incoming && flags.arrived && !flags.error.error" src="../../../assets/img/icons/check.svg" class="msg-flag">
+    <img *ngIf="!flags.incoming && flags.error.error" src="../../../assets/img/icons/close-octagon-outline.svg" class="msg-flag" mdTooltip="{{flags.error.errorMessage}}">
   </div>
 </div>
