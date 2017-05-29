@@ -12,6 +12,13 @@ export class UrlStringPipe implements PipeTransform {
         if (a.startsWith('www.')) {
           a = 'http://' + a;
         }
+        if (a.endsWith('.jpg') || a.endsWith('.png')) {
+          return '<a target="_blank" class="msg-sent-link" href="' + a + '">' + a + '</a><br><img src="' + a + '">';
+        }
+        if (a.endsWith('.mp4')) {
+          return '<a target="_blank" class="msg-sent-link" href="' + a + '">'
+            + a + '</a><br><video src="' + a + '" controls loop width="600px">';
+        }
         return '<a target="_blank" class="msg-sent-link" href="' + a + '">' + a + '</a>';
       });
     } else {
