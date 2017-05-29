@@ -69,4 +69,12 @@ export class AuthService {
         }
       });
   }
+
+  updateUserProfile(user: Contact) {
+    // TODO: Update on Server
+    const command = {type: 'command', subtype: 'auth', command: 'updateUserProfile', data: user};
+    this.webSocketService.emit(command);
+    return this.getListener()
+      .filter(event => event.event === 'updateUserProfileSuccess' || event.error === 'updateUserProfileError');
+  }
 }
