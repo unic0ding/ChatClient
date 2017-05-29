@@ -18,6 +18,7 @@ import {AuthService} from '../../share/services/auth.service';
 import {Observable} from 'rxjs/Observable';
 import {MdDialog, MdDialogConfig} from '@angular/material';
 import {ChatInfoDialogComponent} from '../chat-info-dialog/chat-info-dialog.component';
+import {newGuid} from '../../share/utils/guid-generator';
 
 @Component({
   selector: 'app-chat-card',
@@ -106,7 +107,7 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private sendMessage(message?: Message) {
     const text = this.chatForm.value.message;
-    message = new Message(1, new Date(), this.authService.user, text);
+    message = new Message(newGuid(), new Date(), this.authService.user, text);
     this.chatService.sendMessage(message, this.channel);
     this.messages.push({message: message, incoming: false});
     this.viewMessages = this.messages;
