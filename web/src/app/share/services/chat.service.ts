@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {WebsocketService} from './websocket.service';
 import {Message} from '../model/message.model';
 import {Observable} from 'rxjs/Observable';
-import {Channel} from '../model/channel.model';
 
 @Injectable()
 export class ChatService {
@@ -10,8 +9,13 @@ export class ChatService {
   constructor(private webSocketService: WebsocketService) {
   }
 
-  sendMessage(message: Message, channel: Channel) {
-    const command = {type: 'command', subtype: 'message', command: 'newMessage', data: {message: message, channel: channel}};
+  sendMessage(message: Message, channelName: string) {
+    const command = {
+      type: 'command',
+      subtype: 'message',
+      command: 'newMessage',
+      data: {message: message, channelName: channelName}
+    };
     this.webSocketService.emit(command);
   }
 
