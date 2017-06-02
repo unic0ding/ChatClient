@@ -13,7 +13,6 @@ export class UrlStringPipe implements PipeTransform {
           a = 'http://' + a;
         }
         // TODO: picture dialog onclick
-        // if (a.endsWith('.jpg') || a.endsWith('.png') || a.endsWith('.')) {
         const imgExpr = /\.(?:jpg|gif|png)$/;
         if (imgExpr.exec(a)) {
           return '<a target="_blank" class="msg-sent-link" href="' + a + '">' + a + '</a><br><img height="600px" src="' + a + '">';
