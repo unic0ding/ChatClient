@@ -12,12 +12,16 @@ export class UrlStringPipe implements PipeTransform {
         if (!a.startsWith('http')) {
           a = 'http://' + a;
         }
-        if (a.endsWith('.jpg') || a.endsWith('.png')) {
-          return '<a target="_blank" class="msg-sent-link" href="' + a + '">' + a + '</a><br><img src="' + a + '">';
+        // TODO: picture dialog onclick
+        // if (a.endsWith('.jpg') || a.endsWith('.png') || a.endsWith('.')) {
+        const imgExpr = /\.(?:jpg|gif|png)$/;
+        if (imgExpr.exec(a)) {
+          return '<a target="_blank" class="msg-sent-link" href="' + a + '">' + a + '</a><br><img height="600px" src="' + a + '">';
         }
-        if (a.endsWith('.mp4')) {
+        const vidExpr = /\.(?:mp4|webm|ogg)$/;
+        if (vidExpr.exec(a)) {
           return '<a target="_blank" class="msg-sent-link" href="' + a + '">'
-            + a + '</a><br><video src="' + a + '" controls loop width="600px">';
+            + a + '</a><br><video src="' + a + '" controls muted loop width="600px">';
         }
         return '<a target="_blank" class="msg-sent-link" href="' + a + '">' + a + '</a>';
       });
