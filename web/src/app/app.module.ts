@@ -5,9 +5,11 @@ import {HttpModule} from '@angular/http';
 import {
   MdButtonModule,
   MdCardModule,
-  MdChipsModule, MdDialogModule,
+  MdChipsModule,
+  MdDialogModule,
   MdIconModule,
-  MdInputModule, MdListModule,
+  MdInputModule,
+  MdListModule,
   MdMenuModule,
   MdProgressBarModule,
   MdProgressSpinnerModule,
@@ -39,14 +41,13 @@ import {AuthService} from './share/services/auth.service';
 import {ChannelService} from './share/services/channel.service';
 import {ContactService} from './share/services/contact.service';
 import {AuthGuard} from './auth/auth-login/authguard.service';
-import { ChatInfoDialogComponent } from './chat/chat-info-dialog/chat-info-dialog.component';
-import { ContactDetailDialogComponent } from './contact/contact-detail-dialog/contact-detail-dialog.component';
-import { InitialsPipe } from './share/pipes/initials.pipe';
-import { NotFoundComponent } from './share/components/not-found/not-found.component';
-import { UserSettingsComponent } from './settings/user-settings/user-settings.component';
+import {ChatInfoDialogComponent} from './chat/chat-info-dialog/chat-info-dialog.component';
+import {ContactDetailDialogComponent} from './contact/contact-detail-dialog/contact-detail-dialog.component';
+import {InitialsPipe} from './share/pipes/initials.pipe';
+import {NotFoundComponent} from './share/components/not-found/not-found.component';
+import {UserSettingsComponent} from './settings/user-settings/user-settings.component';
 import {LoggedInGuard} from './auth/auth-login/logged-in-guard.service';
-import { RegisterComponent } from './auth/register/register.component';
-
+import {RegisterComponent} from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,7 @@ import { RegisterComponent } from './auth/register/register.component';
     InitialsPipe,
     NotFoundComponent,
     UserSettingsComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
