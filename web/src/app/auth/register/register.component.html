@@ -1,7 +1,7 @@
 <md-progress-bar mode="query" *ngIf="loading"></md-progress-bar>
-<md-card style="width: 500px" [@fallInAnimation]>
+<md-card [@fallInAnimation]>
   <md-card-content>
-    <div style="width: 50%; margin: 0 auto">
+    <div class="form-container">
       <form [formGroup]="registerForm" (ngSubmit)="onSubmitForm()" novalidate>
         <div>
           <md-input-container>
@@ -10,9 +10,15 @@
         </div>
         <div>
           <md-input-container>
-            <input mdInput placeholder="E-Mail" spellcheck="false" autocomplete="off" formControlName="email" style="width: 90%">
-            <md-icon *ngIf="emailControl.errors?.pattern && (emailControl.touched || emailControl.dirty) && emailControl.value?.length > 1">close</md-icon>
-            <md-icon *ngIf="!emailControl.errors?.pattern && (emailControl.touched || emailControl.dirty) && emailControl.value?.length > 1">check</md-icon>
+            <input mdInput placeholder="E-Mail" spellcheck="false" autocomplete="off" formControlName="email">
+            <md-icon
+              *ngIf="emailControl.errors?.pattern && (emailControl.touched || emailControl.dirty) && emailControl.value?.length > 1">
+              close
+            </md-icon>
+            <md-icon
+              *ngIf="!emailControl.errors?.pattern && (emailControl.touched || emailControl.dirty) && emailControl.value?.length > 1">
+              check
+            </md-icon>
           </md-input-container>
         </div>
         <div>
@@ -25,9 +31,15 @@
         </div>
         <div>
           <md-input-container>
-            <input mdInput type="password" placeholder="Confirm Password" formControlName="confirm_password" style="width: 90%">
-            <md-icon *ngIf="registerForm.errors?.mismatchPasswords && (confirmPasswordControl.touched || confirmPasswordControl.dirty) && confirmPasswordControl.value?.length > 8">close</md-icon>
-            <md-icon *ngIf="!registerForm.errors?.mismatchPasswords && (confirmPasswordControl.touched || confirmPasswordControl.dirty) && confirmPasswordControl.value?.length >= 8" >check_all</md-icon>
+            <input mdInput type="password" placeholder="Confirm Password" formControlName="confirm_password">
+            <md-icon
+              *ngIf="registerForm.errors?.mismatchPasswords && (confirmPasswordControl.touched || confirmPasswordControl.dirty) && confirmPasswordControl.value?.length > 8">
+              close
+            </md-icon>
+            <md-icon
+              *ngIf="!registerForm.errors?.mismatchPasswords && (confirmPasswordControl.touched || confirmPasswordControl.dirty) && confirmPasswordControl.value?.length >= 8">
+              check_all
+            </md-icon>
           </md-input-container>
         </div>
         <div class="login-button-container">

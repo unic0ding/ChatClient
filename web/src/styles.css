@@ -17,3 +17,7 @@ body {
 .msg-sent-link {
   color: #84FFFF;
 }
+
+.error-message {
+  color: #dd4806;
+}

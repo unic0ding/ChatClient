@@ -5,6 +5,10 @@
   max-height: 588px;
 }
 
+h2{
+  color: #FAFAFA;
+}
+
 .icon-btn-primary {
   color: white;
 }
@@ -20,6 +24,7 @@
 
 .card-wide > .mdl-card__media {
   background: #424242 url('../../../assets/img/wallpaper.svg');
+  padding: 0 10px 0 10px;
 }
 
 .flex-form-container {

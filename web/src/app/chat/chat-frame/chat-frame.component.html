@@ -8,21 +8,21 @@
     <!--new Chat Form-->
     <div *ngIf="addNewChat">
       <md-progress-bar mode="query" *ngIf="showSpinner"></md-progress-bar>
-      <md-card style="margin-bottom: 30px">
+      <md-card>
         <md-card-header>
           <md-card-title>Create new Chat Room</md-card-title>
         </md-card-header>
         <md-card-content>
           <form novalidate [formGroup]="newChatForm" (ngSubmit)="onSubmitNewChat()">
-            <md-input-container style="width: 70%">
+            <md-input-container>
               <input mdInput type="text" id="newChatNameInput" formControlName="name" placeholder="Name"
-                     autocomplete="off" spellcheck="false" style="width: 70%">
+                     autocomplete="off" spellcheck="false">
             </md-input-container>
             <button md-raised-button [disabled]="!newChatForm.valid" type="submit">Start Chat</button>
           </form>
         </md-card-content>
-        <md-card-footer style="width: 70%;">
-          <p style="color: #DD2C00;">{{newChatError}}</p>
+        <md-card-footer>
+          <p class="error-message">{{newChatError}}</p>
         </md-card-footer>
       </md-card>
     </div>
@@ -41,12 +41,12 @@
       </md-tab>
     </md-tab-group>
   </div>
-  <div class="mdl-cell mdl-cell--1-col" style="margin-left: 5px">
-    <button *ngIf="!addNewChat" md-fab style="background-color: #FD4282; color: #FAFAFA"
+  <div class="mdl-cell mdl-cell--1-col">
+    <button *ngIf="!addNewChat" md-fab class="colored-buttons"
             (click)="collapseNewChatForm()">
       <md-icon>create</md-icon>
     </button>
-    <button *ngIf="addNewChat" md-fab style="background-color: #FD4282; color: #FAFAFA" (click)="collapseNewChatForm()">
+    <button *ngIf="addNewChat" md-fab class="colored-buttons" (click)="collapseNewChatForm()">
       <md-icon>close</md-icon>
     </button>
   </div>

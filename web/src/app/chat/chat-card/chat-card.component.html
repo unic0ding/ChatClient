@@ -26,15 +26,15 @@
         <span>Delete History</span>
       </button>
     </md-menu>
-    <button md-icon-button style="color: #FAFAFA" (click)="closeWindow.emit(channel)">
+    <button md-icon-button class="icon-btn-primary" (click)="closeWindow.emit(channel)">
       <i class="material-icons">close</i>
     </button>
   </div>
   <div class="mdl-card__title">
     <span class="mdl-chip__contact mdl-color-text--white colored-buttons" (click)="openInfoDialog()">{{channel.name | initials}}</span>
-    <h2 class="mdl-card__title-text" style="color: #FAFAFA">{{channel.name}}</h2>
+    <h2 class="mdl-card__title-text">{{channel.name}}</h2>
   </div>
-  <div class="mdl-card__media" style="padding: 0 10px 0 10px;">
+  <div class="mdl-card__media">
     <app-chat-window [messages]="viewMessages"></app-chat-window>
   </div>
   <div class="mdl-card__actions mdl-card--border">
