@@ -1,5 +1,4 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {MdDialog} from '@angular/material';
 
 @Pipe({
   name: 'urlString'
@@ -17,12 +16,12 @@ export class UrlStringPipe implements PipeTransform {
         const imgExpr = /\.(?:jpg|gif|png)$/;
         if (imgExpr.exec(a)) {
           return '<a target="_blank" class="msg-sent-link" href="' + a + '">'
-            + a + '</a><br><img width="600px" (hover)="openMediaDialog($event, true)" src="' + a + '">';
+            + a + '</a><br><img width="600px" src="' + a + '">';
         }
         const vidExpr = /\.(?:mp4|webm|ogg)$/;
         if (vidExpr.exec(a)) {
           return '<a target="_blank" class="msg-sent-link" href="' + a + '">'
-            + a + '</a><br><video (click)="openMediaDialog($event, false)" src="' + a + '" controls muted loop width="600px">';
+            + a + '</a><br><video src="' + a + '" controls muted loop width="600px">';
         }
         return '<a target="_blank" class="msg-sent-link" href="' + a + '">' + a + '</a>';
       });
