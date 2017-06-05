@@ -9,6 +9,7 @@ body {
 }
 
 .colored-buttons {
+  cursor: pointer;
   color: #FAFAFA;
   background-color: #FD4282;
 }
