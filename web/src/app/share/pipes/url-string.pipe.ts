@@ -15,15 +15,13 @@ export class UrlStringPipe implements PipeTransform {
         // TODO: picture dialog onclick
         const imgExpr = /\.(?:jpg|gif|png)$/;
         if (imgExpr.exec(a)) {
-          return '<a target="_blank" class="msg-sent-link" href="' + a + '">'
-            + a + '</a><br><img width="600px" src="' + a + '">';
+          return `<a target="_blank" class="msg-sent-link" href="${a}">${a}</a><br><img width="600px" src="${a}">`;
         }
         const vidExpr = /\.(?:mp4|webm|ogg)$/;
         if (vidExpr.exec(a)) {
-          return '<a target="_blank" class="msg-sent-link" href="' + a + '">'
-            + a + '</a><br><video src="' + a + '" controls muted loop width="600px">';
+          return `<a target="_blank" class="msg-sent-link" href="${a}">${a}</a><br><video src="${a}" controls muted loop width="600px">`;
         }
-        return '<a target="_blank" class="msg-sent-link" href="' + a + '">' + a + '</a>';
+        return `<a target="_blank" class="msg-sent-link" href="${a}">${a}</a>`;
       });
     } else {
       return value;
