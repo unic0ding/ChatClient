@@ -15,7 +15,4 @@ export class Message {
   constructor(public id: string, public sendAt: Date, public author: Contact, public text: string, public data?) {
   }
 
-  toJson() {
-    return JSON.stringify({id: this.id, sendAt: this.sendAt, author: this.author, text: this.text});
-  }
 }
