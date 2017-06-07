@@ -9,6 +9,8 @@ import {Observable} from 'rxjs/Observable';
 import {MdDialog, MdDialogConfig} from '@angular/material';
 import {ChatInfoDialogComponent} from '../chat-info-dialog/chat-info-dialog.component';
 import {newGuid} from '../../share/utils/guid-generator';
+import {KnownFiles} from '../../share/utils/known-files';
+import {Contact} from '../../share/model/contact.model';
 
 @Component({
   selector: 'app-chat-card',
@@ -27,13 +29,11 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private showMessageSearch = false;
   private searchValue;
-  private inputFileType: string;
-  imgLoaded = true;
+  fileLoaded = true;
   drop = false;
 
   constructor(private chatService: ChatService, private authService: AuthService, private formBuilder: FormBuilder,
               private infoDialog: MdDialog) {
-
     this.buildChatForm();
   }
 
@@ -126,13 +126,12 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   onClickAttachment(type) {
     switch (type) {
       case 'doc':
-        this.inputFileType = 'application/pdf';
+        this.fileInput.nativeElement.accept = KnownFiles.getDocTypes();
         break;
       case 'img':
-        this.inputFileType = 'image/jpeg, image/png, image/jpg, image/gif';
+        this.fileInput.nativeElement.accept = KnownFiles.getImgTypes();
         break;
     }
-    this.fileInput.nativeElement.accept = this.inputFileType;
     this.fileInput.nativeElement.click();
   }
 
@@ -146,8 +145,10 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   sendFile(event) {
+    this.fileLoaded = false;
     this.onDragLeave();
     event.preventDefault();
+
     let fileList;
     if (event instanceof DragEvent) {
       fileList = event.dataTransfer.files;
@@ -155,15 +156,25 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
       fileList = event.target.files;
     }
     for (const file of fileList) {
+      if (!KnownFiles.isKnownType(file.type)) {
+        this.fileLoaded = true;
+        this.pushErrorMessage('This File Type is not supported');
+        continue;
+      }
       const fr = new FileReader();
-      this.imgLoaded = false;
       fr.onloadend = () => {
-        this.imgLoaded = true;
         const message = new Message(newGuid(), new Date(), this.authService.user, '', {res: fr.result, file: file});
         this.sendMessage(message);
+        this.fileLoaded = true;
       };
       fr.readAsDataURL(file);
     }
+  }
+
+  pushErrorMessage(errorMessage: string) {
+    const message = new Message(newGuid(), new Date(), new Contact(1, 'OpenChat', '', 'https://avatars3.githubusercontent.com/u/28691703?v=3&s=200'), errorMessage);
+    this.messages.push({message: message, incoming: true});
+    this.viewMessages = this.messages;
   }
 
   ngOnDestroy(): void {

@@ -39,7 +39,7 @@
     <div *ngIf="drop" (dragleave)="onDragLeave()" class="file-overlay dropZone"></div>
   </div>
   <div class="mdl-card__actions mdl-card--border">
-    <md-progress-bar mode="query" *ngIf="!imgLoaded"></md-progress-bar>
+    <md-progress-bar mode="query" *ngIf="!fileLoaded"></md-progress-bar>
     <form novalidate [formGroup]="chatForm" (ngSubmit)="sendMessage()">
       <div class="flex-form-container">
         <button md-mini-fab class="flex-attachment-button" type="button" [matMenuTriggerFor]="file_input">

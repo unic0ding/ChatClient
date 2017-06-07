@@ -12,7 +12,6 @@ export class UrlStringPipe implements PipeTransform {
         if (!a.startsWith('http')) {
           a = 'http://' + a;
         }
-        // TODO: picture dialog onclick
         const imgExpr = /\.(?:jpg|gif|png)$/;
         if (imgExpr.exec(a)) {
           return `<a target="_blank" class="msg-sent-link" href="${a}">${a}</a><br><img width="600px" src="${a}">`;
