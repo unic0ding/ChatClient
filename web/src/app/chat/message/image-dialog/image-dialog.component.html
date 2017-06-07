@@ -1,6 +1,9 @@
 <md-toolbar>  <div class="mdl-layout-spacer"></div>
   <span>{{data.file.name}}</span>
   <div class="mdl-layout-spacer"></div>
+  <a [href]="data.res" target="_blank" class="mdl-button mdl-js-button mdl-button--icon oc-navbar-icon-margin">
+    <md-icon>add</md-icon>
+  </a>
   <button md-icon-button (click)="dialogRef.close()"><md-icon>close</md-icon></button>
 </md-toolbar>
 <div class="image-container">
