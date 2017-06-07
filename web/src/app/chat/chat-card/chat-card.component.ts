@@ -10,7 +10,6 @@ import {MdDialog, MdDialogConfig} from '@angular/material';
 import {ChatInfoDialogComponent} from '../chat-info-dialog/chat-info-dialog.component';
 import {newGuid} from '../../share/utils/guid-generator';
 import {KnownFiles} from '../../share/utils/known-files';
-import {Contact} from '../../share/model/contact.model';
 
 @Component({
   selector: 'app-chat-card',
@@ -172,7 +171,7 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   pushErrorMessage(errorMessage: string) {
-    const message = new Message(newGuid(), new Date(), new Contact(1, 'OpenChat', '', 'https://avatars3.githubusercontent.com/u/28691703?v=3&s=200'), errorMessage);
+    const message = new Message(newGuid(), new Date(), this.chatService.errorContact, errorMessage);
     this.messages.push({message: message, incoming: true});
     this.viewMessages = this.messages;
   }
