@@ -6,8 +6,10 @@
   <p class="msg-text flex-text" [ngClass]="{'msg-sent-text': !incoming, 'msg-receive-text': incoming}"
      [innerHTML]="(message.text | urlString | hashString)">
   </p>
-  <p *ngIf="message.data" class="msg-text flex-text">{{message.data.file.name}}</p>
-  <img class="msg-img" *ngIf="message.data" [src]="message.data.res"  width="600px" (click)="openImageDialog()">
+  <p *ngIf="message.data" class="msg-text flex-text" (click)="open()">{{message.data.file.name}}</p>
+  <img src="../../../assets/img/icons/file-outline.svg" (click)="open()">
+  <img class="msg-img" *ngIf="message.data?.file.type.startsWith('image')" [src]="message.data.res" width="600px"
+       (click)="openImageDialog()">
   <p class="msg-timestamp flex-timestamp"
      [ngClass]="{'msg-sent-timestamp': !incoming, 'msg-receive-timestamp': incoming}">
     {{message.sendAt | time}}

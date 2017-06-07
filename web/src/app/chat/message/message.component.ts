@@ -35,4 +35,8 @@ export class MessageComponent implements OnInit {
     dialogRef.componentInstance.data = this.message.data;
   }
 
+
+  open() {
+    window.open(this.message.data.res);
+  }
 }

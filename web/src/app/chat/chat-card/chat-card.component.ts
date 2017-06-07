@@ -1,14 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Message} from '../../share/model/message.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Channel} from '../../share/model/channel.model';
@@ -37,6 +27,7 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private showMessageSearch = false;
   private searchValue;
+  private inputFileType: string;
   imgLoaded = true;
   drop = false;
 
@@ -132,7 +123,16 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  onClickAttachment() {
+  onClickAttachment(type) {
+    switch (type) {
+      case 'doc':
+        this.inputFileType = 'application/pdf';
+        break;
+      case 'img':
+        this.inputFileType = 'image/jpeg, image/png, image/jpg, image/gif';
+        break;
+    }
+    this.fileInput.nativeElement.accept = this.inputFileType;
     this.fileInput.nativeElement.click();
   }
 
@@ -145,7 +145,7 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.drop = false;
   }
 
-  sendImage(event) {
+  sendFile(event) {
     this.onDragLeave();
     event.preventDefault();
     let fileList;
