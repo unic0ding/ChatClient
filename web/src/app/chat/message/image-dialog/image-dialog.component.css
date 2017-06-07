@@ -1,7 +1,3 @@
-.image-container {
-  overflow: auto;
-}
-
-.image-container::-webkit-scrollbar {
-  display: none;
+md-toolbar{
+  background-color: #424242;
 }
