@@ -1,9 +1,10 @@
 <md-toolbar style="background-color: #424242">  <div class="mdl-layout-spacer"></div>
+  <span>{{data.file.name}}</span>
   <div class="mdl-layout-spacer"></div>
   <button md-icon-button (click)="dialogRef.close()" style="float: right; color: #FAFAFA"><md-icon>close</md-icon></button>
 </md-toolbar>
 <div class="image-container">
-  <img [src]="data.img" width="100%">
+  <img [src]="data.res" width="100%">
 </div>
 
 

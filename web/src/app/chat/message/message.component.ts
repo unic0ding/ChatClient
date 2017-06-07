@@ -32,7 +32,7 @@ export class MessageComponent implements OnInit {
     config.width = '90%';
     config.height = '80%';
     const dialogRef = this.imageDialog.open(ImageDialogComponent, config);
-    dialogRef.componentInstance.data = {img: this.message.data};
+    dialogRef.componentInstance.data = this.message.data;
   }
 
 }

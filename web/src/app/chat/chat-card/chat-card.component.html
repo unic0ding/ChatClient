@@ -34,8 +34,9 @@
     <span class="mdl-chip__contact mdl-color-text--white colored-buttons" (click)="openInfoDialog()">{{channel.name | initials}}</span>
     <h2 class="mdl-card__title-text">{{channel.name}}</h2>
   </div>
-  <div class="mdl-card__media">
+  <div class="mdl-card__media" (drop)="sendImage($event)" (dragover)="onDragEnter($event)" style="position: relative">
     <app-chat-window [messages]="viewMessages"></app-chat-window>
+    <div *ngIf="drop" (dragleave)="onDragLeave()" class="file-overlay dropZone"></div>
   </div>
   <div class="mdl-card__actions mdl-card--border">
     <md-progress-bar mode="query" *ngIf="!imgLoaded"></md-progress-bar>
@@ -43,7 +44,8 @@
       <div class="flex-form-container">
         <button md-mini-fab class="flex-attachment-button" type="button" (click)="onClickAttachment()">
           <md-icon>attachment</md-icon>
-          <input #fileInput type="file" class="upload" (change)="sendImage($event)" multiple accept="image/jpeg, image/png, image/jpg" width="40px" style="display: none">
+          <input #fileInput type="file" class="upload" (change)="sendImage($event)" multiple
+                 accept="image/jpeg, image/png, image/jpg">
         </button>
         <md-input-container class="flex-input-field">
           <input mdInput placeholder="Send a Message..." id="{{name}}-input" spellcheck="false"

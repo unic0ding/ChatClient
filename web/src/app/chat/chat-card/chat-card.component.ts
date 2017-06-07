@@ -38,6 +38,7 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   private showMessageSearch = false;
   private searchValue;
   imgLoaded = true;
+  drop = false;
 
   constructor(private chatService: ChatService, private authService: AuthService, private formBuilder: FormBuilder,
               private infoDialog: MdDialog) {
@@ -108,8 +109,10 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private sendMessage(message?: Message) {
-    const text = this.chatForm.value.message;
-    message = new Message(newGuid(), new Date(), this.authService.user, text);
+    if (!message) {
+      const text = this.chatForm.value.message;
+      message = new Message(newGuid(), new Date(), this.authService.user, text);
+    }
     this.chatService.sendMessage(message, this.channel.name);
     this.messages.push({message: message, incoming: false});
     this.viewMessages = this.messages;
@@ -133,16 +136,31 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.fileInput.nativeElement.click();
   }
 
+  onDragEnter(event) {
+    event.preventDefault();
+    this.drop = true;
+  }
+
+  onDragLeave() {
+    this.drop = false;
+  }
+
   sendImage(event) {
-    for (const file of event.target.files) {
+    this.onDragLeave();
+    event.preventDefault();
+    let fileList;
+    if (event instanceof DragEvent) {
+      fileList = event.dataTransfer.files;
+    } else {
+      fileList = event.target.files;
+    }
+    for (const file of fileList) {
       const fr = new FileReader();
       this.imgLoaded = false;
       fr.onloadend = () => {
         this.imgLoaded = true;
-        const message = new Message(newGuid(), new Date(), this.authService.user, '', fr.result);
-        this.messages.push({message: message, incoming: false});
-        this.chatService.sendMessage(message, this.channel.name);
-
+        const message = new Message(newGuid(), new Date(), this.authService.user, '', {res: fr.result, file: file});
+        this.sendMessage(message);
       };
       fr.readAsDataURL(file);
     }
