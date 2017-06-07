@@ -162,7 +162,6 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       const fr = new FileReader();
       fr.onloadend = () => {
-        console.log(file)
         const message = new Message(newGuid(), new Date(), this.authService.user, '', {res: fr.result, file: file});
         this.sendMessage(message);
         this.fileLoaded = true;
