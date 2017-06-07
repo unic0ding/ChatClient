@@ -30,12 +30,14 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() saveMessages = new EventEmitter();
   @Input() channel: Channel;
   @ViewChild('searchMessagesInput') searchInput: ElementRef;
+  @ViewChild('fileInput') fileInput: ElementRef;
   private messages = [];
   private viewMessages = [];
   private chatForm: FormGroup;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private showMessageSearch = false;
   private searchValue;
+  imgLoaded = true;
 
   constructor(private chatService: ChatService, private authService: AuthService, private formBuilder: FormBuilder,
               private infoDialog: MdDialog) {
@@ -125,6 +127,25 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
     const dialogRef = this.infoDialog.open(ChatInfoDialogComponent, config);
     dialogRef.componentInstance.channel = this.channel;
 
+  }
+
+  onClickAttachment() {
+    this.fileInput.nativeElement.click();
+  }
+
+  sendImage(event) {
+    for (const file of event.target.files) {
+      const fr = new FileReader();
+      this.imgLoaded = false;
+      fr.onloadend = () => {
+        this.imgLoaded = true;
+        const message = new Message(newGuid(), new Date(), this.authService.user, '', fr.result);
+        this.messages.push({message: message, incoming: false});
+        this.chatService.sendMessage(message, this.channel.name);
+
+      };
+      fr.readAsDataURL(file);
+    }
   }
 
   ngOnDestroy(): void {

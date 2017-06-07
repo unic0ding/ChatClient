@@ -65,3 +65,7 @@
   padding: 4px 8px 4px 8px;
   color: #000a12;
 }
+
+.msg-img {
+  cursor: pointer;
+}

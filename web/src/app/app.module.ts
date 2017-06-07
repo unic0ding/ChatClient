@@ -48,6 +48,7 @@ import {NotFoundComponent} from './share/components/not-found/not-found.componen
 import {UserSettingsComponent} from './settings/user-settings/user-settings.component';
 import {LoggedInGuard} from './auth/auth-login/logged-in-guard.service';
 import {RegisterComponent} from './auth/register/register.component';
+import { ImageDialogComponent } from './chat/message/image-dialog/image-dialog.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import {RegisterComponent} from './auth/register/register.component';
     NotFoundComponent,
     UserSettingsComponent,
     RegisterComponent,
+    ImageDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,6 +98,6 @@ import {RegisterComponent} from './auth/register/register.component';
   ],
   providers: [ContactService, AuthService, ChannelService, ChatService, WebsocketService, AuthGuard, LoggedInGuard],
   bootstrap: [AppComponent],
-  entryComponents: [ChatInfoDialogComponent, ContactDetailDialogComponent]
+  entryComponents: [ChatInfoDialogComponent, ContactDetailDialogComponent, ImageDialogComponent]
 })
 export class AppModule {}

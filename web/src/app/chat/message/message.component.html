@@ -10,4 +10,5 @@
      [ngClass]="{'msg-sent-timestamp': !incoming, 'msg-receive-timestamp': incoming}">
     {{message.sendAt | time}}
   </p>
+  <img class="msg-img" *ngIf="message.data" [src]="message.data"  width="600px" (click)="openImageDialog()">
 </div>

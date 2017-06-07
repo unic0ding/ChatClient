@@ -38,8 +38,13 @@
     <app-chat-window [messages]="viewMessages"></app-chat-window>
   </div>
   <div class="mdl-card__actions mdl-card--border">
+    <md-progress-bar mode="query" *ngIf="!imgLoaded"></md-progress-bar>
     <form novalidate [formGroup]="chatForm" (ngSubmit)="sendMessage()">
       <div class="flex-form-container">
+        <button md-mini-fab class="flex-attachment-button" type="button" (click)="onClickAttachment()">
+          <md-icon>attachment</md-icon>
+          <input #fileInput type="file" class="upload" (change)="sendImage($event)" multiple accept="image/jpeg, image/png, image/jpg" width="40px" style="display: none">
+        </button>
         <md-input-container class="flex-input-field">
           <input mdInput placeholder="Send a Message..." id="{{name}}-input" spellcheck="false"
                  formControlName="message" class="icon-btn-primary" autocomplete="off">
