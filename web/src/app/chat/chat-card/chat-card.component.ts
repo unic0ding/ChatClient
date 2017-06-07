@@ -28,8 +28,8 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private showMessageSearch = false;
   private searchValue;
-  fileLoaded = true;
-  drop = false;
+  private fileLoaded = true;
+  private drop = false;
 
   constructor(private chatService: ChatService, private authService: AuthService, private formBuilder: FormBuilder,
               private infoDialog: MdDialog) {
@@ -162,6 +162,7 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       const fr = new FileReader();
       fr.onloadend = () => {
+        console.log(file)
         const message = new Message(newGuid(), new Date(), this.authService.user, '', {res: fr.result, file: file});
         this.sendMessage(message);
         this.fileLoaded = true;
