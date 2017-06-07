@@ -1,13 +1,16 @@
 <div app-mdl class="card-wide mdl-card mdl-shadow--2dp dark-card">
+  <!--Message Search-->
   <div class="messageSearchContainer" [hidden]="!showMessageSearch">
     <md-input-container id="searchMessagesInputContainer">
       <input mdInput placeholder="Search" #searchMessagesInput id="searchMessagesInput" spellcheck="false"
              autocomplete="off" (keydown.esc)="closeMessageSearch()">
     </md-input-container>
+    <!--Chat Card Header-->
     <button md-icon-button class="icon-btn-primary" (click)="closeMessageSearch()">
       <i class="material-icons">close</i>
     </button>
   </div>
+  <!--Chat Menu-->
   <div class="mdl-card__menu">
     <button md-icon-button [matMenuTriggerFor]="menu" class="icon-btn-primary">
       <md-icon>more_vert</md-icon>
@@ -35,29 +38,28 @@
     <h2 class="mdl-card__title-text">{{channel.name}}</h2>
   </div>
   <div class="mdl-card__media" (dragover)="onDragEnter($event)" (drop)="sendFile($event)" id="window-drag-zone">
+    <!--Chat Window-->
     <app-chat-window [messages]="viewMessages"></app-chat-window>
+
+    <!--Drag and Drop Overlay-->
     <div *ngIf="drop" (dragleave)="onDragLeave()" class="file-overlay dropZone"></div>
+
+    <!-- Floating Buttons Overlay-->
+    <div *ngIf="floatingButton" class="floating-buttons-container">
+      <button md-mini-fab [@floatingButton] (click)="onClickAttachment('img')" class="floating-button"><img
+        src="../../../assets/img/icons/file-image.svg"></button>
+      <button md-mini-fab [@floatingButton] (click)="onClickAttachment('doc')" class="floating-button"><img
+        src="../../../assets/img/icons/file-pdf.svg"></button>
+      <button md-mini-fab [@floatingButton] disabled (click)="onClickAttachment('vid')" class="floating-button"><img
+        src="../../../assets/img/icons/file-video.svg"></button>
+    </div>
   </div>
+  <!--Message Field-->
   <div class="mdl-card__actions mdl-card--border">
     <md-progress-bar mode="query" *ngIf="!fileLoaded"></md-progress-bar>
     <form novalidate [formGroup]="chatForm" (ngSubmit)="sendMessage()">
       <div class="flex-form-container">
-        <button md-mini-fab class="flex-attachment-button" type="button" [matMenuTriggerFor]="file_input">
-          <!--(click)="onClickAttachment()">-->
-          <md-menu #file_input yPosition="above" overlapTrigger>
-            <button md-menu-item (click)="onClickAttachment('doc')">
-              <img src="../../../assets/img/icons/file-pdf.svg">
-              <span>PDF</span>
-            </button>
-            <button md-menu-item (click)="onClickAttachment('img')">
-              <img src="../../../assets/img/icons/file-image.svg">
-              <span>Images</span>
-            </button>
-            <button md-menu-item disabled>
-              <img src="../../../assets/img/icons/file-image.svg">
-              <span>Video</span>
-            </button>
-          </md-menu>
+        <button md-mini-fab class="flex-attachment-button" type="button" (click)="onFloatingButton()">
           <md-icon>attachment</md-icon>
           <input #fileInput type="file" class="upload" (change)="sendFile($event)" multiple>
         </button>

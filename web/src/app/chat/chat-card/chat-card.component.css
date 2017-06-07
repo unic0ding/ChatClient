@@ -79,6 +79,21 @@ h2 {
   width: 80%;
 }
 
+.floating-buttons-container {
+  width: 40px;
+  margin-left: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.floating-button {
+  background-color: #FD4282;
+  color: #FAFAFA;
+  margin-top: 5px;
+}
+
 #searchMessagesInput {
   color: #FAFAFA;
 }

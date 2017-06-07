@@ -10,11 +10,13 @@ import {MdDialog, MdDialogConfig} from '@angular/material';
 import {ChatInfoDialogComponent} from '../chat-info-dialog/chat-info-dialog.component';
 import {newGuid} from '../../share/utils/guid-generator';
 import {KnownFiles} from '../../share/utils/known-files';
+import {floatingButtons} from '../../share/animations/animations';
 
 @Component({
   selector: 'app-chat-card',
   templateUrl: './chat-card.component.html',
-  styleUrls: ['./chat-card.component.css']
+  styleUrls: ['./chat-card.component.css'],
+  animations: [floatingButtons]
 })
 export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() closeWindow = new EventEmitter();
@@ -30,6 +32,7 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   private searchValue;
   private fileLoaded = true;
   private drop = false;
+  private floatingButton = false;
 
   constructor(private chatService: ChatService, private authService: AuthService, private formBuilder: FormBuilder,
               private infoDialog: MdDialog) {
@@ -120,6 +123,10 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
     const dialogRef = this.infoDialog.open(ChatInfoDialogComponent, config);
     dialogRef.componentInstance.channel = this.channel;
 
+  }
+
+  onFloatingButton() {
+    this.floatingButton = !this.floatingButton;
   }
 
   onClickAttachment(type) {
