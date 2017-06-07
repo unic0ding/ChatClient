@@ -36,7 +36,7 @@
   </div>
   <div class="mdl-card__media"  (dragover)="onDragEnter($event)" (drop)="sendImage($event)" id="window-drag-zone">
     <app-chat-window [messages]="viewMessages"></app-chat-window>
-    <div *ngIf="drop" (dragleave)="onDragLeave()" (drop)="sendImage($event)" class="file-overlay dropZone"></div>
+    <div *ngIf="drop" (dragleave)="onDragLeave()" class="file-overlay dropZone"></div>
   </div>
   <div class="mdl-card__actions mdl-card--border">
     <md-progress-bar mode="query" *ngIf="!imgLoaded"></md-progress-bar>
