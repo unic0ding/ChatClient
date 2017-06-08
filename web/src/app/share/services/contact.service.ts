@@ -39,9 +39,6 @@ export class ContactService {
 
   getAllContacts() {
     const command = {type: 'command', subtype: 'user', command: 'getAllUsers'};
-    Observable.timer(10000)
-      .subscribe(() => {
-        this.webSocketService.emit(command);
-      });
+    this.webSocketService.emit(command);
   }
 }

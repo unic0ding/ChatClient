@@ -33,7 +33,7 @@ export class ChannelService {
   }
 
   createRoom(channel: Channel) {
-    const command = {type: 'command', subtype: 'room', command: 'createRoom', data: channel};
+    const command = {type: 'command', subtype: 'room', command: 'createRoom', data: channel.name};
     this.webSocketService.emit(command);
     return this.getListener()
       .filter((event) => event.event === 'newChannelSuccess' || event.error === 'newChannelError');
