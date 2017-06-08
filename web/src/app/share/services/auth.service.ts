@@ -47,8 +47,12 @@ export class AuthService {
     const command = {type: 'command', subtype: 'auth', command: 'logout', data: this.user};
     this.webSocketService.emit(command);
     this.isLoggedIn = false;
-    window.localStorage.removeItem(this.storageKey);
+    this.removeUserFromLocalStorage();
     this.router.navigate(['/auth-login']);
+  }
+
+  removeUserFromLocalStorage() {
+    window.localStorage.removeItem(this.storageKey);
   }
 
   setUser() {
