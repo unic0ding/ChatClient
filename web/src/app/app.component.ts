@@ -27,7 +27,6 @@ export class AppComponent {
 
   connect() {
     this.webSocketService.connect()
-      .delay(2000) // Just for tests
       .subscribe(() => {
         this.loaded = true;
       });
