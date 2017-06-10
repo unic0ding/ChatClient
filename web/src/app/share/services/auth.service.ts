@@ -35,6 +35,20 @@ export class AuthService {
       });
   }
 
+  checkLogin(user) {
+    const command = {type: 'command', subtype: 'auth', command: 'checkLogin', data: {user: user}};
+    this.webSocketService.emit(command);
+    return this.getListener()
+      .filter((event) => event.event === 'authSuccess' || event.error === 'authError')
+      .do((event) => {
+        if (event.event === 'authSuccess') {
+          this.isLoggedIn = true;
+          this.setAuthToLocalStorage(event.data.user);
+          this.user = Contact.fromJson(event.data.user);
+        }
+      });
+  }
+
   setAuthToLocalStorage(value) {
     window.localStorage.setItem(this.storageKey, JSON.stringify(value));
   }
@@ -65,6 +79,7 @@ export class AuthService {
 
     return this.getListener()
       .filter((event) => event.event === 'registrationSuccess' || event.error === 'registrationError')
+      .do(console.log)
       .do((event) => {
         if (event.event === 'registrationSuccess') {
           this.isLoggedIn = true;

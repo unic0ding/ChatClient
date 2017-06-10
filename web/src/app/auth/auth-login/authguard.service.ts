@@ -5,7 +5,8 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {AuthService} from '../../share/services/auth.service';
-import {MdSnackBar} from "@angular/material";
+import {MdSnackBar} from '@angular/material';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -26,7 +27,9 @@ export class AuthGuard implements CanActivate {
       return true;
     }
     if (this.authService.getAuthFromLocalStorage() !== null) {
-      this.authService.login(this.authService.getAuthFromLocalStorage())
+      const ngUnsubscribe = new Subject<any>();
+      this.authService.checkLogin(this.authService.getAuthFromLocalStorage())
+        .takeUntil(ngUnsubscribe)
         .subscribe(event => {
           console.log(event);
           if (event.event === 'authSuccess') {
@@ -40,6 +43,8 @@ export class AuthGuard implements CanActivate {
             this.authService.removeUserFromLocalStorage();
             this.snackbar.open('Error in Authentication', 'close', {duration: 500});
           }
+          ngUnsubscribe.next();
+          ngUnsubscribe.complete();
         });
       this.authService.isLoggedIn = true;
       this.authService.setUser();

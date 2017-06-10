@@ -8,7 +8,8 @@ export class WebsocketService {
   connected: boolean;
   openListener$: Observable<MessageEvent>;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
-  private url = 'ws://localhost:8080/room';
+  // private url = 'ws://localhost:8080/room';
+  private url = 'ws://localhost:5001';
 
   constructor() {
   }
