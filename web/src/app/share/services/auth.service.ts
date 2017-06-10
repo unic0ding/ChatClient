@@ -63,6 +63,7 @@ export class AuthService {
     this.isLoggedIn = false;
     this.removeUserFromLocalStorage();
     this.router.navigate(['/auth-login']);
+    Observable.timer(1000).subscribe(() => window.location.reload(true));
   }
 
   removeUserFromLocalStorage() {
