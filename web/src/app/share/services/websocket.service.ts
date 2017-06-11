@@ -26,6 +26,7 @@ export class WebsocketService {
     return Observable.fromEvent(this.socket, 'message')
       .map((event) => <MessageEvent> event)
       .map((event) => JSON.parse(event.data))
+      .do(console.log)
       .filter((event) => event.type === 'event' || event.type === 'error');
   }
 

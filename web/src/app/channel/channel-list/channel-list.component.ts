@@ -17,13 +17,13 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
   constructor(private channelService: ChannelService) {}
 
   ngOnInit() {
-    this.channelList = this.channelService.channelList;
+    this.channelList = Object.values(this.channelService.channels);
     this.viewChannelList = this.channelList;
 
     // bind to ChannelService ChannelListSubject
     this.channelService.channelListSubject.subscribe(rooms => {
         this.channelList = rooms;
-        this.viewChannelList = this.channelList.sort(compare);
+      this.viewChannelList = this.channelList.sort(compare);
       }
     );
   }

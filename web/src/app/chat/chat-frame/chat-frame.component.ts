@@ -59,7 +59,6 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
         .takeUntil(ngUnsubscribeJoinRoom)
         .subscribe(event => {
             if (event.event === 'joinRoomSuccess') {
-              channel.members.push(this.authService.user);
               this.openChats.push(channel);
             }
             if (event.error === 'joinRoomError') {
