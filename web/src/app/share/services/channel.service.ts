@@ -15,7 +15,7 @@ export class ChannelService {
   constructor(private webSocketService: WebsocketService) {
 
     this.getListener()
-      .filter((event) => event.event === 'allRooms' || event.event === 'newRoom' || event.event === 'newMember')
+      .filter((event) => event.event === 'allRooms' || event.event === 'newRoom' || event.event === 'newMember' || event.event === 'leaveRoom')
       .subscribe(event => {
         if (event.event === 'newRoom') {
           const channel = Channel.fromJson(event.data);
@@ -34,15 +34,10 @@ export class ChannelService {
           this.channels[name].members.push(Contact.fromJson(user));
           this.channelListSubject.next(Object.values(this.channels));
         }
-        if (event.event === 'memberLeaves') {
-          const name = event.data.channel.name;
-          const user = Contact.fromJson(event.data.user);
-          const index = this.channels[name].members.indexOf(Contact.fromJson(user));
-          console.log(index);
-          if (index > -1) {
-            this.channels[event.data].members.splice(index, 1);
-            this.channelListSubject.next(Object.values(this.channels));
-          }
+        if (event.event === 'leaveRoom') {
+          const name = event.data.channelName;
+          this.channels[name].members = this.channels[name].members.filter(c => c.id !== event.data.userId);
+          this.channelListSubject.next(Object.values(this.channels));
         }
       });
     this.getAllRooms();

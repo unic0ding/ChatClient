@@ -37,7 +37,7 @@ export class AppComponent {
       .do(console.log)
       .subscribe((event) => {
         this.loaded = false;
-        this.snackBar.open(`Connection Closed - Reason: '${event.reason || 'None'}'`, 'close');
+        this.snackBar.open(`Connection Closed - Reason: '${event.reason || 'None'}'`, 'close', {duration: 4000});
         this.reconnect();
       });
   }

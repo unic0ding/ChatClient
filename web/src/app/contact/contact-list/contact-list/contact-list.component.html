@@ -11,7 +11,7 @@
     <md-list class="mdl-list">
       <div>
       <span *ngIf="!viewContactList?.length" class="mdl-chip">
-          <span class="mdl-chip__text">No Contacts were Found</span>
+          <span class="mdl-chip__text">No Contacts found</span>
         </span>
       </div>
       <app-contact-list-detail *ngFor="let contact of viewContactList" [contact]="contact">Searching for Contacts
