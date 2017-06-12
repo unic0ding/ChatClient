@@ -151,7 +151,6 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   sendFile(event) {
-    this.fileLoaded = false;
     this.onDragLeave();
     event.preventDefault();
 
@@ -162,6 +161,7 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
       fileList = event.target.files;
     }
     for (const file of fileList) {
+      this.fileLoaded = false;
       if (!KnownFiles.isKnownType(file.type)) {
         this.fileLoaded = true;
         this.pushErrorMessage('This File Type is not supported');
