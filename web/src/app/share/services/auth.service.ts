@@ -70,6 +70,10 @@ export class AuthService {
     window.localStorage.removeItem(this.storageKey);
   }
 
+  removeUserFromLocalStorage() {
+    window.localStorage.removeItem(this.storageKey);
+  }
+
   setUser() {
     this.user = Contact.fromJson(this.getAuthFromLocalStorage());
   }
