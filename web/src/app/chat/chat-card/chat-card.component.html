@@ -39,10 +39,14 @@
   </div>
   <div class="mdl-card__media" (dragover)="onDragEnter($event)" (drop)="sendFile($event)" id="window-drag-zone">
     <!--Chat Window-->
-    <app-chat-window [messages]="viewMessages"></app-chat-window>
+    <app-chat-window #chatWindow [messages]="viewMessages"></app-chat-window>
 
     <!--Drag and Drop Overlay-->
     <div *ngIf="drop" (dragleave)="onDragLeave()" class="file-overlay dropZone"></div>
+
+    <button md-icon-button class="scroll-down-btn" (click)="chatWindow.scrollToBottom()">
+      <img src="../../../assets/img/icons/scroll-down.svg">
+    </button>
 
     <!-- Floating Buttons Overlay-->
     <div *ngIf="floatingButton" class="floating-buttons-container">

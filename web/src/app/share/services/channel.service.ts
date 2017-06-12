@@ -7,26 +7,37 @@ import {Contact} from '../model/contact.model';
 
 @Injectable()
 export class ChannelService {
-  public channelList = [];
-  public channelListSubject: Subject<Array<Channel>> = new Subject<Array<Channel>>();
+  public channels = {};
+  public channelListSubject: Subject<Array<Object>> = new Subject<Array<Object>>();
   public openChats = [];
   public selectedChat = 0;
 
   constructor(private webSocketService: WebsocketService) {
 
     this.getListener()
-      .filter((event) => event.event === 'allRooms' || event.event === 'newRoom')
+      .filter((event) => event.event === 'allRooms' || event.event === 'newRoom' || event.event === 'newMember' || event.event === 'leaveRoom')
       .subscribe(event => {
         if (event.event === 'newRoom') {
           const channel = Channel.fromJson(event.data);
-          if (this.channelList.filter(c => c.name === channel.name).length === 0) {
-            this.channelList.push(channel);
-            this.channelListSubject.next(this.channelList);
+          if (!this.channels[channel.name]) {
+            this.channels[channel.name] = channel;
+            this.channelListSubject.next(Object.values(this.channels));
           }
         }
         if (event.event === 'allRooms') {
-          this.channelList = Channel.fromJsonArray(event.data);
-          this.channelListSubject.next(this.channelList);
+          this.channels = Channel.fromJsonArray(event.data);
+          this.channelListSubject.next(Object.values(this.channels));
+        }
+        if (event.event === 'newMember') {
+          const user = Contact.fromJson(event.data.user);
+          const name = event.data.name;
+          this.channels[name].members.push(Contact.fromJson(user));
+          this.channelListSubject.next(Object.values(this.channels));
+        }
+        if (event.event === 'leaveRoom') {
+          const name = event.data.channelName;
+          this.channels[name].members = this.channels[name].members.filter(c => c.id !== event.data.userId);
+          this.channelListSubject.next(Object.values(this.channels));
         }
       });
     this.getAllRooms();

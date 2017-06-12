@@ -13,8 +13,10 @@ export class Channel {
     return new Channel(json.name, json.members.map(Contact.fromJson));
   }
 
-  static fromJsonArray(json): Channel[] {
-    return json.map(Channel.fromJson);
+  static fromJsonArray(json) {
+    const channels = {};
+    json.map(channel => channels[channel.name] = Channel.fromJson(channel));
+    return channels;
   }
 
   constructor(public name: string, public members: Array<Contact>) {
