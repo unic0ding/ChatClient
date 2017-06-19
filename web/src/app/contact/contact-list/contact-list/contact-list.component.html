@@ -1,0 +1,22 @@
+<md-card class="dark-card">
+  <md-card-title>
+    <span class="mdl-layout-title cc-chat-overview-channels">Contacts</span>
+  </md-card-title>
+  <form action="#">
+    <md-input-container class="example-full-width" id="contactSearchInputContainer">
+      <input mdInput placeholder="Search" #contactSearch id="contactSearchInput">
+    </md-input-container>
+  </form>
+  <md-card-content class="contact-list">
+    <md-list class="mdl-list">
+      <div>
+      <span *ngIf="!viewContactList?.length" class="mdl-chip">
+          <span class="mdl-chip__text">No Contacts found</span>
+        </span>
+      </div>
+      <app-contact-list-detail *ngFor="let contact of viewContactList" [contact]="contact">Searching for Contacts
+      </app-contact-list-detail>
+    </md-list>
+  </md-card-content>
+</md-card>
+

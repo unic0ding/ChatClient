@@ -1,6 +1,19 @@
-.main-content{
+.main-content {
   background-color: #FAFAFA;
   justify-content: center;
+}
+
+md-card {
+  margin-bottom: 30px;
+}
+
+md-card-footer {
+  width: 100%;
+  text-align: center;
+}
+
+md-input-container {
+  width: 80%;
 }
 
 .oc-content {

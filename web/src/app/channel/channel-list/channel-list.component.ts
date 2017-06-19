@@ -1,7 +1,8 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Channel} from '../../share/model/channel.model';
 import {Observable} from 'rxjs/Observable';
-import {ChatFrameComponent} from '../../chat/chat-frame/chat-frame.component';
+import {ChannelService} from '../../share/services/channel.service';
+import {compare} from '../../share/utils/sort';
 
 @Component({
   selector: 'app-channel-list',
@@ -13,16 +14,23 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
   viewChannelList = [];
   channelList = [];
 
-  constructor() {
-    this.channelList.push(new Channel('AngularChannel', []));
-    this.channelList.push(new Channel('PythonChannel', []));
-    this.channelList.push(new Channel('JS_Channel', []));
-    this.channelList.push(new Channel('Android_Channel', []));
-    this.channelList.push(new Channel('JavaChan', []));
+  constructor(private channelService: ChannelService) {}
+
+  ngOnInit() {
+    this.channelList = Object.values(this.channelService.channels);
     this.viewChannelList = this.channelList;
+
+    // bind to ChannelService ChannelListSubject
+    this.channelService.channelListSubject.subscribe(rooms => {
+        this.channelList = rooms;
+      this.viewChannelList = this.channelList.sort(compare);
+      }
+    );
   }
 
   ngAfterViewInit(): void {
+
+    // Channel Search Observable
     const search: any = document.getElementById('channelSearchInput');
     const channelSource$ = Observable.fromEvent(search, 'input')
       .debounceTime(250)
@@ -34,20 +42,13 @@ export class ChannelListComponent implements OnInit, AfterViewInit {
         }
       });
     channelSource$.subscribe(
-      (contact) => {
-        this.viewChannelList.push(contact);
+      (channel) => {
+        this.viewChannelList.push(channel);
       },
-      (error) => {
-        console.log(error);
-      }
     );
   }
 
   onConnectNewChannel(channel: Channel) {
     this.newChannel.emit(channel);
   }
-
-  ngOnInit() {
-  }
-
 }

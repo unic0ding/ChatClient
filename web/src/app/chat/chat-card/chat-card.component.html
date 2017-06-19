@@ -1,44 +1,79 @@
-<div app-mdl class="card-wide mdl-card mdl-shadow--2dp" style="background-color: #363636;" (blur)="this.channel.resetNotification()">
-  <md-progress-bar *ngIf="showSpinner" mode="query" style="padding: 1px;"></md-progress-bar>
-  <div class="mdl-card__menu">
-    <button id="chat-card-menu" style="color: #FAFAFA"
-            class="mdl-button mdl-js-button mdl-button--icon">
-      <i class="material-icons">more_vert</i>
+<div app-mdl class="card-wide mdl-card mdl-shadow--2dp dark-card">
+  <!--Message Search-->
+  <div class="messageSearchContainer" [hidden]="!showMessageSearch">
+    <md-input-container id="searchMessagesInputContainer">
+      <input mdInput placeholder="Search" #searchMessagesInput id="searchMessagesInput" spellcheck="false"
+             autocomplete="off" (keydown.esc)="closeMessageSearch()">
+    </md-input-container>
+    <!--Chat Card Header-->
+    <button md-icon-button class="icon-btn-primary" (click)="closeMessageSearch()">
+      <i class="material-icons">close</i>
     </button>
-    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-        for="chat-card-menu">
-      <li disabled class="mdl-menu__item">Search for Messages</li>
-      <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" (click)="clearHistory()">Clear History</li>
-      <li disabled class="mdl-menu__item">View Info</li>
-    </ul>
-    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" style="color: #FAFAFA"
-            (click)="closeWindow.emit(channel)">
+  </div>
+  <!--Chat Menu-->
+  <div class="mdl-card__menu">
+    <button md-icon-button [matMenuTriggerFor]="menu" class="icon-btn-primary">
+      <md-icon>more_vert</md-icon>
+    </button>
+    <md-menu #menu="mdMenu">
+      <button md-menu-item (click)="openInfoDialog()">
+        <md-icon>info</md-icon>
+        <span>View Info</span>
+      </button>
+      <button md-menu-item (click)="closeMessageSearch()">
+        <md-icon>search</md-icon>
+        <span>Search for Messages</span>
+      </button>
+      <button md-menu-item (click)="clearHistory()">
+        <md-icon>delete_sweep</md-icon>
+        <span>Delete History</span>
+      </button>
+    </md-menu>
+    <button md-icon-button class="icon-btn-primary" (click)="closeWindow.emit(channel)">
       <i class="material-icons">close</i>
     </button>
   </div>
   <div class="mdl-card__title">
-    <i *ngIf="connectionClosed" class="material-icons">cloud_off</i>
-    <span class="mdl-chip__contact mdl-color-text--white" style="background-color: #FD4282">{{channel.name.charAt(0).toUpperCase()}}</span>
-    <h2 class="mdl-card__title-text" style="color: #FAFAFA">{{channel.name}}</h2>
+    <span class="mdl-chip__contact mdl-color-text--white colored-buttons" (click)="openInfoDialog()">{{channel.name | initials}}</span>
+    <h2 class="mdl-card__title-text">{{channel.name}}</h2>
   </div>
-  <div class="mdl-card__media" style="padding: 0 10px 0 10px;">
-    <app-chat-window [messages]="messages"></app-chat-window>
+  <div class="mdl-card__media" (dragover)="onDragEnter($event)" (drop)="sendFile($event)" id="window-drag-zone">
+    <!--Chat Window-->
+    <app-chat-window #chatWindow [messages]="viewMessages"></app-chat-window>
+
+    <!--Drag and Drop Overlay-->
+    <div *ngIf="drop" (dragleave)="onDragLeave()" class="file-overlay dropZone"></div>
+
+    <button md-icon-button class="scroll-down-btn" (click)="chatWindow.scrollToBottom()">
+      <img src="../../../assets/img/icons/scroll-down.svg">
+    </button>
+
+    <!-- Floating Buttons Overlay-->
+    <div *ngIf="floatingButton" class="floating-buttons-container">
+      <button md-mini-fab [@floatingButton] (click)="onClickAttachment('img')" class="floating-button"><img
+        src="../../../assets/img/icons/file-image.svg"></button>
+      <button md-mini-fab [@floatingButton] (click)="onClickAttachment('doc')" class="floating-button"><img
+        src="../../../assets/img/icons/file-pdf.svg"></button>
+      <button md-mini-fab [@floatingButton] disabled (click)="onClickAttachment('vid')" class="floating-button"><img
+        src="../../../assets/img/icons/file-video.svg"></button>
+    </div>
   </div>
+  <!--Message Field-->
   <div class="mdl-card__actions mdl-card--border">
+    <md-progress-bar mode="query" *ngIf="!fileLoaded"></md-progress-bar>
     <form novalidate [formGroup]="chatForm" (ngSubmit)="sendMessage()">
       <div class="flex-form-container">
-        <button type="button" style="color: #FAFAFA; background-color: #424242"
-                class=" mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab flex-attachment-button">
-          <i class="material-icons">attachment</i>
+        <button md-mini-fab class="flex-attachment-button" type="button" (click)="onFloatingButton()">
+          <md-icon>attachment</md-icon>
+          <input #fileInput type="file" class="upload" (change)="sendFile($event)" multiple>
         </button>
         <md-input-container class="flex-input-field">
           <input mdInput placeholder="Send a Message..." id="{{name}}-input" spellcheck="false"
-                 formControlName="message" (focus)="updateNotification(0)" style="color: #FAFAFA">
+                 formControlName="message" class="icon-btn-primary" autocomplete="off">
         </md-input-container>
-        <button
-          class="btn-primary mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored flex-send-button"
-          [disabled]="!chatForm.valid" [hidden]="!chatForm.valid" type="submit">
-          <i class="material-icons">send</i>
+        <button md-mini-fab class="flex-send-button btn-primary" [disabled]="!chatForm.valid" [hidden]="!chatForm.valid"
+                type="submit">
+          <md-icon>send</md-icon>
         </button>
       </div>
     </form>

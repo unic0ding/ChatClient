@@ -1,10 +1,43 @@
 .example-card {
   width: 500px;
 }
+
 .example-form {
   width: 500px;
 }
 
 .example-full-width {
   width: 100%;
+}
+
+.login-container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.login-button-container {
+  text-align: center;
+  margin-bottom: 10px
+}
+
+.login-buttons {
+  width: 70%;
+  cursor: pointer;
+  margin: 0 auto;
+  font-size: 1em;
+}
+
+#google {
+  background: #ffffff url('../../../assets/img/icons/google.svg') no-repeat 25px;
+  background-size: 25px;
+  color: black;
+}
+ #google:active {
+   background-color: #b7b7b7;
+ }
+
+#github {
+  background: #24292E url('../../../assets/img/icons/github-box.svg') no-repeat 25px;
+  background-size: 30px;
+  color: #FFFFFF;
 }

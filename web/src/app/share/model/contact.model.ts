@@ -3,9 +3,17 @@
  */
 export class Contact {
   static fromJson(json) {
-    return new Contact(json.id, json.name, json.email);
+    if (json.avatarUrl) {
+      return new Contact(json.id, json.name, json.email, json.avatarUrl);
+    }else {
+      return new Contact(json.id, json.name, json.email);
+    }
   }
 
-  constructor(public id: number, public name: string, public email: string) {
+  static fromJsonArray(json) {
+    return json.map(Contact.fromJson);
+  }
+
+  constructor(public id: number, public name: string, public email: string, public avatarUrl?: string) {
   }
 }

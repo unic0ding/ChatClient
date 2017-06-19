@@ -1,0 +1,9 @@
+<md-card-header>
+  <div  md-card-avatar>
+    <img *ngIf="contact.avatarUrl" class="mdl-chip__contact" [src]="contact.avatarUrl">
+    <span *ngIf="!contact.avatarUrl" class="mdl-chip__contact contact-circle">{{contact.name | initials}}</span>
+  </div>
+  <md-card-title>{{contact.name}}</md-card-title>
+  <md-card-subtitle>{{contact.email}}</md-card-subtitle>
+</md-card-header>
+<button md-raised-button id="close-button" (click)="dialogRef.close()">Close</button>

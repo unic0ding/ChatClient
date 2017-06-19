@@ -3,3 +3,21 @@
 body {
   background-color: #424242;
 }
+
+.dark-card {
+  background-color: #363636;
+}
+
+.colored-buttons {
+  cursor: pointer;
+  color: #FAFAFA;
+  background-color: #FD4282;
+}
+
+.msg-sent-link {
+  color: #84FFFF;
+}
+
+.error-message {
+  color: #dd4806;
+}

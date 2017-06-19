@@ -1,0 +1,16 @@
+.contact-list {
+  max-height: 320px;
+  overflow: auto;
+}
+
+.mdl-list div {
+  text-align: center;
+}
+
+.contact-list::-webkit-scrollbar {
+  display: none;
+}
+
+#contactSearchInputContainer {
+  width: 100%;
+}

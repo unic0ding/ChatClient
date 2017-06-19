@@ -1,0 +1,16 @@
+md-input-container {
+  width: 100%;
+}
+
+md-card {
+  width: 750px;
+}
+
+input {
+  width: 90%;
+}
+
+.form-container {
+  width: 50%;
+  margin: 0 auto;
+}

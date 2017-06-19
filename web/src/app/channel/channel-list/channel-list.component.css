@@ -1,0 +1,17 @@
+.channel-list {
+  max-height: 320px;
+  overflow: auto;
+}
+
+.mdl-list div {
+  text-align: center;
+}
+
+.channel-list::-webkit-scrollbar {
+  display: none;
+}
+
+#channelSearchInputContainer {
+  width: 100%;
+}
+

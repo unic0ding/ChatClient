@@ -1,75 +1,29 @@
 import {Injectable} from '@angular/core';
 import {WebsocketService} from './websocket.service';
-import {Subject} from 'rxjs/Subject';
+import {Message} from '../model/message.model';
+import {Observable} from 'rxjs/Observable';
+import {Contact} from '../model/contact.model';
 
 @Injectable()
 export class ChatService {
-  // public messages: Subject<any>;
-  // private url = 'ws://echo.websocket.org';
+  public errorContact = new Contact(1, 'OpenChat', '', 'https://avatars3.githubusercontent.com/u/28691703?v=3&s=200')
 
-
-  constructor(private wsService: WebsocketService) {
-    // this.messages = <Subject<any>>wsService
-    //   .connect(this.url)
-    //   .map((response: MessageEvent) => {
-    //     return response.data;
-    //   });
+  constructor(private webSocketService: WebsocketService) {
   }
 
-  getMessages(url): Subject<any> {
-    const messages = <Subject<any>> this.wsService
-      .connect(url)
-      .map((response: MessageEvent) => {
-        return response.data;
-      });
-    return messages;
+  sendMessage(message: Message, channelName: string) {
+    const command = {
+      type: 'command',
+      subtype: 'message',
+      command: 'newMessage',
+      data: {message: message, channelName: channelName}
+    };
+    this.webSocketService.emit(command);
   }
 
+  getListener(): Observable<any> {
+    const listener$ = this.webSocketService.getListener()
+      .filter((data) => data.subtype === 'chat');
+    return listener$;
+  }
 }
-
-
-// private url = 'ws://localhost:8080/echo/';
-// private socket: WebSocket;
-// private listener: EventEmitter<any> = new EventEmitter();
-
-// constructor() {
-// this.socket = new WebSocket(this.url);
-// this.socket.onopen = event => {
-//   this.listener.emit({'type': 'open', 'data': event});
-// };
-// this.socket.onclose = event => {
-//   this.listener.emit({'type': 'close', 'data': event});
-// };
-// this.socket.onmessage = event => {
-//   this.listener.emit({'type': 'message', 'data': event.data});
-//   this.listener.emit({'type': 'message', 'data': JSON.parse(event.data)});
-// };
-// }
-
-// public sendMessage(data: string) {
-//   this.socket.send(data);
-// }
-
-// public close() {
-//   this.socket.close();
-// }
-
-// public getEventListener() {
-//   return this.listener;
-// }
-
-// public getSocket() {
-//   const socket = new WebSocket(this.url);
-//   const listener: EventEmitter<any> = new EventEmitter();
-//   socket.onopen = event => {
-//     listener.emit({'type': 'open', 'data': event});
-//   };
-//   socket.onclose = event => {
-//     listener.emit({'type': 'close', 'data': event});
-//   };
-//   socket.onmessage = event => {
-//     listener.emit({'type': 'message', 'data': event.data});
-//       this.listener.emit({'type': 'message', 'data': JSON.parse(event.data)});
-// };
-// return {socket: socket, listener: listener};
-// }

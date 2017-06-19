@@ -1,8 +1,16 @@
-<li class="mdl-list__item-list__item--three-line" style="margin-top: 10px;">
-  <span class="mdl-list__item-primary-content" style="margin-top: 15px">
-    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-right: 10px;" (click)="addNewChannel.emit(channel)">
-      <i class="material-icons">add</i>
-    </button>
-    <span>{{channel.name}}</span>
-  </span>
+<li class="mdl-list__item-list__item--three-line channel-list-item">
+  <table>
+    <tr>
+      <td>
+        <button md-mini-fab class="colored-buttons add-btn" (click)="addNewChannel.emit(channel)">
+          <md-icon>add</md-icon>
+        </button>
+      </td>
+      <td class="middle-cell"><span class="channel-name">{{channel.name}}</span>
+      </td>
+      <td>
+        <md-icon (click)="openInfoDialog()" class="info-icon">info</md-icon>
+      </td>
+    </tr>
+  </table>
 </li>

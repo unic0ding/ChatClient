@@ -1,0 +1,52 @@
+<md-progress-bar mode="query" *ngIf="loading"></md-progress-bar>
+<md-card [@fallInAnimation]>
+  <md-card-content>
+    <div class="form-container">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmitForm()" novalidate>
+        <div>
+          <md-input-container>
+            <input mdInput placeholder="Name" type="text" spellcheck="false" autocomplete="off" formControlName="name">
+          </md-input-container>
+        </div>
+        <div>
+          <md-input-container>
+            <input mdInput placeholder="E-Mail" spellcheck="false" autocomplete="off" formControlName="email">
+            <md-icon
+              *ngIf="emailControl.errors?.pattern && (emailControl.touched || emailControl.dirty) && emailControl.value?.length > 1">
+              close
+            </md-icon>
+            <md-icon
+              *ngIf="!emailControl.errors?.pattern && (emailControl.touched || emailControl.dirty) && emailControl.value?.length > 1">
+              check
+            </md-icon>
+          </md-input-container>
+        </div>
+        <div>
+          <md-input-container>
+            <input mdInput type="password" placeholder="Password" formControlName="password">
+            <md-hint *ngIf="passwordControl.errors?.minlength && (passwordControl.touched || passwordControl.dirty)">
+              Password must be at least {{passwordControl.errors?.minlength.requiredLength}} Letters
+            </md-hint>
+          </md-input-container>
+        </div>
+        <div>
+          <md-input-container>
+            <input mdInput type="password" placeholder="Confirm Password" formControlName="confirm_password">
+            <md-icon
+              *ngIf="registerForm.errors?.mismatchPasswords && (confirmPasswordControl.touched || confirmPasswordControl.dirty) && confirmPasswordControl.value?.length > 8">
+              close
+            </md-icon>
+            <md-icon
+              *ngIf="!registerForm.errors?.mismatchPasswords && (confirmPasswordControl.touched || confirmPasswordControl.dirty) && confirmPasswordControl.value?.length >= 8">
+              check_all
+            </md-icon>
+          </md-input-container>
+        </div>
+        <div class="login-button-container">
+          <button md-raised-button [disabled]="!registerForm.valid" type="submit" class="login-buttons">Register
+          </button>
+        </div>
+      </form>
+    </div>
+  </md-card-content>
+</md-card>
