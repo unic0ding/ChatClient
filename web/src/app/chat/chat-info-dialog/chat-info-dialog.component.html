@@ -1,6 +1,6 @@
-<h4 style="color: #FAFAFA">{{channel.name}}</h4>
+<h4 id="channel-name">{{channel.name}}</h4>
 <md-list>
   <h2 md-subheader>Members</h2>
-  <app-contact-list-detail *ngFor="let contact of channel.members" [contact]="contact"></app-contact-list-detail>
+  <app-contact-list-detail *ngFor="let contact of members" [contact]="contact"></app-contact-list-detail>
 </md-list>
 <button md-raised-button id="close-dialog" (click)="dialogRef.close()">Close</button>

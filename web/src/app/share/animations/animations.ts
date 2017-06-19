@@ -1,4 +1,4 @@
-import {animate, keyframes, style, transition, trigger} from '@angular/animations';
+import {animate, keyframes, state, style, transition, trigger} from '@angular/animations';
 /**
  * Created by basti on 19.05.17.
  */
@@ -11,5 +11,22 @@ export const fallIn = trigger('fallInAnimation', [
     style({opacity: 1, transform: 'translateX(0%)', offset: 1}),
   ]))
   ]),
+]);
+
+export const floatingButtons = trigger('floatingButton', [
+  state('in', style({opacity: 1, transform: 'translateX(0)'})),
+  transition('void => *', [
+    style({
+      opacity: 0,
+      transform: 'translateY(100%)'
+    }),
+    animate('200ms ease-in')
+  ]),
+  transition('* => void', [
+    animate('200ms ease-out', style({
+      opacity: 0,
+      transform: 'translateY(-100%)'
+    }))
+  ])
 ]);
 

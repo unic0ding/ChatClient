@@ -8,12 +8,14 @@ export class WebsocketService {
   connected: boolean;
   openListener$: Observable<MessageEvent>;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
+  // private url = 'ws://localhost:8080/room';
+  private url = 'ws://localhost:5001';
 
   constructor() {
   }
 
-  connect(url: string): Observable<MessageEvent> {
-    this.socket = new WebSocket(url);
+  connect(): Observable<MessageEvent> {
+    this.socket = new WebSocket(this.url);
     this.openListener$ = Observable.fromEvent(this.socket, 'open')
       .do(() => this.connected = true);
 
@@ -21,18 +23,15 @@ export class WebsocketService {
   }
 
   getListener(): Observable<any> {
-    const listener$ = Observable.fromEvent(this.socket, 'message')
+    return Observable.fromEvent(this.socket, 'message')
       .map((event) => <MessageEvent> event)
       .map((event) => JSON.parse(event.data))
       .filter((event) => event.type === 'event' || event.type === 'error');
-    return listener$;
   }
 
-  getClosedListener(): Observable<MessageEvent> {
-    const closedListener$ = Observable.fromEvent(this.socket, 'close')
-      .map((event) => <MessageEvent> event);
-
-    return closedListener$;
+  getClosedListener(): Observable<CloseEvent> {
+    return Observable.fromEvent(this.socket, 'close')
+      .map((event) => <CloseEvent> event);
   }
 
   emit(command) {
@@ -45,5 +44,4 @@ export class WebsocketService {
         });
     }
   }
-
 }

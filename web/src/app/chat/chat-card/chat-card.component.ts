@@ -1,14 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Message} from '../../share/model/message.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Channel} from '../../share/model/channel.model';
@@ -18,27 +8,34 @@ import {AuthService} from '../../share/services/auth.service';
 import {Observable} from 'rxjs/Observable';
 import {MdDialog, MdDialogConfig} from '@angular/material';
 import {ChatInfoDialogComponent} from '../chat-info-dialog/chat-info-dialog.component';
+import {newGuid} from '../../share/utils/guid-generator';
+import {KnownFiles} from '../../share/utils/known-files';
+import {floatingButtons} from '../../share/animations/animations';
 
 @Component({
   selector: 'app-chat-card',
   templateUrl: './chat-card.component.html',
-  styleUrls: ['./chat-card.component.css']
+  styleUrls: ['./chat-card.component.css'],
+  animations: [floatingButtons]
 })
 export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() closeWindow = new EventEmitter();
   @Output() saveMessages = new EventEmitter();
   @Input() channel: Channel;
   @ViewChild('searchMessagesInput') searchInput: ElementRef;
+  @ViewChild('fileInput') fileInput: ElementRef;
   private messages = [];
   private viewMessages = [];
   private chatForm: FormGroup;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private showMessageSearch = false;
   private searchValue;
+  private fileLoaded = true;
+  private drop = false;
+  private floatingButton = false;
 
   constructor(private chatService: ChatService, private authService: AuthService, private formBuilder: FormBuilder,
               private infoDialog: MdDialog) {
-
     this.buildChatForm();
   }
 
@@ -47,13 +44,13 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.viewMessages = this.messages;
 
     const messageListener$ = this.chatService.getListener()
-      .filter(event => event.subtype === 'chat' || event.event === 'chatError');
+      .filter(event => event.event === 'newMessage' || event.type === 'error');
 
     messageListener$
       .takeUntil(this.ngUnsubscribe)
       .subscribe(event => {
-        if (event.event === 'newMessage' && event.roomName === this.channel.name) {
-          this.messages.push({message: Message.fromJson(event.data), incoming: true});
+        if (event.data.roomName === this.channel.name) {
+          this.messages.push({message: Message.fromJson(event.data.message), incoming: true});
           this.viewMessages = this.messages;
           this.channel.updateNotification();
         }
@@ -105,9 +102,11 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private sendMessage(message?: Message) {
-    const text = this.chatForm.value.message;
-    message = new Message(1, new Date(), this.authService.user, text);
-    this.chatService.sendMessage(message);
+    if (!message) {
+      const text = this.chatForm.value.message;
+      message = new Message(newGuid(), new Date(), this.authService.user, text);
+    }
+    this.chatService.sendMessage(message, this.channel.name);
     this.messages.push({message: message, incoming: false});
     this.viewMessages = this.messages;
     this.chatForm.reset();
@@ -124,6 +123,67 @@ export class ChatCardComponent implements OnInit, AfterViewInit, OnDestroy {
     const dialogRef = this.infoDialog.open(ChatInfoDialogComponent, config);
     dialogRef.componentInstance.channel = this.channel;
 
+  }
+
+  onFloatingButton() {
+    this.floatingButton = !this.floatingButton;
+  }
+
+  onClickAttachment(type) {
+    switch (type) {
+      case 'doc':
+        this.fileInput.nativeElement.accept = KnownFiles.getDocTypes();
+        break;
+      case 'img':
+        this.fileInput.nativeElement.accept = KnownFiles.getImgTypes();
+        break;
+    }
+    this.fileInput.nativeElement.click();
+  }
+
+  onDragEnter(event) {
+    event.preventDefault();
+    this.drop = true;
+  }
+
+  onDragLeave() {
+    this.drop = false;
+  }
+
+  sendFile(event) {
+    this.onDragLeave();
+    event.preventDefault();
+
+    let fileList;
+    if (event instanceof DragEvent) {
+      fileList = event.dataTransfer.files;
+    } else {
+      fileList = event.target.files;
+    }
+    for (const file of fileList) {
+      this.fileLoaded = false;
+      if (!KnownFiles.isKnownType(file.type)) {
+        this.fileLoaded = true;
+        this.pushErrorMessage('This File Type is not supported');
+        continue;
+      }
+      const fr = new FileReader();
+      fr.onloadend = () => {
+        const message = new Message(newGuid(), new Date(), this.authService.user, '', {
+          res: fr.result,
+          file: {size: file.size, name: file.name, type: file.type}
+        });
+        this.sendMessage(message);
+        this.fileLoaded = true;
+      };
+      fr.readAsDataURL(file);
+    }
+  }
+
+  pushErrorMessage(errorMessage: string) {
+    const message = new Message(newGuid(), new Date(), this.chatService.errorContact, errorMessage);
+    this.messages.push({message: message, incoming: true});
+    this.viewMessages = this.messages;
   }
 
   ngOnDestroy(): void {

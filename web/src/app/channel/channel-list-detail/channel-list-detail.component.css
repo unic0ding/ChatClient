@@ -1,4 +1,31 @@
 .channel-list-item {
-  margin-top: 10px;
-  padding-left: 10px;
+  padding: 10px;
 }
+
+.channel-list-item:hover {
+  background-color: #424242;
+}
+
+.middle-cell {
+  width: 50%;
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+table {
+  width: 100%;
+}
+
+.add-btn {
+  margin-right: 10px;
+
+}
+
+.info-icon {
+  cursor: pointer;
+  float: right;
+  margin-right: 10px;
+}
+

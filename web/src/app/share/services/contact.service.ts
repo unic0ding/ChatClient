@@ -14,8 +14,11 @@ export class ContactService {
       .filter((event) => event.subtype === 'user')
       .subscribe(event => {
         if (event.event === 'newUser') {
-          this.contactList.push(Contact.fromJson(event.data));
-          this.contactListSubject.next(this.contactList);
+          const contact = Contact.fromJson(event.data);
+          if (this.contactList.filter(u => u.email === contact.email).length === 0) {
+            this.contactList.push(Contact.fromJson(event.data));
+            this.contactListSubject.next(this.contactList);
+          }
         }
         if (event.event === 'allUsers') {
           this.contactList = Contact.fromJsonArray(event.data);

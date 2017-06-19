@@ -1,3 +1,25 @@
 .user-image {
   background-size: cover;
 }
+
+md-card {
+  width: 1000px;
+}
+
+md-card-title {
+  text-align: center;
+}
+
+#avatar-circle {
+  background-color: #FD4282;
+  color: #FAFAFA;
+}
+
+.settings-table {
+  background-color: #424242;
+  width: 80%;
+}
+
+md-input-container {
+  width: 80%;
+}

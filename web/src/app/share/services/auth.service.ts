@@ -35,6 +35,20 @@ export class AuthService {
       });
   }
 
+  checkLogin(user) {
+    const command = {type: 'command', subtype: 'auth', command: 'checkLogin', data: {user: user}};
+    this.webSocketService.emit(command);
+    return this.getListener()
+      .filter((event) => event.event === 'authSuccess' || event.error === 'authError')
+      .do((event) => {
+        if (event.event === 'authSuccess') {
+          this.isLoggedIn = true;
+          this.setAuthToLocalStorage(event.data.user);
+          this.user = Contact.fromJson(event.data.user);
+        }
+      });
+  }
+
   setAuthToLocalStorage(value) {
     window.localStorage.setItem(this.storageKey, JSON.stringify(value));
   }
@@ -47,8 +61,13 @@ export class AuthService {
     const command = {type: 'command', subtype: 'auth', command: 'logout', data: this.user};
     this.webSocketService.emit(command);
     this.isLoggedIn = false;
-    window.localStorage.removeItem(this.storageKey);
+    this.removeUserFromLocalStorage();
     this.router.navigate(['/auth-login']);
+    Observable.timer(1000).subscribe(() => window.location.reload(true));
+  }
+
+  removeUserFromLocalStorage() {
+    window.localStorage.removeItem(this.storageKey);
   }
 
   setUser() {
@@ -61,6 +80,7 @@ export class AuthService {
 
     return this.getListener()
       .filter((event) => event.event === 'registrationSuccess' || event.error === 'registrationError')
+      .do(console.log)
       .do((event) => {
         if (event.event === 'registrationSuccess') {
           this.isLoggedIn = true;
@@ -68,5 +88,13 @@ export class AuthService {
           this.user = Contact.fromJson(event.data.user);
         }
       });
+  }
+
+  updateUserProfile(user: Contact) {
+    // TODO: Update on Server
+    const command = {type: 'command', subtype: 'auth', command: 'updateUserProfile', data: user};
+    this.webSocketService.emit(command);
+    return this.getListener()
+      .filter(event => event.event === 'updateUserProfileSuccess' || event.error === 'updateUserProfileError');
   }
 }

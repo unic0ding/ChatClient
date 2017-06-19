@@ -1,4 +1,4 @@
-<md-card-header style="color: #FAFAFA">
+<md-card-header>
   <div  md-card-avatar>
     <img *ngIf="contact.avatarUrl" class="mdl-chip__contact" [src]="contact.avatarUrl">
     <span *ngIf="!contact.avatarUrl" class="mdl-chip__contact contact-circle">{{contact.name | initials}}</span>
