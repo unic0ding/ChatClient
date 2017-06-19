@@ -20,10 +20,10 @@ export const floatingButtons = trigger('floatingButton', [
       opacity: 0,
       transform: 'translateY(100%)'
     }),
-    animate('0.2s ease-in')
+    animate('200ms ease-in')
   ]),
   transition('* => void', [
-    animate('0.2s 10 ease-out', style({
+    animate('200ms ease-out', style({
       opacity: 0,
       transform: 'translateY(-100%)'
     }))
