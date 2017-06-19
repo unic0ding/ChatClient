@@ -36,7 +36,10 @@ export class ChannelService {
         }
         if (event.event === 'leaveRoom') {
           const name = event.data.channelName;
-          this.channels[name].members = this.channels[name].members.filter(c => c.id !== event.data.userId);
+          const index = this.channels[name].members.indexOf(this.channels[name].members.filter(c => c.id === event.data.userId)[0]);
+          if (index > -1) {
+            this.channels[name].members.splice(index, 1);
+          }
           this.channelListSubject.next(Object.values(this.channels));
         }
       });

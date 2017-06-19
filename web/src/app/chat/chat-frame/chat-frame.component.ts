@@ -120,10 +120,9 @@ export class ChatFrameComponent implements OnInit, AfterViewInit, OnDestroy {
         (event) => {
           this.showSpinner = false;
           if (event.event === 'newChannelSuccess') {
-            // TODO: add Response Channel to openChats
-            this.openChats.push(channel);
             this.newChatForm.reset();
             this.addNewChat = false;
+            this.onConnectNewChannel(channel);
           }
           if (event.error === 'newChannelError') {
             this.newChatError = event.data;
