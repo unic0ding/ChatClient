@@ -44,7 +44,6 @@ export class UserSettingsComponent implements OnInit {
         .subscribe(event => {
           this.showProgress = false;
           if (event.event === 'updateUserProfileSuccess') {
-            // TODO: set Response to authservice.user
             this.authService.user = this.user;
             this.snackbar.open('Changes saved', 'close', {duration: 500});
           }
