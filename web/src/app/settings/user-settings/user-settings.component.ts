@@ -46,7 +46,6 @@ export class UserSettingsComponent implements OnInit {
           if (event.event === 'updateUserProfileSuccess') {
             // TODO: set Response to authservice.user
             this.authService.user = this.user;
-            this.authService.setAuthToLocalStorage(this.user);
             this.snackbar.open('Changes saved', 'close', {duration: 500});
           }
           if (event.error === 'updateUserProfileError') {
