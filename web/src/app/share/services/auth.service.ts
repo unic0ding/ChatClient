@@ -29,21 +29,20 @@ export class AuthService {
       .do((event) => {
         if (event.event === 'authSuccess') {
           this.isLoggedIn = true;
-          this.setAuthToLocalStorage(event.data.user);
+          this.setAuthToLocalStorage(event.data.sessionId);
           this.user = Contact.fromJson(event.data.user);
         }
       });
   }
 
-  checkLogin(user) {
-    const command = {type: 'command', subtype: 'auth', command: 'checkLogin', data: {user: user}};
+  checkLogin(sessionId) {
+    const command = {type: 'command', subtype: 'auth', command: 'checkLogin', data: {sessionId: sessionId}};
     this.webSocketService.emit(command);
     return this.getListener()
       .filter((event) => event.event === 'authSuccess' || event.error === 'authError')
       .do((event) => {
         if (event.event === 'authSuccess') {
           this.isLoggedIn = true;
-          this.setAuthToLocalStorage(event.data.user);
           this.user = Contact.fromJson(event.data.user);
         }
       });
@@ -63,6 +62,7 @@ export class AuthService {
     this.isLoggedIn = false;
     this.removeUserFromLocalStorage();
     this.router.navigate(['/auth-login']);
+    // provisional clearing the Service data....
     Observable.timer(1000).subscribe(() => window.location.reload(true));
   }
 
@@ -84,7 +84,7 @@ export class AuthService {
       .do((event) => {
         if (event.event === 'registrationSuccess') {
           this.isLoggedIn = true;
-          this.setAuthToLocalStorage(event.data.user);
+          this.setAuthToLocalStorage(event.data.sessionId);
           this.user = Contact.fromJson(event.data.user);
         }
       });
